@@ -1,0 +1,23 @@
+{
+  "scope": "Independent public English SMS diagnostic, local action rules only; spam is not a fraud ground-truth label. No model training or tuning on this corpus. URLs and live evidence excluded. No SMS text sent to providers.",
+  "source": "https://archive.ics.uci.edu/static/public/228/sms+spam+collection.zip",
+  "citation": "Almeida & Hidalgo (2011), SMS Spam Collection, UCI, DOI 10.24432/C5CC84",
+  "license": "CC BY 4.0 (UCI dataset page)",
+  "archive_sha256": "1587ea43e58e82b14ff1f5425c88e17f8496bfcdb67a583dbff9eefaf9963ce3",
+  "total": 5574,
+  "counts_by_original_label": {
+    "ham": {
+      "SCAM": 0,
+      "UNSURE": 4827,
+      "GENUINE": 0
+    },
+    "spam": {
+      "SCAM": 0,
+      "UNSURE": 747,
+      "GENUINE": 0
+    }
+  },
+  "ham_scam_flag_rate": 0.0,
+  "spam_scam_flag_rate": 0.0,
+  "limitations": "Historical largely non-Indian English SMS. Spam-flag coverage is NOT scam recall. Most spam can be advertising, and UNSURE is expected. Does not establish current Indian multilingual fraud accuracy."
+}

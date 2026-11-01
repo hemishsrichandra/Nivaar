@@ -1,0 +1,72 @@
+[
+  {
+    "id": "pib-2130875",
+    "url": "https://www.pib.gov.in/PressReleasePage.aspx?PRID=2130875",
+    "publisher": "Cabinet Secretariat / PIB",
+    "date": "2025-05-23",
+    "title": "Misinformation on Field Assistant recruitment",
+    "summary": "The Cabinet Secretariat denies an advertisement for 1,736 Field Assistant (GD) posts and related admit cards. Check recruitment notices through official channels.",
+    "anchor": "categorically denies",
+    "family": "fake_recruitment"
+  },
+  {
+    "id": "pib-2082761",
+    "url": "https://www.pib.gov.in/PressReleasePage.aspx?PRID=2082761",
+    "publisher": "Ministry of Home Affairs / PIB",
+    "date": "2024-12-10",
+    "title": "Digital arrest scam",
+    "summary": "MHA describes digital arrest scams involving impersonation of police, CBI and other agencies. It lists blocked Skype and WhatsApp accounts and the 1930 reporting helpline.",
+    "anchor": "digital arrest",
+    "family": "digital_arrest"
+  },
+  {
+    "id": "pib-1819189",
+    "url": "https://www.pib.gov.in/PressReleasePage.aspx?PRID=1819189",
+    "publisher": "India Post / PIB",
+    "date": "2022-04-23",
+    "title": "India Post warns against fraudulent websites",
+    "summary": "India Post disowns subsidy and prize offers spread through survey links. The advisory asks people not to respond or disclose personal information.",
+    "anchor": "not involved in any such activities",
+    "family": "fake_delivery_sms"
+  },
+  {
+    "id": "rbi-2628",
+    "url": "https://www.rbi.org.in/commonman/english/scripts/PressReleases.aspx?Id=2628",
+    "publisher": "Reserve Bank of India",
+    "date": "2018-02-08",
+    "title": "RBI cautions about fake websites in its name",
+    "summary": "RBI warns about websites impersonating the central bank and collecting confidential banking information. RBI does not hold individual accounts or solicit personal banking details.",
+    "anchor": "does not hold any accounts for individuals",
+    "family": "fake_kyc"
+  },
+  {
+    "id": "pib-2207376",
+    "url": "https://www.pib.gov.in/PressReleasePage.aspx?PRID=2207376",
+    "publisher": "Department of Telecommunications / PIB",
+    "date": "2025-12-22",
+    "title": "Sanchar Saathi and Financial Fraud Risk Indicator",
+    "summary": "DoT describes information sharing through the Digital Intelligence Platform and how Sanchar Saathi reports contribute to financial fraud prevention.",
+    "anchor": "Financial Fraud Risk Indicator",
+    "family": "digital_arrest"
+  },
+  {
+    "id": "sebi-check",
+    "url": "https://siportal.sebi.gov.in/intermediary/sebi-check",
+    "publisher": "Securities and Exchange Board of India",
+    "date": null,
+    "title": "SEBI Check: UPI and account details",
+    "summary": "An official interactive portal for checking verified UPI IDs and account details. Nivaar routes users here; it does not automate or claim to complete the portal check.",
+    "anchor": "CHECK VERIFIED UPI",
+    "family": "investment_scam"
+  },
+  {
+    "id": "pib-1982936",
+    "url": "https://www.pib.gov.in/PressReleasePage.aspx?PRID=1982936",
+    "publisher": "Ministry of Home Affairs / PIB",
+    "date": "2023-12-06",
+    "title": "Investment and task based part time job frauds",
+    "summary": "Task commissions lure victims into larger deposits that become inaccessible.",
+    "family": "investment_scam",
+    "anchor": "task"
+  }
+]

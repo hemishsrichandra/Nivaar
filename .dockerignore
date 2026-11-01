@@ -1,0 +1,14 @@
+.git
+node_modules
+.next
+.venv
+.wrangler
+.sites-runtime
+.vinext
+dist
+.env*
+backend/.env
+**/__pycache__
+.pytest_cache
+outputs
+work

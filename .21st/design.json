@@ -1,0 +1,127 @@
+{
+  "version": 1,
+  "project": {
+    "name": "nivaar",
+    "productType": "Desktop-first citizen fraud verification web application",
+    "stack": [
+      "nextjs",
+      "react",
+      "tailwind-v4"
+    ]
+  },
+  "sources": {
+    "tokens": [
+      "app/globals.css"
+    ],
+    "components": [],
+    "assets": [],
+    "instructions": [
+      "AGENTS.md",
+      "CLAUDE.md"
+    ]
+  },
+  "design": {
+    "colorMode": "light",
+    "colors": {
+      "primary": {
+        "value": "#1d4ed8",
+        "source": "app/globals.css"
+      },
+      "background": {
+        "value": "#f7f9fc",
+        "source": "app/globals.css"
+      },
+      "foreground": {
+        "value": "#17263f",
+        "source": "app/globals.css"
+      },
+      "danger": {
+        "value": "#a02e28",
+        "source": "app/globals.css"
+      },
+      "warning": {
+        "value": "#87500c",
+        "source": "app/globals.css"
+      }
+    },
+    "typography": {
+      "body": {
+        "value": "Self-hosted Nivaar Sans (Noto-derived Latin/Devanagari/Kannada)",
+        "source": "public/fonts/NivaarUnicode.ttf"
+      }
+    },
+    "spacing": {},
+    "radius": {},
+    "shadows": {},
+    "motion": {},
+    "density": "comfortable"
+  },
+  "components": {
+    "installed": [],
+    "preferredPrimitives": [],
+    "patterns": []
+  },
+  "constraints": {
+    "must": [
+      "Civic Clarity: focused intake, prominent verdict, evidence and safe actions in reading order",
+      "Preserve text/link/image/voice APIs and explicit media consent",
+      "Readable text, visible focus, keyboard-operated tabs, reduced motion and multilingual wrapping",
+      "Keep emergency guidance accessible throughout"
+    ],
+    "avoid": [
+      "Large decorative empty panels",
+      "Neon, glass effects and animated marketing sections",
+      "Unverified live-service badges",
+      "Government affiliation implications"
+    ]
+  },
+  "decisions": [
+    {
+      "date": "2026-11-01",
+      "direction": "Civic Clarity",
+      "reason": "Selected as best fit by user delegation: clarity under pressure, accessible reading and a concrete next step",
+      "references": [
+        "https://21st.dev/@originui/components/stepper/vertical-with-inline-titles-and-descriptions",
+        "https://21st.dev/@sean0205/components/file-upload/card-upload",
+        "https://design-system.service.gov.uk/"
+      ],
+      "retrieval_note": "21st CLI design context initialized; catalog search requires authentication, so public reference previews and existing project primitives were used."
+    },
+    {
+      "date": "2026-11-01",
+      "decision": "Replace green branding with navy and cobalt blue",
+      "reason": "User explicitly dislikes green. Keep restrained red and amber for warnings."
+    }
+  ],
+  "evidence": [
+    {
+      "fact": "design.colorMode:light",
+      "source": "app/globals.css"
+    },
+    {
+      "fact": "design.tokens",
+      "source": "app/globals.css"
+    },
+    {
+      "fact": "project.instructions",
+      "source": "AGENTS.md"
+    },
+    {
+      "fact": "project.instructions",
+      "source": "CLAUDE.md"
+    },
+    {
+      "fact": "project.stack:nextjs",
+      "source": "package.json"
+    },
+    {
+      "fact": "project.stack:react",
+      "source": "package.json"
+    },
+    {
+      "fact": "project.stack:tailwind-v4",
+      "source": "package.json"
+    }
+  ],
+  "generatedAt": "2026-11-01T09:54:13.576Z"
+}

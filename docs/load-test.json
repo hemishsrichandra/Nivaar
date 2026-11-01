@@ -1,0 +1,12 @@
+{
+  "scope": "ASGI integration: 120 requests, 20 clients; stubbed analysis, no provider calls; not Render network throughput",
+  "requests": 120,
+  "p50_ms": 19.99,
+  "p95_ms": 110.82,
+  "statuses": {
+    "200": 60,
+    "429": 60
+  },
+  "budget_enforced": true,
+  "server_errors": 0
+}

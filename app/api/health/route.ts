@@ -1,1 +1,0 @@
-export function GET(){return Response.json({status:'ok',application:'Nivaar',mode:'deterministic',official_fetch:'live, bounded registry',stores_messages:false,providers:{llm:false,search:false,speech:'browser',ocr:'browser-local'}});}

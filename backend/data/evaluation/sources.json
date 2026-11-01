@@ -1,0 +1,35 @@
+[
+  {
+    "id": "digital_arrest",
+    "url": "https://www.pib.gov.in/PressReleasePage.aspx?PRID=2110809&lang=1&reg=3",
+    "publication_date": "2025-03-12",
+    "sha256": "a59d9e22dadf3282b7fc5e7a40af75bb5f4d0952a2e4c4caf9ccd97c23591c04",
+    "bytes": 108844,
+    "status": "downloaded",
+    "retrieved_at": "2026-11-01T10:27:43.287324+00:00"
+  },
+  {
+    "id": "banking",
+    "url": "https://rbikehtahai.rbi.org.in/safeguards-for-digital-banking.html",
+    "status": "unavailable",
+    "reason": "HTTPStatusError"
+  },
+  {
+    "id": "task_jobs",
+    "url": "https://www.pib.gov.in/PressReleasePage.aspx?PRID=1982936&lang=2&reg=48",
+    "publication_date": "2023-12-06",
+    "sha256": "a73a14ec97e84979427ede8c0de34f09b702c8ec7df30db3f7619b486439f154",
+    "bytes": 105516,
+    "status": "downloaded",
+    "retrieved_at": "2026-11-01T10:27:43.690782+00:00"
+  },
+  {
+    "id": "credentials",
+    "url": "https://cyber.delhipolice.gov.in/netbanking.html",
+    "publication_date": null,
+    "sha256": "df699ea5bfc69a276e5ea7bb77b042fab51022370877fe58d783c1f338823683",
+    "bytes": 40186,
+    "status": "downloaded",
+    "retrieved_at": "2026-11-01T10:27:43.936202+00:00"
+  }
+]

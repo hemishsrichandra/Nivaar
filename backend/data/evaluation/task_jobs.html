@@ -1,0 +1,1128 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head id="Head1"><title>
+	Press Release Page | Press Information Bureau
+</title><link href="css/style.css?v=1" rel="stylesheet" type="text/css" /><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><link rel="alternate stylesheet" href="css/change.css?v=1" media="screen" title="change" /><link rel="alternate stylesheet" href="css/green.css?v=1" media="screen" title="green" /><link rel="alternate stylesheet" href="css/yellow.css" media="screen" title="yellow" /><link rel="stylesheet" type="text/css" href="css/prtint.css" media="print" /><link rel="stylesheet" href="css/style3.1.css" type="text/css" /><link id="pibA11yCss" rel="stylesheet" href="/css/accessibility.css?v=7" type="text/css" />
+    <script type="text/javascript">
+        (function (d) {
+            var t = "";
+            try {
+                t = window.localStorage.getItem("pibStyle") || "";
+            } catch (e) {
+                t = "";
+            }
+            if (t === "orange") {
+                t = "yellow";
+            }
+            var c = t === "change" ? " pib-hc"
+                : t === "green" ? " pib-theme-green"
+                : t === "yellow" ? " pib-theme-yellow" : "";
+            d.documentElement.className += c + " pib-a11y-content";
+        }(document));
+    </script>
+
+    <script src="js/jquery.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/js/accessibility.js?v=7"></script>
+
+    <script type="text/javascript">
+            $(document).ready(function () {
+                  function getParameterByName(name) {
+                        var url = window.location.href;
+                        name = name.replace(/[\[\]]/g, '\\$&');
+                        var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+                              results = regex.exec(url);
+                        if (!results) return null;
+                        if (!results[2]) return '';
+                        return decodeURIComponent(results[2].replace(/\+/g, ' '));
+                  }
+                  let prid = parseInt(getParameterByName('PRID'), 10);
+
+                  if (!isNaN(prid) && prid > 0) {
+                        $.ajax({
+                              type: "POST",
+                              url: "AjaxMethod.aspx/UpdatePRHitCount",
+                              async: false,
+                              data: JSON.stringify({ 'PermId': prid }),
+                              contentType: "application/json; charset=utf-8",
+                              dataType: "json",
+                              success: function (response) {
+                                    console.log(response);
+                              },
+                              error: function (error) {
+                                    console.log("Error in AJAX request", error);
+                              }
+                        });
+                  } else {
+                        console.log("Invalid parameters:", prid);
+                  }
+            });
+    </script>
+    <style type="text/css">
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        .banner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #000;
+            color: #fff;
+            padding: 20px;
+        }
+
+        full-width {
+            width: 100%;
+        }
+
+        .logo-left, .logo-center, .countdown {
+            display: flex;
+            align-items: center;
+        }
+
+            .logo-left img, .logo-center img {
+                height: 70px;
+            }
+
+        .countdown {
+            text-align: center;
+            background-color: var(--dbim-text, #150202);
+            border-radius: 10px;
+            padding: 10px;
+            border: 2px solid grey;
+        }
+
+        .firstnumber {
+            color: #000000;
+            position: absolute;
+            top: 50px;
+            right: 90px;
+            font-size: 30px;
+        }
+
+        .secondnumber {
+            position: absolute;
+            color: #000000;
+            right: 45px;
+            top: 50px;
+            font-size: 30px;
+        }
+
+        .countdown .days {
+            font-size: 35px;
+            color: gold;
+        }
+
+        .countdown p {
+            margin: 0;
+        }
+
+        .countdown .text {
+            font-size: 16px;
+        }
+
+        a {
+            word-break: break-all;
+        }
+
+        iframe, img {
+            max-width: 100%;
+        }
+
+        /* === DBIM 3.0 Option 4 Separator Line & Reading Meta Styling === */
+        .pr-share--footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            border-top: 1px solid var(--dbim-border, #d1d5db);
+            padding-top: 16px;
+            margin-top: 24px;
+        }
+
+        .pr-share__left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .pr-reading-meta {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.95rem;
+            color: var(--dbim-text-secondary, #475569);
+            font-weight: 500;
+            white-space: nowrap;
+            margin-left: auto;
+        }
+
+        .pr-reading-meta__item {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .pr-reading-meta__divider {
+            color: var(--dbim-border, #cbd5e1);
+            font-weight: 300;
+        }
+
+        .pib-hc .pr-reading-meta,
+        .pib-hc .pr-reading-meta svg {
+            color: currentColor !important;
+        }
+
+        @media (max-width: 680px) {
+            .pr-share--footer {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .pr-reading-meta {
+                margin-left: 0;
+                width: 100%;
+                justify-content: flex-start;
+            }
+        }
+
+        @media(max-width:1199px) {
+            .firstnumber {
+                top: 40px;
+                right: 72px;
+                font-size: 30px;
+            }
+
+            .secondnumber {
+                right: 35px;
+                top: 40px;
+                font-size: 30px;
+            }
+        }
+
+        @media(max-width:990px) {
+            .firstnumber {
+                top: 25px;
+                right: 54px;
+                font-size: 30px;
+            }
+
+            .secondnumber {
+                right: 25px;
+                top: 25px;
+                font-size: 30px;
+            }
+        }
+
+        @media(max-width:768px) {
+            .countdown, .days {
+                font-size: 12px !important;
+            }
+
+            .firstnumber {
+                top: 25%;
+                right: 8%;
+                font-size: 30px;
+            }
+
+            .secondnumber {
+                right: 4.5%;
+                top: 25%;
+                font-size: 30px;
+            }
+        }
+
+        @media(max-width:475px) {
+            .countdown, .days {
+                font-size: 10px !important;
+                top: 20%;
+            }
+
+            .bannerimgdiv {
+                padding: 0 !important;
+            }
+
+            .bannerimg {
+                width: 108% !important;
+            }
+        }
+    </style>
+    <script type="text/javascript">
+            $(function () {
+                  $("[id*=printPDF]").click(function () {
+                        $("[id*=hfGridHtml]").val($("#PdfDiv").html());
+                  });
+            });
+            $(function () {
+                  $("[id*=printPDFEvent]").click(function () {
+                        $("[id*=hfGridHtml]").val($("#PdfDiv").html());
+                  });
+            });
+    </script>
+
+    <link id="pibConsentCss" href="/css/consent.css?v=8" rel="stylesheet" type="text/css" /><link id="pibFontsCss" href="/css/fonts-noto.css?v=6" rel="stylesheet" type="text/css" /><link id="pibDbimCss" href="/css/dbim.css?v=1120" rel="stylesheet" type="text/css" /><meta property="og:title" content="Under the leadership of Prime Minister Shri Narendra Modi and guidance of Union Home Minister Shri Amit Shah, building a &quot;Cyber Safe India&quot; is one of the top priorities of the Ministry of Home Affairs" /><meta property="og:url" content="www.pib.gov.in/Pressreleaseshare.aspx?PRID=1982936" /><meta property="og:description" content="Under the leadership of Prime Minister Shri Narendra Modi and guidance of Union Home Minister Shri A" /><meta property="og:image" content="https:/pib.gov.in/images/indian-emblem.png" />
+                                <script>!function(e){var n="https://s.go-mpulse.net/boomerang/";if("False"=="True")e.BOOMR_config=e.BOOMR_config||{},e.BOOMR_config.PageParams=e.BOOMR_config.PageParams||{},e.BOOMR_config.PageParams.pci=!0,n="https://s2.go-mpulse.net/boomerang/";if(window.BOOMR_API_key="C4E7H-KSCMC-422L4-W3EM5-U36MF",function(){function e(){if(!i){var e=document.createElement("script");e.id="boomr-scr-as",e.src=window.BOOMR.url,e.async=!0,o.parentNode.appendChild(e),i=!0}}function t(e){i=!0;var n,t,a,r,d=document,O=window;if(window.BOOMR.snippetMethod=e?"if":"i",t=function(e,n){var t=d.createElement("script");t.id=n||"boomr-if-as",t.src=window.BOOMR.url,BOOMR_lstart=(new Date).getTime(),e=e||d.body,e.appendChild(t)},!window.addEventListener&&window.attachEvent&&navigator.userAgent.match(/MSIE [67]\./))return window.BOOMR.snippetMethod="s",void t(o.parentNode,"boomr-async");a=document.createElement("IFRAME"),a.src="about:blank",a.title="",a.role="presentation",a.loading="eager",r=(a.frameElement||a).style,r.width=0,r.height=0,r.border=0,r.display="none",o.parentNode.appendChild(a);try{O=a.contentWindow,d=O.document.open()}catch(_){n=document.domain,a.src="javascript:var d=document.open();d.domain='"+n+"';void(0);",O=a.contentWindow,d=O.document.open()}if(n)d._boomrl=function(){this.domain=n,t()},d.write("<bo"+"dy onload='document._boomrl();'>");else if(O._boomrl=function(){t()},O.addEventListener)O.addEventListener("load",O._boomrl,!1);else if(O.attachEvent)O.attachEvent("onload",O._boomrl);d.close()}function a(e){window.BOOMR_onload=e&&e.timeStamp||(new Date).getTime()}if(!window.BOOMR||!window.BOOMR.version&&!window.BOOMR.snippetExecuted){window.BOOMR=window.BOOMR||{},window.BOOMR.snippetStart=(new Date).getTime(),window.BOOMR.snippetExecuted=!0,window.BOOMR.snippetVersion=12,window.BOOMR.url=n+"C4E7H-KSCMC-422L4-W3EM5-U36MF";var o=document.currentScript||document.getElementsByTagName("script")[0],i=!1,r=document.createElement("link");if(r.relList&&"function"==typeof r.relList.supports&&r.relList.supports("preload")&&"as"in r)window.BOOMR.snippetMethod="p",r.href=window.BOOMR.url,r.rel="preload",r.as="script",r.addEventListener("load",e),r.addEventListener("error",function(){t(!0)}),setTimeout(function(){if(!i)t(!0)},3e3),BOOMR_lstart=(new Date).getTime(),o.parentNode.appendChild(r);else t(!1);if(window.addEventListener)window.addEventListener("load",a,!1);else if(window.attachEvent)window.attachEvent("onload",a)}}(),"".length>0)if(e&&"performance"in e&&e.performance&&"function"==typeof e.performance.setResourceTimingBufferSize)e.performance.setResourceTimingBufferSize();!function(){if(BOOMR=e.BOOMR||{},BOOMR.plugins=BOOMR.plugins||{},!BOOMR.plugins.AK){var n=""=="true"?1:0,t="",a="naonzl5ydpcia2xhcqpq-f-4ee6bec5e-clientnsv4-s.akamaihd.net",o="false"=="true"?2:1,i={"ak.v":"41","ak.cp":"1825201","ak.ai":parseInt("1215205",10),"ak.ol":"0","ak.cr":1,"ak.ipv":4,"ak.proto":"http/1.1","ak.rid":"10989842","ak.r":39689,"ak.a2":n,"ak.m":"dscb","ak.n":"ff","ak.cport":34399,"ak.gh":"184.27.196.15","ak.quicv":"","ak.tlsv":"tls1.3","ak.0rtt":"","ak.0rtt.ed":"","ak.csrc":"-","ak.acc":"bbr","ak.t":"1793528863","ak.ak":"hOBiQwZUYzCg5VSAfCLimQ==C0hVOE+yVTj4DpYU/OvlCLM7xeNWbVLcpCTB3kRm9mEEWYj5aZ6pl61+PwnsqNrg0OGcSGkYhbA58kPRqsbb+PHgN1j/vV8lT4w4bhpTnWWXKqT6fwveAOeVIqrfJUAh+lllCQgMUYV1EI9Y+D47K/jFWq2bH2G66tTG26KfLGT3X19g0hA71yAZmraI+f/wGem/cBcIZSr92gPEyeExTuyBlXkOYbzc1BkfCuN/TtiPznB8w75RPpByETcH/iqz1QpIGgevpcVe217k200bLNLNaDEkozhQZuDW1SOaWwCTamEM253a9FWc9axCStXlwvcdPnFTqmJ4wcqRsJcG4P2LXIvSkSxZFt7YGkkFuvT3L3IjypWLzCMA2mWxQYnmuRnZF6wCVNi8gq1ULs64dwlNwX6p7Vg55bjjuYFvtAE=","ak.pv":"9","ak.dpoabenc":"","ak.tf":o};if(""!==t)i["ak.ruds"]=t;var r={i:!1,av:function(n){var t="http.initiator";if(n&&(!n[t]||"spa_hard"===n[t]))i["ak.feo"]=void 0!==e.aFeoApplied?1:0,BOOMR.addVar(i)},rv:function(){var e=["ak.cport","ak.cr","ak.csrc","ak.gh","ak.ipv","ak.m","ak.n","ak.ol","ak.proto","ak.quicv","ak.tlsv","ak.0rtt","ak.0rtt.ed","ak.r","ak.acc","ak.t","ak.tf"];BOOMR.removeVar(e)}};BOOMR.plugins.AK={akVars:i,akDNSPreFetchDomain:a,init:function(){if(!r.i){var e=BOOMR.subscribe;e("before_beacon",r.av,null,null),e("onbeacon",r.rv,null,null),r.i=!0}return this},is_complete:function(){return!0}}}}()}(window);</script></head>
+<body>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"
+     style="position:absolute;width:0;height:0;overflow:hidden" id="dbim-icon-sprite">
+    <defs>
+        <symbol id="icon-angle-double-left" viewBox="0 0 24 24"><path d="M11.6 4.6 4.2 12l7.4 7.4 2.2-2.2L8.6 12l5.2-5.2z"/><path d="M19 4.6 11.6 12 19 19.4l2.2-2.2L16 12l5.2-5.2z"/></symbol>
+        <symbol id="icon-angle-double-right" viewBox="0 0 24 24"><path d="M12.4 4.6 10.2 6.8 15.4 12l-5.2 5.2 2.2 2.2L19.8 12z"/><path d="M5 4.6 2.8 6.8 8 12l-5.2 5.2L5 19.4 12.4 12z"/></symbol>
+        <symbol id="icon-arrow-left" viewBox="0 0 24 24"><path d="M20.8 10.6H9.6v2.8h11.2z"/><path d="M10.8 5.6 3.2 12l7.6 6.4z"/></symbol>
+        <symbol id="icon-arrow-right" viewBox="0 0 24 24"><path d="M3.2 10.6h11.2v2.8H3.2z"/><path d="M13.2 5.6 20.8 12l-7.6 6.4z"/></symbol>
+        <symbol id="icon-blogger" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M6.4 2.4h11.2a4 4 0 0 1 4 4v11.2a4 4 0 0 1-4 4H6.4a4 4 0 0 1-4-4V6.4a4 4 0 0 1 4-4zm2.8 5.2a2 2 0 0 0 0 4h2.4a2 2 0 0 0 0-4zm0 5.6a2 2 0 0 0 0 4h5.6a2 2 0 0 0 0-4z"/></symbol>
+        <symbol id="icon-calendar" viewBox="0 0 24 24"><path d="M7.6 2.4H10v2.4H7.6z"/><path d="M14 2.4h2.4v2.4H14z"/><path fill-rule="evenodd" d="M4 4.8h16a1.6 1.6 0 0 1 1.6 1.6v13.2a1.6 1.6 0 0 1-1.6 1.6H4a1.6 1.6 0 0 1-1.6-1.6V6.4A1.6 1.6 0 0 1 4 4.8zm.4 5.6v8.4h15.2v-8.4z"/><path d="M6.4 12.4h3.2v3.2H6.4z"/></symbol>
+        <symbol id="icon-chevron-left" viewBox="0 0 24 24"><path d="M15.4 4.6 8 12l7.4 7.4 2.2-2.2L12.4 12l5.2-5.2z"/></symbol>
+        <symbol id="icon-chevron-right" viewBox="0 0 24 24"><path d="M8.6 4.6 6.4 6.8 11.6 12l-5.2 5.2 2.2 2.2L16 12z"/></symbol>
+        <symbol id="icon-circle" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/></symbol>
+        <symbol id="icon-download" viewBox="0 0 24 24"><path d="M10.8 3h2.4v7.6h3.4L12 16.6l-4.6-6h3.4z"/><path d="M4 17.2h2.4v2.4h11.2v-2.4H20v3.2a1.4 1.4 0 0 1-1.4 1.4H5.4A1.4 1.4 0 0 1 4 20.4z"/></symbol>
+        <symbol id="icon-facebook" viewBox="0 0 24 24"><path d="M13.6 21.6v-8.4h2.8l.42-3.3h-3.22V7.8c0-.95.27-1.6 1.64-1.6h1.74V3.26a23 23 0 0 0-2.54-.13c-2.5 0-4.22 1.53-4.22 4.34v2.43H7.4v3.3h2.82v8.4z"/></symbol>
+        <symbol id="icon-fact-check" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 2.4 3.6 5.6v6.2c0 4.6 3.4 8.6 8.4 9.8 5-1.2 8.4-5.2 8.4-9.8V5.6zm-1 13.2-3.6-3.6 1.7-1.7 1.9 1.9 4.5-4.5 1.7 1.7z"/></symbol>
+        <symbol id="icon-hashtag" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M8.8 3h2.4l-1 6h3.2l1-6h2.4l-1 6h3.4v2.4h-3.8l-.6 3.2h3.6V17h-4l-1 5h-2.4l1-5h-3.2l-1 5H5.4l1-5H3V14.6h3.8l.6-3.2H3.8V9h4zm.6 8.4-.6 3.2h3.2l.6-3.2z"/></symbol>
+        <symbol id="icon-home" viewBox="0 0 24 24"><path d="M12 3.4 2.8 11.6h2.4v8.4a1 1 0 0 0 1 1h3.3v-5.4h5v5.4h3.3a1 1 0 0 0 1-1v-8.4h2.4z"/></symbol>
+        <symbol id="icon-instagram" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M7.6 2.4h8.8a5.2 5.2 0 0 1 5.2 5.2v8.8a5.2 5.2 0 0 1-5.2 5.2H7.6a5.2 5.2 0 0 1-5.2-5.2V7.6a5.2 5.2 0 0 1 5.2-5.2zm0 2.4a2.8 2.8 0 0 0-2.8 2.8v8.8a2.8 2.8 0 0 0 2.8 2.8h8.8a2.8 2.8 0 0 0 2.8-2.8V7.6a2.8 2.8 0 0 0-2.8-2.8z"/><path fill-rule="evenodd" d="M12 6.8a5.2 5.2 0 1 0 0 10.4 5.2 5.2 0 0 0 0-10.4zm0 2.4a2.8 2.8 0 1 1 0 5.6 2.8 2.8 0 0 1 0-5.6z"/><circle cx="17.3" cy="6.7" r="1.3"/></symbol>
+        <symbol id="icon-linkedin" viewBox="0 0 24 24"><path d="M4.8 8.8h3.6v12H4.8z"/><circle cx="6.6" cy="5.4" r="2.1"/><path d="M10.8 8.8h3.45v1.65h.05c.48-.9 1.65-1.85 3.4-1.85 3.63 0 4.3 2.35 4.3 5.4v6.6h-3.6v-5.85c0-1.4-.03-3.2-1.95-3.2-1.95 0-2.25 1.52-2.25 3.1v5.95h-3.6z"/></symbol>
+        <symbol id="icon-mail" viewBox="0 0 24 24"><path d="M2.4 7.6v9.2a1.6 1.6 0 0 0 1.6 1.6h16a1.6 1.6 0 0 0 1.6-1.6V7.6L12 14z"/><path d="M21.2 5.4H2.8L12 11.8z"/></symbol>
+        <symbol id="icon-mail-open" viewBox="0 0 24 24"><path d="M2.4 9.8h19.2v9.6A1.6 1.6 0 0 1 20 21H4a1.6 1.6 0 0 1-1.6-1.6z"/><path d="M12 2.6 21.6 9.2h-3.8L12 5.3 6.2 9.2H2.4z"/><path d="m3.9 11.2 8.1 5.4 8.1-5.4 1.5 1.3-9.6 6.4-9.6-6.4z"/></symbol>
+        <symbol id="icon-map-marker" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 2.4a7 7 0 0 0-7 7c0 5.2 7 12.2 7 12.2s7-7 7-12.2a7 7 0 0 0-7-7zm0 9.6a2.6 2.6 0 1 1 0-5.2 2.6 2.6 0 0 1 0 5.2z"/></symbol>
+        <symbol id="icon-newspaper" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M2.8 4.4h14.8v15.2H2.8zm2 2v11.2h10.8V6.4z"/><path d="M6 7.6h8.4v1.6H6z"/><path d="M6 10.8h8.4v1.6H6z"/><path d="M6 14h5.2v1.6H6z"/><path d="M18.4 8.4h2.8v9.6a1.4 1.4 0 0 1-2.8 0z"/></symbol>
+        <symbol id="icon-pause" viewBox="0 0 24 24"><rect x="7.4" y="4" width="3.6" height="16" rx="0.9"/><rect x="13" y="4" width="3.6" height="16" rx="0.9"/></symbol>
+    <symbol id="icon-play" viewBox="0 0 24 24"><path d="M8 4.5v15l12-7.5z"/></symbol>
+        <symbol id="icon-picture" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M2.4 5.2h19.2v13.6H2.4zm2 2v9.6h15.2V7.2z"/><path d="M5.6 16.4 10 11l2.6 3 2-2.2 4 4.6z"/><circle cx="8" cy="10.4" r="1.5"/></symbol>
+        <symbol id="icon-press-conference" viewBox="0 0 24 24"><circle cx="12" cy="5.2" r="2.6"/><path d="M7.6 12.2a4.4 4.4 0 0 1 8.8 0z"/><circle cx="4.9" cy="9.6" r="2.2"/><path d="M1.8 15.2a3.1 3.1 0 0 1 6.2 0z"/><circle cx="19.1" cy="9.6" r="2.2"/><path d="M16 15.2a3.1 3.1 0 0 1 6.2 0z"/><path d="M6.6 13.6h10.8l2.2 7.8H4.4z"/></symbol>
+        <symbol id="icon-print" viewBox="0 0 24 24"><path d="M6.4 2.8h11.2v4.4H6.4z"/><path d="M4 8.4h16a1.6 1.6 0 0 1 1.6 1.6v5.6a1.6 1.6 0 0 1-1.6 1.6h-1.6v-2.8H6v2.8H4a1.6 1.6 0 0 1-1.6-1.6V10A1.6 1.6 0 0 1 4 8.4z"/><path d="M7.2 15.6h9.6v5.6H7.2z"/></symbol>
+        <symbol id="icon-rss" viewBox="0 0 24 24"><circle cx="4.8" cy="19.2" r="2.4"/><path d="M2.4 11.2v3.2a6.4 6.4 0 0 1 6.4 6.4H12A9.6 9.6 0 0 0 2.4 11.2z"/><path d="M2.4 4.8V8A13.6 13.6 0 0 1 16 21.6h3.2A16.8 16.8 0 0 0 2.4 4.8z"/></symbol>
+        <symbol id="icon-search-plus" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M10 2.8a7.2 7.2 0 1 0 0 14.4 7.2 7.2 0 0 0 0-14.4zm0 2.4a4.8 4.8 0 1 1 0 9.6 4.8 4.8 0 0 1 0-9.6z"/><path d="M15.3 14.6 21.2 20.5l-1.5 1.5-5.9-5.9z"/><path d="M9.2 6.8h1.6v2.4h2.4v1.6h-2.4v2.4H9.2v-2.4H6.8V9.2h2.4z"/></symbol>
+        <symbol id="icon-share" viewBox="0 0 24 24"><circle cx="18" cy="5.6" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="18.4" r="3"/><path d="M8.3 10.9 15.7 7.2l.9 1.8-7.4 3.7z"/><path d="M9.2 13.1 16.6 16.8l-.9 1.8-7.4-3.7z"/></symbol>
+        <symbol id="icon-twitter" viewBox="0 0 24 24"><path d="M4.2 3h4.3l11.3 18h-4.3z"/><path d="M19.3 3h-2.6L4.2 21h2.6z"/></symbol>
+        <symbol id="icon-university" viewBox="0 0 24 24"><path d="M12 2.4 21.6 7.2v1.6H2.4V7.2z"/><path d="M4.8 10.4h2.4v8H4.8z"/><path d="M9.2 10.4h2.4v8H9.2z"/><path d="M13.4 10.4h2.4v8h-2.4z"/><path d="M17.6 10.4H20v8h-2.4z"/><path d="M3.2 19.8h17.6v1.8H3.2z"/></symbol>
+        <symbol id="icon-volume-up" viewBox="0 0 24 24"><path d="M3.2 9.2h3.3l5-4.2v14l-5-4.2H3.2z"/><path d="M14.6 8.4a5 5 0 0 1 0 7.2l1.6 1.6a7.2 7.2 0 0 0 0-10.4z"/><path d="M17.4 5.6a8.8 8.8 0 0 1 0 12.8l1.5 1.5a10.9 10.9 0 0 0 0-15.8z"/></symbol>
+        <symbol id="icon-whatsapp" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 2.4a9.5 9.5 0 0 0-8.1 14.5L2.4 21.6l4.8-1.4A9.5 9.5 0 1 0 12 2.4zm0 2.2a7.3 7.3 0 1 1-3.8 13.5l-.4-.2-2.6.7.7-2.5-.3-.4A7.3 7.3 0 0 1 12 4.6z"/><path d="M9.4 7.8c-.2-.5-.4-.5-.6-.5h-.5a1 1 0 0 0-.7.3c-.3.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.7 2.8 4.3 3.8 2.1.8 2.6.7 3 .6.5 0 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2l-.5-.3-1.6-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6 6 0 0 1-1.8-1.1 6.6 6.6 0 0 1-1.2-1.6c-.1-.2 0-.4.1-.5l.4-.5.3-.5v-.5z"/></symbol>
+        <symbol id="icon-youtube" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M21.6 7.2a2.8 2.8 0 0 0-2-2C17.9 4.8 12 4.8 12 4.8s-5.9 0-7.6.4a2.8 2.8 0 0 0-2 2A29 29 0 0 0 2 12a29 29 0 0 0 .4 4.8 2.8 2.8 0 0 0 2 2c1.7.4 7.6.4 7.6.4s5.9 0 7.6-.4a2.8 2.8 0 0 0 2-2A29 29 0 0 0 22 12a29 29 0 0 0-.4-4.8zM10.2 15.1V8.9l5.1 3.1z"/></symbol>
+    </defs>
+</svg>
+
+    <form method="post" action="./PressReleasePage.aspx?PRID=1982936&amp;lang=2&amp;reg=48" id="form1">
+<input type="hidden" name="sc_HiddenField" id="sc_HiddenField" value="" />
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="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" />
+
+
+<script src="/ScriptResource.axd?d=x6wALODbMJK5e0eRC_p1LdIxBJXt0U_WW5GWfJqHAqo6frgCmGRfEywglicTersO2OKrFhK1gAIp0Wk2al2YrpdR3uWqH6f4nfjBsCyRUfTUUVmb0&amp;t=ffffffffecf8d3f2" type="text/javascript"></script>
+<script src="/PressReleasePage.aspx?_TSM_HiddenField_=sc_HiddenField&amp;_TSM_CombinedScripts_=%3b%3bAjaxControlToolkit%2c+Version%3d3.5.7.123%2c+Culture%3dneutral%2c+PublicKeyToken%3d28f01b0e84b6d53e%3aen-US%3a5a4df314-b4a2-4da2-a207-9284f1b1e96c%3ade1feab2%3af2c8e708%3a8613aea7%3af9cec9bc%3a3202a5a2%3aab09e3fe%3a87104b7c%3a720a52bf%3a589eaa30%3aa67c2700%3abe6fb298" type="text/javascript"></script>
+<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="59B53027" />
+<input type="hidden" name="__VIEWSTATEENCRYPTED" id="__VIEWSTATEENCRYPTED" value="" />
+<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="WN1Ak4tGrcAk1eYrKGtD3+tMRX4W+NWwFDeZtqtySmAXR1yAesakV0kf7kpLcEoV1Ov3FZ96VwNE+745+bn5E/oN8Pna3PtZMsBOgBXYs5c8hAdcHzPTdQ6uPMpB1EFo2rmIypE3irztBNjB/gAWpgE0A2AQtAyekTAUH1Z/9xAIQIsuZz77orEM0oFd/bThsL77JchVKGOuk1/Iqjuu/u7luFK6Rh+4Z1GhNFSIB4NcyjkMaJfj8kcOJzervBgZpf1h4w84p7OhNH6Q/Ot59QOxMjI=" />
+        
+        <div id="templateCss"></div>
+        
+        <input type="hidden" name="hfGridHtml" id="hfGridHtml" />
+        <div class="container" style='margin-bottom: 50px;'>
+            <div id="accessories">
+                
+                <div class="pull-right" style="display: flex">
+                    <div id="voll"></div>
+                    <div id="vollDT"></div>
+                    
+
+<span class="print-icons">
+<input type="image" name="Print1$print" id="Print1_print" aria-label="Print" src="images/printer_icon.png" alt="print page button" style="padding: 5px 10px 5px 10px;" />
+</span>
+                </div>
+            </div>
+            <input type="hidden" name="hydpermid" id="hydpermid" value="1982936" />
+            
+
+            <div class="innner-page-main-about-us-content-right-part">
+                <div id="MinistryName" class="MinistryNameSubhead text-center">
+                    Ministry of Home Affairs
+                </div>
+                <div id="lg_g"><div class='log_oo'>  <img src='https://static.pib.gov.in/WriteReadData/specificdocs/photo/2026/sep/ph_9768_20260902_10000501.png' alt='azadi ka amrit mahotsav' /> </div></div>
+
+                <div class="text-center event-heading-background">
+                    
+                    <h1 id="Titleh2">
+                        Under the leadership of Prime Minister Shri Narendra Modi and guidance of Union Home Minister Shri Amit Shah, building a "Cyber Safe India" is one of the top priorities of the Ministry of Home Affairs
+                    </h1>
+                    <h3 id="Subtitleh3">
+                        <span id="ltrSubtitle"><br/>I4C, through its vertical National Cybercrime Threat Analytics Unit (NCTAU), had last week identified and recommended over 100 websites involved in organized investment / task based - part time job frauds<br/><br/>M/o Electronics and Information Technology (MeitY), invoking it’s power under the Information Technology Act, 2000, has blocked these websites<br/><br/>These websites, facilitating task based / organized illegal investment related economic crimes, were learnt to be operated by overseas actors by using digital advertisement, chat messengers & mule / rented accounts<br/><br/>It was also learnt that proceeds from the large scale economic frauds were seen to be laundered out of India using card network, crypto currency, overseas ATM withdrawals and international Fintech companies</span>
+                    </h3>
+                </div>
+
+                <div id="PrDateTime" class="ReleaseDateSubHeaddateTime text-center pt20">
+                    Posted On:
+                              06 DEC 2023 10:12AM by PIB Delhi
+                </div>
+                
+                <div class='pt20'>
+                </div>
+                <input type="hidden" name="hydphotoUrl" id="hydphotoUrl" />
+                
+
+                <!-- Release content wrapper for client-side zero-reflow word count -->
+                <div id="pibReleaseBody">
+                    <p style="text-align:justify"><span style="font-family:&quot;Times New Roman&quot;,Times,serif; font-size:16px">Under the leadership of Prime Minister Shri Narendra Modi and guidance of Union Home Minister Shri Amit Shah, building a &quot;Cyber Safe India&quot; is one of the top priorities of the Ministry of Home Affairs.</span></p>
+
+<p style="text-align:justify"><span style="font-family:&quot;Times New Roman&quot;,Times,serif; font-size:16px">Under the guidance of Union Home Minister Shri Amit Shah, M/o Home Affairs is committed to curbing cybercrime and protecting people from cyber threat actors. Citizens are also advised to promptly report phone numbers and social media handles used by such fraudsters to the NCRP </span><a href="http://www.cybercrime.gov.in" target="_blank"><strong style="font-family:&quot;Times New Roman&quot;,Times,serif; font-size:16px"><em><u>www.cybercrime.gov.in</u></em></strong></a></p>
+
+<p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">Indian Cybercrime Coordination Centre (I4C) is an initiative of MHA to deal with cybercrime in the country in a coordinated and comprehensive manner. I4C, MHA, through its vertical National Cybercrime Threat Analytics Unit (NCTAU) had last week identified and recommended over 100 websites involved in organized investment / task based - part time job frauds. <span style="color:#202124">M/o Electronics and Information Technology (</span>MeitY), invoking it&rsquo;s power under the Information Technology Act, 2000, has blocked these websites. These websites, which facilitated task based / organized illegal investment related economic crimes, were learnt to being operated by overseas actors and they were using digital advertisement, chat messengers and mule / rented accounts. It was also learnt that proceeds from the large scale economic frauds were seen to be laundered out of India using card network, crypto currency, overseas ATM withdrawals and international Fintech companies. In this regard, several complaints were received through 1930 helpline and NCRP and these offences were posing significant threat to the citizens and also involved data security concerns. <strong>These frauds, typically, involve following steps:-</strong></span></span></p>
+
+<p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">1. Targeted digital advertisements are launched&nbsp; on platforms like Google and Meta using key words like&quot;Ghar baithe job&quot;, &quot;Ghar baidhe kamai kaise karen&quot; etc in multiple languages from overseas advertisers. Targets are mostly retired employees, women and unemployed youth looking for part time jobs.</span></span></p>
+
+<p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">2. Upon clicking the advertisement, an agent using WhatsApp / Telegram starts conversation with the potential victim, who convinces her to perform some tasks like Video Likes and Subscribe, Maps Rating, etc.</span></span></p>
+
+<p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">3. Upon completion of task, victim is given some commission, initially and is asked to invest more to get more returns against given task. </span></span></p>
+
+<p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">4. After gaining confidence, when victim deposits larger sum, deposits are frozen and thus victim is duped.</span></span></p>
+
+<p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px"><strong>As precautionary measure, it is advised to:-</strong></span></span></p>
+
+<p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">1. Exercise due diligence before investing in any such very high commission paying online schemes sponsored over internet.</span></span></p>
+
+<p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">2. If an unknown person contacts you over WhatsApp / Telegram, refrain from performing financial transactions without verification. </span></span></p>
+
+<p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">3. Verify the name of receiver mentioned in UPI App. If receiver is any random person, it may be a mule account and scheme may be fraudulent. Similarly, check the source from where initial commission is received.</span></span></p>
+
+<p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">4. Citizens should refrain from doing transactions with unknown accounts, as these could be involved in money laundering and even terror financing and lead to blocking of accounts by police and other legal action.</span></span></p>
+
+<p style="text-align:center"><span style="font-family:&quot;Times New Roman&quot;,Times,serif; font-size:16px">*****</span></p>
+
+<p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px"><strong>RK/AY/ASH/RR</strong></span></span></p>
+
+                </div>
+
+                <div id="reel_pic">
+                </div>
+
+                <br />
+                <span id="ReleaseId">(Release ID: 1982936)</span>
+                <span id="lblViews">Visitor Counter : 11744</span>
+                <div>
+                    
+                </div>
+                
+
+                <span id="lblRefPhoto"></span>
+
+                <div class="BackgroundRelease">
+                    
+                </div>
+                <div>
+                    
+                </div>
+                <div class="ReleaseLang">Read this release in: 
+                
+                        <a href='https://pib.gov.in/PressReleasePage.aspx?PRID=1982948' target="_blank">
+                            Urdu </a>
+                    
+                        ,
+                    
+                        <a href='https://pib.gov.in/PressReleasePage.aspx?PRID=1983015' target="_blank">
+                            Marathi </a>
+                    
+                        ,
+                    
+                        <a href='https://pib.gov.in/PressReleasePage.aspx?PRID=1982970' target="_blank">
+                            हिन्दी </a>
+                    
+                        ,
+                    
+                        <a href='https://pib.gov.in/PressReleasePage.aspx?PRID=1983367' target="_blank">
+                            Bengali </a>
+                    
+                        ,
+                    
+                        <a href='https://pib.gov.in/PressReleasePage.aspx?PRID=1982983' target="_blank">
+                            Assamese </a>
+                    
+                        ,
+                    
+                        <a href='https://pib.gov.in/PressReleasePage.aspx?PRID=1982946' target="_blank">
+                            Gujarati </a>
+                    
+                        ,
+                    
+                        <a href='https://pib.gov.in/PressReleasePage.aspx?PRID=1983110' target="_blank">
+                            Odia </a>
+                    
+                        ,
+                    
+                        <a href='https://pib.gov.in/PressReleasePage.aspx?PRID=1983012' target="_blank">
+                            Tamil </a>
+                    
+                        ,
+                    
+                        <a href='https://pib.gov.in/PressReleasePage.aspx?PRID=1983210' target="_blank">
+                            Telugu </a>
+                    
+                        ,
+                    
+                        <a href='https://pib.gov.in/PressReleasePage.aspx?PRID=1983202' target="_blank">
+                            Kannada </a>
+                    
+                        ,
+                    
+                        <a href='https://pib.gov.in/PressReleasePage.aspx?PRID=1983100' target="_blank">
+                            Malayalam </a>
+                    
+                </div>
+
+                <div class="RelTag">
+                    <ul>
+                        
+                    </ul>
+                </div>
+                <div class="clear">
+                </div>
+
+                <!-- DBIM 3.0 Option 4: Separator Line with Left Share Rail & Right Reading Metrics -->
+                <div class="pr-share pr-share--footer" role="region" aria-label="Share and reading details">
+                    <div class="pr-share__left">
+                        <span class="pr-share__label" aria-hidden="true">Share</span>
+                        <ul class="pr-share__list">
+                            <li><a class="pr-share__btn pr-share__btn--facebook"
+                                href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpib.gov.in%2fPressReleasePage.aspx%3fPRID%3d1982936"
+                                target="_blank" rel="noopener noreferrer"
+                                aria-label="Share on Facebook">
+                                <svg class="dbim-icon dbim-icon-24" width="24" height="24" fill="currentColor" aria-hidden="true" focusable="false">
+                                    <use href="#icon-facebook" xlink:href="#icon-facebook"></use>
+                                </svg>
+                            </a></li>
+                            <li><a class="pr-share__btn pr-share__btn--twitter"
+                                href="https://twitter.com/intent/tweet?url=https%3a%2f%2fpib.gov.in%2fPressReleasePage.aspx%3fPRID%3d1982936"
+                                target="_blank" rel="noopener noreferrer"
+                                aria-label="Share on X">
+                                <svg class="dbim-icon dbim-icon-24" width="24" height="24" fill="currentColor" aria-hidden="true" focusable="false">
+                                    <use href="#icon-twitter" xlink:href="#icon-twitter"></use>
+                                </svg>
+                            </a></li>
+                            <li><a class="pr-share__btn pr-share__btn--whatsapp"
+                                href="https://api.whatsapp.com/send?text=https%3a%2f%2fpib.gov.in%2fPressReleasePage.aspx%3fPRID%3d1982936"
+                                target="_blank" rel="noopener noreferrer"
+                                aria-label="Share on WhatsApp">
+                                <svg class="dbim-icon dbim-icon-24" width="24" height="24" fill="currentColor" aria-hidden="true" focusable="false">
+                                    <use href="#icon-whatsapp" xlink:href="#icon-whatsapp"></use>
+                                </svg>
+                            </a></li>
+                            <li><a class="pr-share__btn pr-share__btn--linkedin"
+                                href="https://www.linkedin.com/sharing/share-offsite/?url=https%3a%2f%2fpib.gov.in%2fPressReleasePage.aspx%3fPRID%3d1982936"
+                                target="_blank" rel="noopener noreferrer"
+                                aria-label="Share on LinkedIn">
+                                <svg class="dbim-icon dbim-icon-24" width="24" height="24" fill="currentColor" aria-hidden="true" focusable="false">
+                                    <use href="#icon-linkedin" xlink:href="#icon-linkedin"></use>
+                                </svg>
+                            </a></li>
+                            <li><a class="pr-share__btn pr-share__btn--mail"
+                                href="mailto:?subject=Press+release+from+PIB&amp;body=https%3a%2f%2fpib.gov.in%2fPressReleasePage.aspx%3fPRID%3d1982936"
+                                aria-label="Share by email">
+                                <svg class="dbim-icon dbim-icon-24" width="24" height="24" fill="currentColor" aria-hidden="true" focusable="false">
+                                    <use href="#icon-mail" xlink:href="#icon-mail"></use>
+                                </svg>
+                            </a></li>
+                        </ul>
+                    </div>
+                    <div class="pr-reading-meta" id="prReadingMeta" aria-label="Reading statistics">
+                        <span class="pr-reading-meta__item">
+                            <!-- Modern Document / Word Count Icon -->
+                            <svg class="pr-reading-meta__icon" width="18" height="18" viewbox="0 0 16 16" fill="currentColor" aria-hidden="true" focusable="false">
+                                <path d="M5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5" />
+                                <path d="M9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.5zm0 1v2A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z" />
+                            </svg>
+                            <span id="prWordCount">-- words</span>
+                        </span>
+
+                        <span class="pr-reading-meta__divider" aria-hidden="true">|</span>
+
+                        <span class="pr-reading-meta__item">
+                            <!-- Modern Precision Clock / Read Time Icon -->
+                            <svg class="pr-reading-meta__icon" width="18" height="18" viewbox="0 0 16 16" fill="currentColor" aria-hidden="true" focusable="false">
+                                <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71z" />
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0" />
+                            </svg>
+                            <span id="prReadTime">-- min read</span>
+                        </span>
+                    </div>
+                </div>
+
+                <div id="RelLink" class="RelLink">
+                    <ul>
+                        
+                    </ul>
+                </div>
+                <center>
+                    
+                </center>
+            </div>
+
+            <div id="update12">
+	
+                    
+                    <input type="hidden" name="Hidden" id="Hidden" />
+                    <div id="P_CategoryManagement" class="ModalWindow" style="display: none">
+		
+                        <div>
+                            <input type="image" name="btnClose" id="btnClose" src="images/close_flat_icon.png" />
+                        </div>
+                        <div id="description">
+                        </div>
+                        <div class="text-center">
+                            <h2>
+                                
+                                <br>
+                                
+                            </h2>
+                        </div>
+                        <br />
+                        <div class="clear">
+                        </div>
+                        
+                    
+	</div>
+                
+</div>
+        </div>
+
+        <div id="PdfDiv" style="display: none;">
+            <table width="100%">
+                <tr>
+                    <td style="font-weight: 200; text-align: center">
+                        Ministry of Home Affairs
+                        <div style="height: 30px; width: 100%;">
+                        </div>
+                        <div style="font-weight: 200; text-align: center; font-size: 30px;">
+                            Under the leadership of Prime Minister Shri Narendra Modi and guidance of Union Home Minister Shri Amit Shah, building a "Cyber Safe India" is one of the top priorities of the Ministry of Home Affairs
+                        </div>
+                        <div style="height: 30px; width: 100%;">
+                        </div>
+                        <div style="font-weight: 200; text-align: center; font-size: 30px;">
+                            <div style='height:30px;width:100%;'></div>I4C, through its vertical National Cybercrime Threat Analytics Unit (NCTAU), had last week identified and recommended over 100 websites involved in organized investment / task based - part time job frauds<div style='height:30px;width:100%;'></div><div style='height:30px;width:100%;'></div>M/o Electronics and Information Technology (MeitY), invoking it’s power under the Information Technology Act, 2000, has blocked these websites<div style='height:30px;width:100%;'></div><div style='height:30px;width:100%;'></div>These websites, facilitating task based / organized illegal investment related economic crimes, were learnt to be operated by overseas actors by using digital advertisement, chat messengers & mule / rented accounts<div style='height:30px;width:100%;'></div><div style='height:30px;width:100%;'></div>It was also learnt that proceeds from the large scale economic frauds were seen to be laundered out of India using card network, crypto currency, overseas ATM withdrawals and international Fintech companies
+                        </div>
+                        <div style="height: 30px; width: 100%;">
+                        </div>
+                        <div style="text-align: center; font-size: 14px;">
+                            Posted On:
+                                          06 DEC 2023 10:12AM by PIB Delhi
+                        </div>
+                        <div style="height: 30px; width: 100%;">
+                        </div>
+                        <div style="font-weight: 200; text-align: left; font-size: 16px;">
+                            <p style="text-align:justify"><span style="font-family:&quot;Times New Roman&quot;,Times,serif; font-size:16px">Under the leadership of Prime Minister Shri Narendra Modi and guidance of Union Home Minister Shri Amit Shah, building a &quot;Cyber Safe India&quot; is one of the top priorities of the Ministry of Home Affairs.</span></p>
+
+<p style="text-align:justify"><span style="font-family:&quot;Times New Roman&quot;,Times,serif; font-size:16px">Under the guidance of Union Home Minister Shri Amit Shah, M/o Home Affairs is committed to curbing cybercrime and protecting people from cyber threat actors. Citizens are also advised to promptly report phone numbers and social media handles used by such fraudsters to the NCRP </span><a href="http://www.cybercrime.gov.in" target="_blank"><strong style="font-family:&quot;Times New Roman&quot;,Times,serif; font-size:16px"><em><u>www.cybercrime.gov.in</u></em></strong></a></p>
+
+<p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">Indian Cybercrime Coordination Centre (I4C) is an initiative of MHA to deal with cybercrime in the country in a coordinated and comprehensive manner. I4C, MHA, through its vertical National Cybercrime Threat Analytics Unit (NCTAU) had last week identified and recommended over 100 websites involved in organized investment / task based - part time job frauds. <span style="color:#202124">M/o Electronics and Information Technology (</span>MeitY), invoking it&rsquo;s power under the Information Technology Act, 2000, has blocked these websites. These websites, which facilitated task based / organized illegal investment related economic crimes, were learnt to being operated by overseas actors and they were using digital advertisement, chat messengers and mule / rented accounts. It was also learnt that proceeds from the large scale economic frauds were seen to be laundered out of India using card network, crypto currency, overseas ATM withdrawals and international Fintech companies. In this regard, several complaints were received through 1930 helpline and NCRP and these offences were posing significant threat to the citizens and also involved data security concerns. <strong>These frauds, typically, involve following steps:-</strong></span></span></p>
+
+<p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">1. Targeted digital advertisements are launched&nbsp; on platforms like Google and Meta using key words like&quot;Ghar baithe job&quot;, &quot;Ghar baidhe kamai kaise karen&quot; etc in multiple languages from overseas advertisers. Targets are mostly retired employees, women and unemployed youth looking for part time jobs.</span></span></p>
+
+<p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">2. Upon clicking the advertisement, an agent using WhatsApp / Telegram starts conversation with the potential victim, who convinces her to perform some tasks like Video Likes and Subscribe, Maps Rating, etc.</span></span></p>
+
+<p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">3. Upon completion of task, victim is given some commission, initially and is asked to invest more to get more returns against given task. </span></span></p>
+
+<p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">4. After gaining confidence, when victim deposits larger sum, deposits are frozen and thus victim is duped.</span></span></p>
+
+<p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px"><strong>As precautionary measure, it is advised to:-</strong></span></span></p>
+
+<p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">1. Exercise due diligence before investing in any such very high commission paying online schemes sponsored over internet.</span></span></p>
+
+<p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">2. If an unknown person contacts you over WhatsApp / Telegram, refrain from performing financial transactions without verification. </span></span></p>
+
+<p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">3. Verify the name of receiver mentioned in UPI App. If receiver is any random person, it may be a mule account and scheme may be fraudulent. Similarly, check the source from where initial commission is received.</span></span></p>
+
+<p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">4. Citizens should refrain from doing transactions with unknown accounts, as these could be involved in money laundering and even terror financing and lead to blocking of accounts by police and other legal action.</span></span></p>
+
+<p style="text-align:center"><span style="font-family:&quot;Times New Roman&quot;,Times,serif; font-size:16px">*****</span></p>
+
+<p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px"><strong>RK/AY/ASH/RR</strong></span></span></p>
+
+                        </div>
+                        <div style="height: 30px; width: 100%;">
+                        </div>
+                        <div style="height: 30px; width: 100%;">
+                        </div>
+                        <div style="font-weight: 100; text-align: left; font-size: 16px;">
+                            (Release ID: 1982936)
+                        </div>
+                        <div style="height: 30px; width: 100%;">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="font-weight: 200; text-align: center; font-size: 24px;"></td>
+                </tr>
+            </table>
+        </div>
+        <div class="clearfix">
+        </div>
+
+        <div class="section1">
+            <div id="frst_t">
+                <div id="arr_rm"><div class='sticky-social_mb'><ul class='social_mb'><a href='http://www.facebook.com/share.php?u=https://pib.gov.in/PressReleasePage.aspx?PRID=1982936' target='_blank'><li class='fb_b'   ></li></a><a href='https://twitter.com/intent/tweet?url=https://pib.gov.in/PressReleasePage.aspx?PRID=1982936&text=Under the leadership of Prime Minister Shri Narendra Modi and guidance of Union Home Minister Shri Amit Shah, building a "Cyber Safe India" is one of the top priorities of the Ministry of Home Affairs' target='_blank'><li class='twitter_r'  > </li></a><a href='https://api.whatsapp.com/send?text=https://pib.gov.in/PressReleasePage.aspx?PRID=1982936' target='_blank'><li class='whatsapp_r'  ></li></a><a href='https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=&su=Under the leadership of Prime Minister Shri Narendra Modi and guidance of Union Home Minister Shri Amit Shah, building a "Cyber Safe India" is one of the top priorities of the Ministry of Home Affairs&body=https://pib.gov.in/PressReleasePage.aspx?PRID=1982936&ui=2&tf=1&pli=1' title='Share by Email' target='_blank'><li class='fa-envelope_r' ></li></a><a href='https://www.linkedin.com/shareArticle?mini=true&url=https://pib.gov.in/PressReleasePage.aspx?PRID=1982936&title=Under the leadership of Prime Minister Shri Narendra Modi and guidance of Union Home Minister Shri Amit Shah, building a "Cyber Safe India" is one of the top priorities of the Ministry of Home Affairs&summary=My%20favorite%20developer%20program&source=LinkedIn' target='_blank'><li class='fa-linkedin_r'  ></li></a></ul></div></div>
+            </div>
+            <div id="second_t">
+                <div id="sndr_rm"><div class='sticky-social'><ul class='social'><a href='http://www.facebook.com/share.php?u=https://pib.gov.in/PressReleasePage.aspx?PRID=1982936' target='_blank'><li class='fb_b'   ></li></a><a href='https://twitter.com/intent/tweet?url=https://pib.gov.in/PressReleasePage.aspx?PRID=1982936&text=Under the leadership of Prime Minister Shri Narendra Modi and guidance of Union Home Minister Shri Amit Shah, building a "Cyber Safe India" is one of the top priorities of the Ministry of Home Affairs' target='_blank'><li class='twitter_r'  > </li></a><a href='https://api.whatsapp.com/send?text=https://pib.gov.in/PressReleasePage.aspx?PRID=1982936' target='_blank'><li class='whatsapp_r'  ></li></a><a href='https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=&su=Under the leadership of Prime Minister Shri Narendra Modi and guidance of Union Home Minister Shri Amit Shah, building a "Cyber Safe India" is one of the top priorities of the Ministry of Home Affairs&body=https://pib.gov.in/PressReleasePage.aspx?PRID=1982936&ui=2&tf=1&pli=1' title='Share by Email' target='_blank'><li class='fa-envelope_r' ></li></a><a href='https://www.linkedin.com/shareArticle?mini=true&url=https://pib.gov.in/PressReleasePage.aspx?PRID=1982936&title=Under the leadership of Prime Minister Shri Narendra Modi and guidance of Union Home Minister Shri Amit Shah, building a "Cyber Safe India" is one of the top priorities of the Ministry of Home Affairs&summary=My%20favorite%20developer%20program&source=LinkedIn' target='_blank'><li class='fa-linkedin_r'  ></li></a></ul></div></div>
+            </div>
+        </div>
+        <input type="hidden" name="ltrTitlee" id="ltrTitlee" value="Under the leadership of Prime Minister Shri Narendra Modi and guidance of Union Home Minister Shri Amit Shah, building a &quot;Cyber Safe India&quot; is one of the top priorities of the Ministry of Home Affairs" />
+        <input type="hidden" name="ltrSubtitlee" id="ltrSubtitlee" value="&lt;br/>I4C, through its vertical National Cybercrime Threat Analytics Unit (NCTAU), had last week identified and recommended over 100 websites involved in organized investment / task based - part time job frauds&lt;br/>&lt;br/>M/o Electronics and Information Technology (MeitY), invoking it’s power under the Information Technology Act, 2000, has blocked these websites&lt;br/>&lt;br/>These websites, facilitating task based / organized illegal investment related economic crimes, were learnt to be operated by overseas actors by using digital advertisement, chat messengers &amp; mule / rented accounts&lt;br/>&lt;br/>It was also learnt that proceeds from the large scale economic frauds were seen to be laundered out of India using card network, crypto currency, overseas ATM withdrawals and international Fintech companies" />
+        <input type="hidden" name="ltrDescriptionn" id="ltrDescriptionn" value="&lt;p style=&quot;text-align:justify&quot;>&lt;span style=&quot;font-family:&amp;quot;Times New Roman&amp;quot;,Times,serif; font-size:16px&quot;>Under the leadership of Prime Minister Shri Narendra Modi and guidance of Union Home Minister Shri Amit Shah, building a &amp;quot;Cyber Safe India&amp;quot; is one of the top priorities of the Ministry of Home Affairs.&lt;/span>&lt;/p>
+
+&lt;p style=&quot;text-align:justify&quot;>&lt;span style=&quot;font-family:&amp;quot;Times New Roman&amp;quot;,Times,serif; font-size:16px&quot;>Under the guidance of Union Home Minister Shri Amit Shah, M/o Home Affairs is committed to curbing cybercrime and protecting people from cyber threat actors. Citizens are also advised to promptly report phone numbers and social media handles used by such fraudsters to the NCRP &lt;/span>&lt;a href=&quot;http://www.cybercrime.gov.in&quot; target=&quot;_blank&quot;>&lt;strong style=&quot;font-family:&amp;quot;Times New Roman&amp;quot;,Times,serif; font-size:16px&quot;>&lt;em>&lt;u>www.cybercrime.gov.in&lt;/u>&lt;/em>&lt;/strong>&lt;/a>&lt;/p>
+
+&lt;p style=&quot;text-align:justify&quot;>&lt;span style=&quot;font-family:Times New Roman,Times,serif&quot;>&lt;span style=&quot;font-size:16px&quot;>Indian Cybercrime Coordination Centre (I4C) is an initiative of MHA to deal with cybercrime in the country in a coordinated and comprehensive manner. I4C, MHA, through its vertical National Cybercrime Threat Analytics Unit (NCTAU) had last week identified and recommended over 100 websites involved in organized investment / task based - part time job frauds. &lt;span style=&quot;color:#202124&quot;>M/o Electronics and Information Technology (&lt;/span>MeitY), invoking it&amp;rsquo;s power under the Information Technology Act, 2000, has blocked these websites. These websites, which facilitated task based / organized illegal investment related economic crimes, were learnt to being operated by overseas actors and they were using digital advertisement, chat messengers and mule / rented accounts. It was also learnt that proceeds from the large scale economic frauds were seen to be laundered out of India using card network, crypto currency, overseas ATM withdrawals and international Fintech companies. In this regard, several complaints were received through 1930 helpline and NCRP and these offences were posing significant threat to the citizens and also involved data security concerns. &lt;strong>These frauds, typically, involve following steps:-&lt;/strong>&lt;/span>&lt;/span>&lt;/p>
+
+&lt;p style=&quot;text-align:justify&quot;>&lt;span style=&quot;font-family:Times New Roman,Times,serif&quot;>&lt;span style=&quot;font-size:16px&quot;>1. Targeted digital advertisements are launched&amp;nbsp; on platforms like Google and Meta using key words like&amp;quot;Ghar baithe job&amp;quot;, &amp;quot;Ghar baidhe kamai kaise karen&amp;quot; etc in multiple languages from overseas advertisers. Targets are mostly retired employees, women and unemployed youth looking for part time jobs.&lt;/span>&lt;/span>&lt;/p>
+
+&lt;p style=&quot;text-align:justify&quot;>&lt;span style=&quot;font-family:Times New Roman,Times,serif&quot;>&lt;span style=&quot;font-size:16px&quot;>2. Upon clicking the advertisement, an agent using WhatsApp / Telegram starts conversation with the potential victim, who convinces her to perform some tasks like Video Likes and Subscribe, Maps Rating, etc.&lt;/span>&lt;/span>&lt;/p>
+
+&lt;p style=&quot;text-align:justify&quot;>&lt;span style=&quot;font-family:Times New Roman,Times,serif&quot;>&lt;span style=&quot;font-size:16px&quot;>3. Upon completion of task, victim is given some commission, initially and is asked to invest more to get more returns against given task. &lt;/span>&lt;/span>&lt;/p>
+
+&lt;p style=&quot;text-align:justify&quot;>&lt;span style=&quot;font-family:Times New Roman,Times,serif&quot;>&lt;span style=&quot;font-size:16px&quot;>4. After gaining confidence, when victim deposits larger sum, deposits are frozen and thus victim is duped.&lt;/span>&lt;/span>&lt;/p>
+
+&lt;p style=&quot;text-align:justify&quot;>&lt;span style=&quot;font-family:Times New Roman,Times,serif&quot;>&lt;span style=&quot;font-size:16px&quot;>&lt;strong>As precautionary measure, it is advised to:-&lt;/strong>&lt;/span>&lt;/span>&lt;/p>
+
+&lt;p style=&quot;text-align:justify&quot;>&lt;span style=&quot;font-family:Times New Roman,Times,serif&quot;>&lt;span style=&quot;font-size:16px&quot;>1. Exercise due diligence before investing in any such very high commission paying online schemes sponsored over internet.&lt;/span>&lt;/span>&lt;/p>
+
+&lt;p style=&quot;text-align:justify&quot;>&lt;span style=&quot;font-family:Times New Roman,Times,serif&quot;>&lt;span style=&quot;font-size:16px&quot;>2. If an unknown person contacts you over WhatsApp / Telegram, refrain from performing financial transactions without verification. &lt;/span>&lt;/span>&lt;/p>
+
+&lt;p style=&quot;text-align:justify&quot;>&lt;span style=&quot;font-family:Times New Roman,Times,serif&quot;>&lt;span style=&quot;font-size:16px&quot;>3. Verify the name of receiver mentioned in UPI App. If receiver is any random person, it may be a mule account and scheme may be fraudulent. Similarly, check the source from where initial commission is received.&lt;/span>&lt;/span>&lt;/p>
+
+&lt;p style=&quot;text-align:justify&quot;>&lt;span style=&quot;font-family:Times New Roman,Times,serif&quot;>&lt;span style=&quot;font-size:16px&quot;>4. Citizens should refrain from doing transactions with unknown accounts, as these could be involved in money laundering and even terror financing and lead to blocking of accounts by police and other legal action.&lt;/span>&lt;/span>&lt;/p>
+
+&lt;p style=&quot;text-align:center&quot;>&lt;span style=&quot;font-family:&amp;quot;Times New Roman&amp;quot;,Times,serif; font-size:16px&quot;>*****&lt;/span>&lt;/p>
+
+&lt;p style=&quot;text-align:justify&quot;>&lt;span style=&quot;font-family:Times New Roman,Times,serif&quot;>&lt;span style=&quot;font-size:16px&quot;>&lt;strong>RK/AY/ASH/RR&lt;/strong>&lt;/span>&lt;/span>&lt;/p>
+" />
+        <script type="text/javascript">
+                  var mPlayer = document.getElementById("background_music");
+                  var mPlayAction = document.getElementById("playbutton");
+                  var isPlaying = false;
+
+                  function playAudio() {
+                        mPlayer.play();
+                        isPlaying = true;
+                        document.getElementById('stopA').style.display = "block";
+                        document.getElementById('playA').style.display = "none";
+                  }
+
+                  function pauseAudio() {
+                        mPlayer.pause();
+                        isPlaying = false;
+                        document.getElementById('playA').style.display = "block";
+                        document.getElementById('stopA').style.display = "none";
+                  }
+        </script>
+        <script type="text/javascript">
+                  var synth = window.speechSynthesis;
+
+                  function CleanHtml(html) {
+                        html = html.replace(/<script[\s\S]*?<\/script>/gi, '');
+                        return html;
+                  }
+                  function stripHtml(html) {
+                        let tmp = document.createElement("DIV");
+                        tmp.innerHTML = CleanHtml(html);
+                        return tmp.textContent || tmp.innerText || "";
+                  }
+        </script>
+        <script type="text/javascript">
+                  $(document).ready(function () {
+                        $("table").each(function () {
+                              if (!$(this).closest(".table-responsive").length) {
+                                    $(this).wrap("<div class='table-responsive'></div>");
+                              }
+                        });
+
+                        var width = $(window).width();
+                        if (width < 768) {
+                              document.getElementById('frst_t').style.display = "block";
+                              document.getElementById('second_t').style.display = "none";
+                        } else if (width < 991) {
+                              document.getElementById('frst_t').style.display = "block";
+                              document.getElementById('second_t').style.display = "none";
+                        } else if (width < 1199) {
+                              document.getElementById('frst_t').style.display = "none";
+                              document.getElementById('second_t').style.display = "block";
+                        } else {
+                              document.getElementById('frst_t').style.display = "none";
+                              document.getElementById('second_t').style.display = "block";
+                        }
+                  });
+        </script>
+        <style type="text/css">
+            @media print {
+                .sticky-social, .sticky-social_mb, .pull-right, #printPDF {
+                    display: none !important;
+                }
+            }
+
+            .f_vl {
+                padding-right: 30px;
+                font-size: 17px;
+                cursor: pointer;
+            }
+
+            .log_oo {
+                display: flex;
+                justify-content: space-between;
+            }
+
+                .log_oo img {
+                    width: 150px;
+                }
+
+            .sticky-social_mb {
+                position: fixed;
+                bottom: 0px;
+                padding: 0px;
+                margin: 0px;
+                width: 100%;
+            }
+
+            .social_mb {
+                list-style: none;
+                display: flex;
+                width: 100%;
+                margin-bottom: -8px;
+            }
+
+                .social_mb a {
+                    padding: 8px 0px;
+                    font-size: 30px;
+                    transition: all 0.8s ease-in-out;
+                    width: 20% !important;
+                    text-align: center;
+                }
+        </style>
+        <style type="text/css">
+            .section1 {
+                position: relative;
+                padding: 10px 0px;
+                width: 100%;
+            }
+
+            .sticky-social {
+                position: fixed;
+                top: 20px;
+                left: 0px;
+                padding: 0px;
+                margin: 0px;
+            }
+
+            .social {
+                list-style: none;
+            }
+
+                .social a li {
+                    padding: 8px 12px;
+                    font-size: 25px;
+                    transition: all 0.8s ease-in-out;
+                }
+
+                    .social a li:hover {
+                        margin-right: -30px;
+                        box-shadow: 2px 5px 10px grey;
+                    }
+
+                        .social a li:hover .fa {
+                            margin-left: 20px;
+                        }
+
+            .fb_b {
+                background-color: var(--dbim-key, #0F5757);
+            }
+
+            .twitter_r {
+                background-color: var(--dbim-key, #0F5757);
+            }
+
+            .whatsapp_r {
+                background-color: var(--dbim-key, #0F5757);
+            }
+
+            .fa-envelope_r {
+                background-color: var(--dbim-key, #0F5757);
+            }
+
+            .fa-linkedin_r {
+                background-color: var(--dbim-key, #0F5757);
+            }
+        </style>
+        <style type="text/css">
+            @media only screen and (max-device-width: 767px) {
+                p span img {
+                    max-width: 90% !important;
+                    height: auto !important;
+                }
+
+                p img {
+                    max-width: 90% !important;
+                    height: auto !important;
+                }
+
+                h2 {
+                    font-size: var(--dbim-h2, 20px);
+                    font-weight: 600 !important;
+                }
+
+                h3 {
+                    font-size: var(--dbim-h3, 16px);
+                    font-weight: 600 !important;
+                }
+            }
+        </style>
+        <style type="text/css">
+            .film-roll-badge {
+                position: absolute;
+                top: 82%;
+                right: 20px;
+                width: 230px;
+                height: 70px;
+                background: repeating-linear-gradient( to right, var(--dbim-green-key, #0F5757) 0px, var(--dbim-green-key, #0F5757) 18px, var(--dbim-text, #150202) 18px, var(--dbim-text, #150202) 36px );
+                border-top: 8px solid var(--dbim-green-key, #0F5757);
+                border-bottom: 8px solid var(--dbim-green-key, #0F5757);
+                border-radius: 8px;
+                overflow: hidden;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+                animation: moveFilm 8s linear infinite;
+                z-index: 10;
+            }
+
+                .film-roll-badge::before,
+                .film-roll-badge::after {
+                    content: "";
+                    position: absolute;
+                    width: 100%;
+                    height: 10px;
+                    background: repeating-linear-gradient( to right, var(--dbim-green-key, #0F5757) 0px, var(--dbim-green-key, #0F5757) 10px, #fff 10px, #fff 20px );
+                    left: 0;
+                    z-index: 2;
+                }
+
+                .film-roll-badge::before {
+                    top: -4px;
+                }
+
+                .film-roll-badge::after {
+                    bottom: -4px;
+                }
+
+            .film-roll-inner {
+                position: relative;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                animation: flicker 2s infinite ease-in-out;
+            }
+
+            .countdown-text {
+                font-size: 1.3rem;
+                font-weight: 700;
+                color: #fff;
+                text-shadow: 0 0 6px rgba(255, 255, 255, 0.4), 0 0 10px #000;
+                white-space: nowrap;
+            }
+
+            @keyframes moveFilm {
+                0% {
+                    background-position: 0 0;
+                }
+
+                100% {
+                    background-position: 120px 0;
+                }
+            }
+
+            @keyframes flicker {
+                0%, 100% {
+                    opacity: 1;
+                }
+
+                50% {
+                    opacity: 0.9;
+                }
+
+                25% {
+                    opacity: 0.95;
+                }
+
+                75% {
+                    opacity: 0.85;
+                }
+            }
+
+            @media (max-width: 1500px) {
+                .film-roll-badge {
+                    top: 68%;
+                    right: 18px;
+                    height: 65px;
+                    font-size: 0.85rem;
+                }
+
+                .press-section {
+                    margin-top: 35px;
+                }
+            }
+
+            @media (max-width: 992px) {
+                .film-roll-badge {
+                    top: 52%;
+                    right: 10px;
+                    width: 200px;
+                    height: 60px;
+                }
+            }
+
+            @media (max-width: 768px) {
+                .film-roll-badge {
+                    top: 56%;
+                    right: 10px;
+                    width: 124px;
+                    height: 55px;
+                }
+
+                .countdown-text {
+                    font-size: 0.9rem;
+                }
+            }
+
+            @media (max-width: 576px) {
+                .film-roll-badge {
+                    top: 59%;
+                    right: 5px;
+                    height: 50px;
+                }
+
+                .countdown-text {
+                    font-size: 0.85rem;
+                }
+            }
+        </style>
+        <script type="text/javascript">
+                  const festivalStart = new Date("2025-11-20T00:00:00").getTime();
+                  const festivalEnd = new Date("2025-11-28T23:59:59").getTime();
+                  const countdownElement = document.getElementById("countdown");
+
+                  if (countdownElement) {
+                        const interval = setInterval(() => {
+                              const now = new Date().getTime();
+
+                              if (now < festivalStart) {
+                                    const diff = festivalStart - now;
+                                    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                                    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+
+                                    countdownElement.innerHTML = `${days} Day${days !== 1 ? 's' : ''} ${hours} Hour${hours !== 1 ? 's' : ''} to go`;
+                              } else if (now >= festivalStart && now <= festivalEnd) {
+                                    const dayNumber = Math.floor((now - festivalStart) / (1000 * 60 * 60 * 24)) + 1;
+                                    countdownElement.innerHTML = `56th IFFI - Day ${dayNumber}`;
+                              } else {
+                                    countdownElement.innerHTML = `✨ IFFI closes but never ends…`;
+                                    const elements = document.querySelectorAll('.film-roll-badge');
+                                    elements.forEach(el => el.style.width = "350px");
+                                    clearInterval(interval);
+                              }
+                        }, 1000);
+                  }
+        </script>
+        <script type="text/javascript">
+                  const miffStart = new Date("2026-06-15T00:00:00").getTime();
+                  const miffEnd = new Date("2026-06-15T23:59:59").getTime();
+                  const miffElement = document.getElementById("miff");
+
+                  if (miffElement) {
+                        const miffInterval = setInterval(() => {
+                              const now = new Date().getTime();
+
+                              if (now < miffStart) {
+                                    const diff = miffStart - now;
+                                    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                                    miffElement.innerHTML = `${days} Day${days === 1 ? '' : 's'} to MIFF ...`;
+                              } else if (now >= miffStart && now <= miffEnd) {
+                                    const dayNumber = Math.floor((now - miffStart) / (1000 * 60 * 60 * 24)) + 1;
+                                    miffElement.innerHTML = `19th MIFF - Day ${dayNumber}`;
+                              } else {
+                                    miffElement.innerHTML = `✨ MIFF concludes, cinema lives on...`;
+                                    document.querySelectorAll('.film-roll-badge').forEach(el => el.style.width = "350px");
+                                    clearInterval(miffInterval);
+                              }
+                        }, 1000);
+                  }
+        </script>
+    
+
+<script type="text/javascript">
+//<![CDATA[
+(function() {var fn = function() {$get("sc_HiddenField").value = '';Sys.Application.remove_init(fn);};Sys.Application.add_init(fn);})();Sys.Application.add_init(function() {
+    $create(Sys.Extended.UI.ModalPopupBehavior, {"BackgroundCssClass":"modalBackground","PopupControlID":"P_CategoryManagement","dynamicServicePath":"/PressReleasePage.aspx","id":"mpe"}, null, null, $get("Hidden"));
+});
+//]]>
+</script>
+<input type="hidden" name="__ncforminfo" value="poNROAqER3zed665i_fZKgtDQQOgU4g9WkA5smFqrjrTbMCRFUsiW2jh__nvpkrpICp-aaotu6aWiCchPZr1ZSoawS59EuAQ"/></form>
+    
+
+<script type="application/json" id="pibConsentConfig">{"ga4Id":"G-Q414Y0X6EE,G-QJJ6LZ8LHV","policyUrl":"/CookiePolicy.aspx","text":{"bannerLabel":"Cookie consent","title":"Cookies on this website","body":"We use essential cookies to make this website work. We also set analytics cookies when you arrive, so we can see how the site is used and improve it - you can switch these off below or at any time from the Cookie Policy page. Cookies from embedded social media content are set only if you allow them.","policyLink":"Read our Cookie Policy","accept":"Accept all","reject":"Reject optional","customize":"Customise","prefsTitle":"Cookie preferences","prefsIntro":"Choose which cookies this website may set. Essential cookies cannot be switched off because the site does not work without them. Analytics cookies are on unless you turn them off. Social media cookies stay off until you allow them. You can change these choices at any time from the Cookie Policy page.","essentialName":"Essential cookies","essentialDesc":"Needed for the site to function. These remember your session, your language and region, your text size and colour theme, and verify the security check on forms. They are always on.","analyticsName":"Analytics cookies","analyticsDesc":"Help us understand how visitors use the site - which pages are read and how long people stay - so it can be improved. The information is collected in a form that does not directly identify you. These are on when you arrive; switching them off here stops them and deletes the ones already set.","socialName":"Social media cookies","socialDesc":"Set by content embedded from X, Facebook and YouTube, such as timelines and videos. These platforms may use them to track you across websites. They stay off until you allow them.","save":"Save preferences","cancel":"Cancel"}}</script>
+<script type="text/javascript" src='/js/consent.js?v=10'></script>
+
+<script type="text/javascript" src='/js/consent-embeds.js?v=10'></script>
+
+
+    <!-- Minimal O(N) Time and O(1) Auxiliary Space Word Count & Read Time Calculation -->
+    <script type="text/javascript">
+            (function () {
+                  function calculateReadingStats() {
+                        var bodyEl = document.getElementById("pibReleaseBody");
+                        if (!bodyEl) return;
+
+                        // textContent extracts text without triggering expensive layout/reflow computations
+                        var text = bodyEl.textContent || "";
+                        var words = 0;
+                        var inWord = false;
+
+                        // O(N) single pass character code scan: achieves O(1) space with zero array allocations
+                        for (var i = 0, len = text.length; i < len; i++) {
+                              var code = text.charCodeAt(i);
+                              // Delimits on ASCII whitespace, control characters, tabs, newlines, and non-breaking spaces (160)
+                              if (code <= 32 || code === 160) {
+                                    inWord = false;
+                              } else if (!inWord) {
+                                    inWord = true;
+                                    words++;
+                              }
+                        }
+
+                        // Standard 250 WPM reading speed (e.g., 612 words yields 2 min read)
+                        var minutes = Math.max(1, Math.round(words / 250));
+
+                        var elWords = document.getElementById("prWordCount");
+                        var elTime = document.getElementById("prReadTime");
+
+                        if (elWords) elWords.textContent = words + (words === 1 ? " word" : " words");
+                        if (elTime) elTime.textContent = minutes + " min read";
+                  }
+
+                  if (document.readyState === "loading") {
+                        document.addEventListener("DOMContentLoaded", calculateReadingStats);
+                  } else {
+                        calculateReadingStats();
+                  }
+            })();
+    </script>
+
+    <script type="text/javascript">
+            (function () {
+                  try {
+                        if (window.self === window.top) { return; }
+                  } catch (e) { return; }
+                  var s = document.createElement("style");
+                  s.textContent = ".sticky-social, .sticky-social_mb { display: none !important; }";
+                  (document.head || document.documentElement).appendChild(s);
+            }());
+    </script>
+</body>
+</html>

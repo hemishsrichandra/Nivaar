@@ -45,4 +45,18 @@ yarn-error.log*
 .DS_Store
 
 # Publish the non-secret setup template
+/.venv/
+/backend/__pycache__/
+**/__pycache__/
+.pytest_cache/
+*.pyc
 !.env.example
+!backend/.env.example
+
+# Local databases and editor files
+*.sqlite
+*.sqlite3
+*.sqlite3-*
+*.db
+.vscode/
+.idea/

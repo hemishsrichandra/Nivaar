@@ -1,0 +1,1122 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head id="Head1"><title>
+	Press Release Page | Press Information Bureau
+</title><link href="css/style.css?v=1" rel="stylesheet" type="text/css" /><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><link rel="alternate stylesheet" href="css/change.css?v=1" media="screen" title="change" /><link rel="alternate stylesheet" href="css/green.css?v=1" media="screen" title="green" /><link rel="alternate stylesheet" href="css/yellow.css" media="screen" title="yellow" /><link rel="stylesheet" type="text/css" href="css/prtint.css" media="print" /><link rel="stylesheet" href="css/style3.1.css" type="text/css" /><link id="pibA11yCss" rel="stylesheet" href="/css/accessibility.css?v=7" type="text/css" />
+    <script type="text/javascript">
+        (function (d) {
+            var t = "";
+            try {
+                t = window.localStorage.getItem("pibStyle") || "";
+            } catch (e) {
+                t = "";
+            }
+            if (t === "orange") {
+                t = "yellow";
+            }
+            var c = t === "change" ? " pib-hc"
+                : t === "green" ? " pib-theme-green"
+                : t === "yellow" ? " pib-theme-yellow" : "";
+            d.documentElement.className += c + " pib-a11y-content";
+        }(document));
+    </script>
+
+    <script src="js/jquery.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/js/accessibility.js?v=7"></script>
+
+    <script type="text/javascript">
+            $(document).ready(function () {
+                  function getParameterByName(name) {
+                        var url = window.location.href;
+                        name = name.replace(/[\[\]]/g, '\\$&');
+                        var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+                              results = regex.exec(url);
+                        if (!results) return null;
+                        if (!results[2]) return '';
+                        return decodeURIComponent(results[2].replace(/\+/g, ' '));
+                  }
+                  let prid = parseInt(getParameterByName('PRID'), 10);
+
+                  if (!isNaN(prid) && prid > 0) {
+                        $.ajax({
+                              type: "POST",
+                              url: "AjaxMethod.aspx/UpdatePRHitCount",
+                              async: false,
+                              data: JSON.stringify({ 'PermId': prid }),
+                              contentType: "application/json; charset=utf-8",
+                              dataType: "json",
+                              success: function (response) {
+                                    console.log(response);
+                              },
+                              error: function (error) {
+                                    console.log("Error in AJAX request", error);
+                              }
+                        });
+                  } else {
+                        console.log("Invalid parameters:", prid);
+                  }
+            });
+    </script>
+    <style type="text/css">
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        .banner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #000;
+            color: #fff;
+            padding: 20px;
+        }
+
+        full-width {
+            width: 100%;
+        }
+
+        .logo-left, .logo-center, .countdown {
+            display: flex;
+            align-items: center;
+        }
+
+            .logo-left img, .logo-center img {
+                height: 70px;
+            }
+
+        .countdown {
+            text-align: center;
+            background-color: var(--dbim-text, #150202);
+            border-radius: 10px;
+            padding: 10px;
+            border: 2px solid grey;
+        }
+
+        .firstnumber {
+            color: #000000;
+            position: absolute;
+            top: 50px;
+            right: 90px;
+            font-size: 30px;
+        }
+
+        .secondnumber {
+            position: absolute;
+            color: #000000;
+            right: 45px;
+            top: 50px;
+            font-size: 30px;
+        }
+
+        .countdown .days {
+            font-size: 35px;
+            color: gold;
+        }
+
+        .countdown p {
+            margin: 0;
+        }
+
+        .countdown .text {
+            font-size: 16px;
+        }
+
+        a {
+            word-break: break-all;
+        }
+
+        iframe, img {
+            max-width: 100%;
+        }
+
+        /* === DBIM 3.0 Option 4 Separator Line & Reading Meta Styling === */
+        .pr-share--footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            border-top: 1px solid var(--dbim-border, #d1d5db);
+            padding-top: 16px;
+            margin-top: 24px;
+        }
+
+        .pr-share__left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .pr-reading-meta {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.95rem;
+            color: var(--dbim-text-secondary, #475569);
+            font-weight: 500;
+            white-space: nowrap;
+            margin-left: auto;
+        }
+
+        .pr-reading-meta__item {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .pr-reading-meta__divider {
+            color: var(--dbim-border, #cbd5e1);
+            font-weight: 300;
+        }
+
+        .pib-hc .pr-reading-meta,
+        .pib-hc .pr-reading-meta svg {
+            color: currentColor !important;
+        }
+
+        @media (max-width: 680px) {
+            .pr-share--footer {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .pr-reading-meta {
+                margin-left: 0;
+                width: 100%;
+                justify-content: flex-start;
+            }
+        }
+
+        @media(max-width:1199px) {
+            .firstnumber {
+                top: 40px;
+                right: 72px;
+                font-size: 30px;
+            }
+
+            .secondnumber {
+                right: 35px;
+                top: 40px;
+                font-size: 30px;
+            }
+        }
+
+        @media(max-width:990px) {
+            .firstnumber {
+                top: 25px;
+                right: 54px;
+                font-size: 30px;
+            }
+
+            .secondnumber {
+                right: 25px;
+                top: 25px;
+                font-size: 30px;
+            }
+        }
+
+        @media(max-width:768px) {
+            .countdown, .days {
+                font-size: 12px !important;
+            }
+
+            .firstnumber {
+                top: 25%;
+                right: 8%;
+                font-size: 30px;
+            }
+
+            .secondnumber {
+                right: 4.5%;
+                top: 25%;
+                font-size: 30px;
+            }
+        }
+
+        @media(max-width:475px) {
+            .countdown, .days {
+                font-size: 10px !important;
+                top: 20%;
+            }
+
+            .bannerimgdiv {
+                padding: 0 !important;
+            }
+
+            .bannerimg {
+                width: 108% !important;
+            }
+        }
+    </style>
+    <script type="text/javascript">
+            $(function () {
+                  $("[id*=printPDF]").click(function () {
+                        $("[id*=hfGridHtml]").val($("#PdfDiv").html());
+                  });
+            });
+            $(function () {
+                  $("[id*=printPDFEvent]").click(function () {
+                        $("[id*=hfGridHtml]").val($("#PdfDiv").html());
+                  });
+            });
+    </script>
+
+    <link id="pibConsentCss" href="/css/consent.css?v=8" rel="stylesheet" type="text/css" /><link id="pibFontsCss" href="/css/fonts-noto.css?v=6" rel="stylesheet" type="text/css" /><link id="pibDbimCss" href="/css/dbim.css?v=1120" rel="stylesheet" type="text/css" /><meta property="og:title" content="STEPS TAKEN TO ADDRESS THE ISSUE OF DIGITAL ARREST SCAMS" /><meta property="og:url" content="www.pib.gov.in/Pressreleaseshare.aspx?PRID=2110809" /><meta property="og:description" content="‘Police’ and ‘Public Order’ are State subjects as per the Seventh Schedule of the Constitution of In" /><meta property="og:image" content="https:/pib.gov.in/images/indian-emblem.png" />
+                                <script>!function(e){var n="https://s.go-mpulse.net/boomerang/";if("False"=="True")e.BOOMR_config=e.BOOMR_config||{},e.BOOMR_config.PageParams=e.BOOMR_config.PageParams||{},e.BOOMR_config.PageParams.pci=!0,n="https://s2.go-mpulse.net/boomerang/";if(window.BOOMR_API_key="C4E7H-KSCMC-422L4-W3EM5-U36MF",function(){function e(){if(!i){var e=document.createElement("script");e.id="boomr-scr-as",e.src=window.BOOMR.url,e.async=!0,o.parentNode.appendChild(e),i=!0}}function t(e){i=!0;var n,t,a,r,d=document,O=window;if(window.BOOMR.snippetMethod=e?"if":"i",t=function(e,n){var t=d.createElement("script");t.id=n||"boomr-if-as",t.src=window.BOOMR.url,BOOMR_lstart=(new Date).getTime(),e=e||d.body,e.appendChild(t)},!window.addEventListener&&window.attachEvent&&navigator.userAgent.match(/MSIE [67]\./))return window.BOOMR.snippetMethod="s",void t(o.parentNode,"boomr-async");a=document.createElement("IFRAME"),a.src="about:blank",a.title="",a.role="presentation",a.loading="eager",r=(a.frameElement||a).style,r.width=0,r.height=0,r.border=0,r.display="none",o.parentNode.appendChild(a);try{O=a.contentWindow,d=O.document.open()}catch(_){n=document.domain,a.src="javascript:var d=document.open();d.domain='"+n+"';void(0);",O=a.contentWindow,d=O.document.open()}if(n)d._boomrl=function(){this.domain=n,t()},d.write("<bo"+"dy onload='document._boomrl();'>");else if(O._boomrl=function(){t()},O.addEventListener)O.addEventListener("load",O._boomrl,!1);else if(O.attachEvent)O.attachEvent("onload",O._boomrl);d.close()}function a(e){window.BOOMR_onload=e&&e.timeStamp||(new Date).getTime()}if(!window.BOOMR||!window.BOOMR.version&&!window.BOOMR.snippetExecuted){window.BOOMR=window.BOOMR||{},window.BOOMR.snippetStart=(new Date).getTime(),window.BOOMR.snippetExecuted=!0,window.BOOMR.snippetVersion=12,window.BOOMR.url=n+"C4E7H-KSCMC-422L4-W3EM5-U36MF";var o=document.currentScript||document.getElementsByTagName("script")[0],i=!1,r=document.createElement("link");if(r.relList&&"function"==typeof r.relList.supports&&r.relList.supports("preload")&&"as"in r)window.BOOMR.snippetMethod="p",r.href=window.BOOMR.url,r.rel="preload",r.as="script",r.addEventListener("load",e),r.addEventListener("error",function(){t(!0)}),setTimeout(function(){if(!i)t(!0)},3e3),BOOMR_lstart=(new Date).getTime(),o.parentNode.appendChild(r);else t(!1);if(window.addEventListener)window.addEventListener("load",a,!1);else if(window.attachEvent)window.attachEvent("onload",a)}}(),"".length>0)if(e&&"performance"in e&&e.performance&&"function"==typeof e.performance.setResourceTimingBufferSize)e.performance.setResourceTimingBufferSize();!function(){if(BOOMR=e.BOOMR||{},BOOMR.plugins=BOOMR.plugins||{},!BOOMR.plugins.AK){var n=""=="true"?1:0,t="",a="naonzl5ydpcia2xhcqpa-f-dc13222a9-clientnsv4-s.akamaihd.net",o="false"=="true"?2:1,i={"ak.v":"41","ak.cp":"1825201","ak.ai":parseInt("1215205",10),"ak.ol":"0","ak.cr":1,"ak.ipv":4,"ak.proto":"http/1.1","ak.rid":"10989648","ak.r":39689,"ak.a2":n,"ak.m":"dscb","ak.n":"ff","ak.cport":34393,"ak.gh":"184.27.196.15","ak.quicv":"","ak.tlsv":"tls1.3","ak.0rtt":"","ak.0rtt.ed":"","ak.csrc":"-","ak.acc":"bbr","ak.t":"1793528862","ak.ak":"hOBiQwZUYzCg5VSAfCLimQ==/Ar47fW/fn7BVq11KQaAhwXrnXshLiTpcjU6RdlUEP5SuuB+TLF9TjLQrWk64fS0UFCqKxej6F6ao6Gu6AsImH1OMnPn3kt3/scp46ufIUpDWg1muLPhB5SZMi5V4a8WaX5xzQxy7881EE576z2GAOlmbmpsirX+sRMTDyJ2qcQpqA9atXhoXL+fnWTq3j9mqFIhG5yAA7ZM3GK3UslBHjVHVw1wNy7eaFkizUgf4D8U1TnhTYHFbRWUKjfUmUhQ0Up1tztMGrwo8JtP/o+JoJQDZBV8/kc6TxA5qDuMVaRxAe0PbUeCrnpH13WH9QgVqMOLHqnuI7RC90NPeEBi3MdcPSNmuD22ciKGpUL+GgjNKTc7m6I1aiy9vqd0lVi/pLjoxUF5bWKpi4pgxkDM3L8yNnI/XZD7CWz99rEFpUs=","ak.pv":"9","ak.dpoabenc":"","ak.tf":o};if(""!==t)i["ak.ruds"]=t;var r={i:!1,av:function(n){var t="http.initiator";if(n&&(!n[t]||"spa_hard"===n[t]))i["ak.feo"]=void 0!==e.aFeoApplied?1:0,BOOMR.addVar(i)},rv:function(){var e=["ak.cport","ak.cr","ak.csrc","ak.gh","ak.ipv","ak.m","ak.n","ak.ol","ak.proto","ak.quicv","ak.tlsv","ak.0rtt","ak.0rtt.ed","ak.r","ak.acc","ak.t","ak.tf"];BOOMR.removeVar(e)}};BOOMR.plugins.AK={akVars:i,akDNSPreFetchDomain:a,init:function(){if(!r.i){var e=BOOMR.subscribe;e("before_beacon",r.av,null,null),e("onbeacon",r.rv,null,null),r.i=!0}return this},is_complete:function(){return!0}}}}()}(window);</script></head>
+<body>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"
+     style="position:absolute;width:0;height:0;overflow:hidden" id="dbim-icon-sprite">
+    <defs>
+        <symbol id="icon-angle-double-left" viewBox="0 0 24 24"><path d="M11.6 4.6 4.2 12l7.4 7.4 2.2-2.2L8.6 12l5.2-5.2z"/><path d="M19 4.6 11.6 12 19 19.4l2.2-2.2L16 12l5.2-5.2z"/></symbol>
+        <symbol id="icon-angle-double-right" viewBox="0 0 24 24"><path d="M12.4 4.6 10.2 6.8 15.4 12l-5.2 5.2 2.2 2.2L19.8 12z"/><path d="M5 4.6 2.8 6.8 8 12l-5.2 5.2L5 19.4 12.4 12z"/></symbol>
+        <symbol id="icon-arrow-left" viewBox="0 0 24 24"><path d="M20.8 10.6H9.6v2.8h11.2z"/><path d="M10.8 5.6 3.2 12l7.6 6.4z"/></symbol>
+        <symbol id="icon-arrow-right" viewBox="0 0 24 24"><path d="M3.2 10.6h11.2v2.8H3.2z"/><path d="M13.2 5.6 20.8 12l-7.6 6.4z"/></symbol>
+        <symbol id="icon-blogger" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M6.4 2.4h11.2a4 4 0 0 1 4 4v11.2a4 4 0 0 1-4 4H6.4a4 4 0 0 1-4-4V6.4a4 4 0 0 1 4-4zm2.8 5.2a2 2 0 0 0 0 4h2.4a2 2 0 0 0 0-4zm0 5.6a2 2 0 0 0 0 4h5.6a2 2 0 0 0 0-4z"/></symbol>
+        <symbol id="icon-calendar" viewBox="0 0 24 24"><path d="M7.6 2.4H10v2.4H7.6z"/><path d="M14 2.4h2.4v2.4H14z"/><path fill-rule="evenodd" d="M4 4.8h16a1.6 1.6 0 0 1 1.6 1.6v13.2a1.6 1.6 0 0 1-1.6 1.6H4a1.6 1.6 0 0 1-1.6-1.6V6.4A1.6 1.6 0 0 1 4 4.8zm.4 5.6v8.4h15.2v-8.4z"/><path d="M6.4 12.4h3.2v3.2H6.4z"/></symbol>
+        <symbol id="icon-chevron-left" viewBox="0 0 24 24"><path d="M15.4 4.6 8 12l7.4 7.4 2.2-2.2L12.4 12l5.2-5.2z"/></symbol>
+        <symbol id="icon-chevron-right" viewBox="0 0 24 24"><path d="M8.6 4.6 6.4 6.8 11.6 12l-5.2 5.2 2.2 2.2L16 12z"/></symbol>
+        <symbol id="icon-circle" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/></symbol>
+        <symbol id="icon-download" viewBox="0 0 24 24"><path d="M10.8 3h2.4v7.6h3.4L12 16.6l-4.6-6h3.4z"/><path d="M4 17.2h2.4v2.4h11.2v-2.4H20v3.2a1.4 1.4 0 0 1-1.4 1.4H5.4A1.4 1.4 0 0 1 4 20.4z"/></symbol>
+        <symbol id="icon-facebook" viewBox="0 0 24 24"><path d="M13.6 21.6v-8.4h2.8l.42-3.3h-3.22V7.8c0-.95.27-1.6 1.64-1.6h1.74V3.26a23 23 0 0 0-2.54-.13c-2.5 0-4.22 1.53-4.22 4.34v2.43H7.4v3.3h2.82v8.4z"/></symbol>
+        <symbol id="icon-fact-check" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 2.4 3.6 5.6v6.2c0 4.6 3.4 8.6 8.4 9.8 5-1.2 8.4-5.2 8.4-9.8V5.6zm-1 13.2-3.6-3.6 1.7-1.7 1.9 1.9 4.5-4.5 1.7 1.7z"/></symbol>
+        <symbol id="icon-hashtag" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M8.8 3h2.4l-1 6h3.2l1-6h2.4l-1 6h3.4v2.4h-3.8l-.6 3.2h3.6V17h-4l-1 5h-2.4l1-5h-3.2l-1 5H5.4l1-5H3V14.6h3.8l.6-3.2H3.8V9h4zm.6 8.4-.6 3.2h3.2l.6-3.2z"/></symbol>
+        <symbol id="icon-home" viewBox="0 0 24 24"><path d="M12 3.4 2.8 11.6h2.4v8.4a1 1 0 0 0 1 1h3.3v-5.4h5v5.4h3.3a1 1 0 0 0 1-1v-8.4h2.4z"/></symbol>
+        <symbol id="icon-instagram" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M7.6 2.4h8.8a5.2 5.2 0 0 1 5.2 5.2v8.8a5.2 5.2 0 0 1-5.2 5.2H7.6a5.2 5.2 0 0 1-5.2-5.2V7.6a5.2 5.2 0 0 1 5.2-5.2zm0 2.4a2.8 2.8 0 0 0-2.8 2.8v8.8a2.8 2.8 0 0 0 2.8 2.8h8.8a2.8 2.8 0 0 0 2.8-2.8V7.6a2.8 2.8 0 0 0-2.8-2.8z"/><path fill-rule="evenodd" d="M12 6.8a5.2 5.2 0 1 0 0 10.4 5.2 5.2 0 0 0 0-10.4zm0 2.4a2.8 2.8 0 1 1 0 5.6 2.8 2.8 0 0 1 0-5.6z"/><circle cx="17.3" cy="6.7" r="1.3"/></symbol>
+        <symbol id="icon-linkedin" viewBox="0 0 24 24"><path d="M4.8 8.8h3.6v12H4.8z"/><circle cx="6.6" cy="5.4" r="2.1"/><path d="M10.8 8.8h3.45v1.65h.05c.48-.9 1.65-1.85 3.4-1.85 3.63 0 4.3 2.35 4.3 5.4v6.6h-3.6v-5.85c0-1.4-.03-3.2-1.95-3.2-1.95 0-2.25 1.52-2.25 3.1v5.95h-3.6z"/></symbol>
+        <symbol id="icon-mail" viewBox="0 0 24 24"><path d="M2.4 7.6v9.2a1.6 1.6 0 0 0 1.6 1.6h16a1.6 1.6 0 0 0 1.6-1.6V7.6L12 14z"/><path d="M21.2 5.4H2.8L12 11.8z"/></symbol>
+        <symbol id="icon-mail-open" viewBox="0 0 24 24"><path d="M2.4 9.8h19.2v9.6A1.6 1.6 0 0 1 20 21H4a1.6 1.6 0 0 1-1.6-1.6z"/><path d="M12 2.6 21.6 9.2h-3.8L12 5.3 6.2 9.2H2.4z"/><path d="m3.9 11.2 8.1 5.4 8.1-5.4 1.5 1.3-9.6 6.4-9.6-6.4z"/></symbol>
+        <symbol id="icon-map-marker" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 2.4a7 7 0 0 0-7 7c0 5.2 7 12.2 7 12.2s7-7 7-12.2a7 7 0 0 0-7-7zm0 9.6a2.6 2.6 0 1 1 0-5.2 2.6 2.6 0 0 1 0 5.2z"/></symbol>
+        <symbol id="icon-newspaper" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M2.8 4.4h14.8v15.2H2.8zm2 2v11.2h10.8V6.4z"/><path d="M6 7.6h8.4v1.6H6z"/><path d="M6 10.8h8.4v1.6H6z"/><path d="M6 14h5.2v1.6H6z"/><path d="M18.4 8.4h2.8v9.6a1.4 1.4 0 0 1-2.8 0z"/></symbol>
+        <symbol id="icon-pause" viewBox="0 0 24 24"><rect x="7.4" y="4" width="3.6" height="16" rx="0.9"/><rect x="13" y="4" width="3.6" height="16" rx="0.9"/></symbol>
+    <symbol id="icon-play" viewBox="0 0 24 24"><path d="M8 4.5v15l12-7.5z"/></symbol>
+        <symbol id="icon-picture" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M2.4 5.2h19.2v13.6H2.4zm2 2v9.6h15.2V7.2z"/><path d="M5.6 16.4 10 11l2.6 3 2-2.2 4 4.6z"/><circle cx="8" cy="10.4" r="1.5"/></symbol>
+        <symbol id="icon-press-conference" viewBox="0 0 24 24"><circle cx="12" cy="5.2" r="2.6"/><path d="M7.6 12.2a4.4 4.4 0 0 1 8.8 0z"/><circle cx="4.9" cy="9.6" r="2.2"/><path d="M1.8 15.2a3.1 3.1 0 0 1 6.2 0z"/><circle cx="19.1" cy="9.6" r="2.2"/><path d="M16 15.2a3.1 3.1 0 0 1 6.2 0z"/><path d="M6.6 13.6h10.8l2.2 7.8H4.4z"/></symbol>
+        <symbol id="icon-print" viewBox="0 0 24 24"><path d="M6.4 2.8h11.2v4.4H6.4z"/><path d="M4 8.4h16a1.6 1.6 0 0 1 1.6 1.6v5.6a1.6 1.6 0 0 1-1.6 1.6h-1.6v-2.8H6v2.8H4a1.6 1.6 0 0 1-1.6-1.6V10A1.6 1.6 0 0 1 4 8.4z"/><path d="M7.2 15.6h9.6v5.6H7.2z"/></symbol>
+        <symbol id="icon-rss" viewBox="0 0 24 24"><circle cx="4.8" cy="19.2" r="2.4"/><path d="M2.4 11.2v3.2a6.4 6.4 0 0 1 6.4 6.4H12A9.6 9.6 0 0 0 2.4 11.2z"/><path d="M2.4 4.8V8A13.6 13.6 0 0 1 16 21.6h3.2A16.8 16.8 0 0 0 2.4 4.8z"/></symbol>
+        <symbol id="icon-search-plus" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M10 2.8a7.2 7.2 0 1 0 0 14.4 7.2 7.2 0 0 0 0-14.4zm0 2.4a4.8 4.8 0 1 1 0 9.6 4.8 4.8 0 0 1 0-9.6z"/><path d="M15.3 14.6 21.2 20.5l-1.5 1.5-5.9-5.9z"/><path d="M9.2 6.8h1.6v2.4h2.4v1.6h-2.4v2.4H9.2v-2.4H6.8V9.2h2.4z"/></symbol>
+        <symbol id="icon-share" viewBox="0 0 24 24"><circle cx="18" cy="5.6" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="18.4" r="3"/><path d="M8.3 10.9 15.7 7.2l.9 1.8-7.4 3.7z"/><path d="M9.2 13.1 16.6 16.8l-.9 1.8-7.4-3.7z"/></symbol>
+        <symbol id="icon-twitter" viewBox="0 0 24 24"><path d="M4.2 3h4.3l11.3 18h-4.3z"/><path d="M19.3 3h-2.6L4.2 21h2.6z"/></symbol>
+        <symbol id="icon-university" viewBox="0 0 24 24"><path d="M12 2.4 21.6 7.2v1.6H2.4V7.2z"/><path d="M4.8 10.4h2.4v8H4.8z"/><path d="M9.2 10.4h2.4v8H9.2z"/><path d="M13.4 10.4h2.4v8h-2.4z"/><path d="M17.6 10.4H20v8h-2.4z"/><path d="M3.2 19.8h17.6v1.8H3.2z"/></symbol>
+        <symbol id="icon-volume-up" viewBox="0 0 24 24"><path d="M3.2 9.2h3.3l5-4.2v14l-5-4.2H3.2z"/><path d="M14.6 8.4a5 5 0 0 1 0 7.2l1.6 1.6a7.2 7.2 0 0 0 0-10.4z"/><path d="M17.4 5.6a8.8 8.8 0 0 1 0 12.8l1.5 1.5a10.9 10.9 0 0 0 0-15.8z"/></symbol>
+        <symbol id="icon-whatsapp" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 2.4a9.5 9.5 0 0 0-8.1 14.5L2.4 21.6l4.8-1.4A9.5 9.5 0 1 0 12 2.4zm0 2.2a7.3 7.3 0 1 1-3.8 13.5l-.4-.2-2.6.7.7-2.5-.3-.4A7.3 7.3 0 0 1 12 4.6z"/><path d="M9.4 7.8c-.2-.5-.4-.5-.6-.5h-.5a1 1 0 0 0-.7.3c-.3.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.7 2.8 4.3 3.8 2.1.8 2.6.7 3 .6.5 0 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2l-.5-.3-1.6-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6 6 0 0 1-1.8-1.1 6.6 6.6 0 0 1-1.2-1.6c-.1-.2 0-.4.1-.5l.4-.5.3-.5v-.5z"/></symbol>
+        <symbol id="icon-youtube" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M21.6 7.2a2.8 2.8 0 0 0-2-2C17.9 4.8 12 4.8 12 4.8s-5.9 0-7.6.4a2.8 2.8 0 0 0-2 2A29 29 0 0 0 2 12a29 29 0 0 0 .4 4.8 2.8 2.8 0 0 0 2 2c1.7.4 7.6.4 7.6.4s5.9 0 7.6-.4a2.8 2.8 0 0 0 2-2A29 29 0 0 0 22 12a29 29 0 0 0-.4-4.8zM10.2 15.1V8.9l5.1 3.1z"/></symbol>
+    </defs>
+</svg>
+
+    <form method="post" action="./PressReleasePage.aspx?PRID=2110809&amp;lang=1&amp;reg=3" id="form1">
+<input type="hidden" name="sc_HiddenField" id="sc_HiddenField" value="" />
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="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" />
+
+
+<script src="/ScriptResource.axd?d=x6wALODbMJK5e0eRC_p1LdIxBJXt0U_WW5GWfJqHAqo6frgCmGRfEywglicTersO2OKrFhK1gAIp0Wk2al2YrpdR3uWqH6f4nfjBsCyRUfTUUVmb0&amp;t=ffffffffecf8d3f2" type="text/javascript"></script>
+<script src="/PressReleasePage.aspx?_TSM_HiddenField_=sc_HiddenField&amp;_TSM_CombinedScripts_=%3b%3bAjaxControlToolkit%2c+Version%3d3.5.7.123%2c+Culture%3dneutral%2c+PublicKeyToken%3d28f01b0e84b6d53e%3aen-US%3a5a4df314-b4a2-4da2-a207-9284f1b1e96c%3ade1feab2%3af2c8e708%3a8613aea7%3af9cec9bc%3a3202a5a2%3aab09e3fe%3a87104b7c%3a720a52bf%3a589eaa30%3aa67c2700%3abe6fb298" type="text/javascript"></script>
+<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="59B53027" />
+<input type="hidden" name="__VIEWSTATEENCRYPTED" id="__VIEWSTATEENCRYPTED" value="" />
+<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="XLMAP96R/rBEUmJVNQ7JU1X6Lyr9zZsJ6ajdQehefoobjMTD7ddMLleLsamMD4+oAkOZceSVwxIeSdBN1Err3spfhKEGC6VuFGPzUzkrEcTnVouOt49WFBpFYNZ7olWnSBstWZbdO1Qzy1YeS6iUrAWW7vPSIJ5E2zfTRs0ok2J7j2GSsoJmddhN6LzSxomk+QRHZmFhShY9Zif4QYYOXLQTKFJ7DUrjppIYh+z5P0EGI+mcjO5rUhKBxSLFeTwSIoZxTa+Jm7A/kk2RUi+QfGZTHnA=" />
+        
+        <div id="templateCss"></div>
+        
+        <input type="hidden" name="hfGridHtml" id="hfGridHtml" />
+        <div class="container" style='margin-bottom: 50px;'>
+            <div id="accessories">
+                
+                <div class="pull-right" style="display: flex">
+                    <div id="voll"></div>
+                    <div id="vollDT"></div>
+                    
+
+<span class="print-icons">
+<input type="image" name="Print1$print" id="Print1_print" aria-label="Print" src="images/printer_icon.png" alt="print page button" style="padding: 5px 10px 5px 10px;" />
+</span>
+                </div>
+            </div>
+            <input type="hidden" name="hydpermid" id="hydpermid" value="2110809" />
+            
+
+            <div class="innner-page-main-about-us-content-right-part">
+                <div id="MinistryName" class="MinistryNameSubhead text-center">
+                    Ministry of Home Affairs
+                </div>
+                <div id="lg_g"><div class='log_oo'>  <img src='https://static.pib.gov.in/WriteReadData/specificdocs/photo/2026/sep/ph_9768_20260902_10000501.png' alt='azadi ka amrit mahotsav' /> </div></div>
+
+                <div class="text-center event-heading-background">
+                    
+                    <h1 id="Titleh2">
+                        STEPS TAKEN TO ADDRESS THE ISSUE OF DIGITAL ARREST SCAMS
+                    </h1>
+                    <h3 id="Subtitleh3">
+                        <span id="ltrSubtitle"></span>
+                    </h3>
+                </div>
+
+                <div id="PrDateTime" class="ReleaseDateSubHeaddateTime text-center pt20">
+                    Posted On:
+                              12 MAR 2025 4:19PM by PIB Delhi
+                </div>
+                
+                <div class='pt20'>
+                </div>
+                <input type="hidden" name="hydphotoUrl" id="hydphotoUrl" />
+                
+
+                <!-- Release content wrapper for client-side zero-reflow word count -->
+                <div id="pibReleaseBody">
+                    <p style="margin-left:0in; margin-right:-1.1pt; text-align:justify"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">&lsquo;Police&rsquo; and &lsquo;Public Order&rsquo; are State subjects as per the Seventh Schedule of the Constitution of India. The States/UTs are primarily responsible for the prevention, detection, investigation and prosecution of crimes including cyber crime and digital arrest scams through their Law Enforcement Agencies (LEAs). The Central Government supplements the initiatives of the States/UTs through advisories and financial assistance under various schemes for capacity building of their LEAs. </span></span></p>
+
+<p style="text-align:justify"><span style="font-family:&quot;Times New Roman&quot;,Times,serif; font-size:16px">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; The National Crime Records Bureau (NCRB) compiles and publishes the statistical data on crimes in its publication &ldquo;Crime in India&rdquo;. The latest published report is for the year 2022. &nbsp;Specific data regarding digital arrest scams is not maintained separately by NCRB.</span></p>
+
+<p style="text-align:justify"><span style="font-family:&quot;Times New Roman&quot;,Times,serif; font-size:16px">To strengthen the mechanism to deal with cyber crimes including digital arrest scams in a comprehensive and coordinated manner, the Central Government has taken steps which, inter-alia, include the following:</span></p>
+
+<ol style="list-style-type:lower-roman">
+	<li style="text-align: justify;"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">The Ministry of Home Affairs has set up the &lsquo;Indian Cyber Crime Coordination Centre&rsquo; (I4C) as an attached office to deal with all types of cyber crimes in the country, in a coordinated and comprehensive manner.</span></span></li>
+	<li style="text-align: justify;"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">The Central Government has launched a comprehensive awareness programme on digital arrest scams which, inter-alia, include; newspaper advertisement, announcement in Delhi Metros, use of social media influencers to create special posts, campaign through Prasar Bharti and electronic media, special programme on Aakashvani and participated in Raahgiri Function at Connaught Place, New Delhi on 27.11.2024.</span></span></li>
+	<li style="text-align: justify;"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">The Hon&#39;ble Prime Minister spoke about digital arrests during the episode &quot;Mann Ki Baat&quot; on 27.10.2024&nbsp; and apprised&nbsp; the citizens&nbsp; of India. </span></span></li>
+</ol>
+
+<ol start="4" style="list-style-type:lower-roman">
+	<li style="text-align: justify;"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">I4C in collaboration with the Department of Telecommunications (DoT) has launched a caller tune campaign for raising awareness about cybercrime and promoting the Cyber Crime Helpline Number 1930 &amp; &lsquo;National Cyber Crime Reporting Portal&rsquo; (NCRP). The caller tune is also being broadcasts in regional languages, delivered 7-8 times a day by Telecom Service Providers (TSPs).</span></span></li>
+	<li style="text-align: justify;"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">I4C proactively identify and blocked more than 3,962 Skype IDs and 83,668 Whatsapp accounts used for Digital Arrest.</span></span></li>
+	<li style="text-align: justify;"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">The Central Government has published a Press Release on Alert against incidents of &lsquo;Blackmail&rsquo; and &lsquo;Digital Arrest&rsquo; by Cyber Criminals Impersonating State/UT Police, NCB, CBI, RBI and other Law Enforcement Agencies.</span></span></li>
+	<li style="text-align: justify;"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">The Central Government and Telecom Service Providers (TSPs) have devised a system to identify and block incoming international spoofed calls displaying Indian mobile numbers appear to be originating within India. Directions have been issued to the TSPs for blocking of such incoming international spoofed calls. </span></span></li>
+	<li style="text-align: justify;"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">Till 28.02.2025, more than 7.81 lakhs SIM cards and 2,08,469 IMEIs as reported by Police authorities have been blocked by Government of India.</span></span></li>
+	<li style="text-align: justify;"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">The &lsquo;National Cyber Crime Reporting Portal&rsquo; (<a href="https://cybercrime.gov.in" target="_blank">https://cybercrime.gov.in</a>) </span></span></li>
+</ol>
+
+<p style="margin-left:0.5in; margin-right:0in; text-align:justify"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">has &nbsp;been &nbsp;launched, &nbsp;as &nbsp;a &nbsp;part &nbsp;of &nbsp;the &nbsp;I4C, to enable public to report </span></span></p>
+
+<p style="margin-left:0.5in; margin-right:0in; text-align:justify"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">incidents pertaining to all types of cyber crimes, with special focus on cyber crimes against women and children. Cyber crime incidents reported on this portal, their conversion into FIRs and subsequent action thereon are handled by the State/UT Law Enforcement Agencies concerned as per the provisions of the law.</span></span></p>
+
+<ol start="10" style="list-style-type:lower-roman">
+	<li style="text-align: justify;"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">The &lsquo;Citizen Financial Cyber Fraud Reporting and Management System&rsquo;, under I4C, has been launched in year 2021 for immediate reporting of financial frauds and to stop siphoning off funds by the fraudsters. So far, financial amount of more than Rs. 4,386 Crore has been saved in more than 13.36 lakh complaints. A toll-free Helpline number &lsquo;1930&rsquo; has been operationalized to get assistance in lodging online cyber complaints.</span></span></li>
+	<li style="text-align: justify;"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">To spread awareness on cyber crime, the Central Government has taken steps which, inter-alia, include; dissemination of messages through SMS, I4C social media account i.e. X (formerly Twitter) (@CyberDost), Facebook(CyberDostI4C), Instagram (cyberDostI4C), Telegram(cyberdosti4c), Radio campaign, engaged MyGov for publicity in multiple mediums, organizing Cyber Safety and Security Awareness weeks in association with States/UTs, publishing of Handbook for Adolescents/Students, digital displays on railway stations and airports across, etc. </span></span></li>
+</ol>
+
+<p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">This was stated by the Minister of State in the Ministry of Home Affairs Shri Bandi Sanjay Kumar in a written reply to a question in the Rajya Sabha.</span></span></p>
+
+<p style="text-align:center"><strong><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">*****</span></span></strong></p>
+
+<p style="text-align:justify"><strong><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">RK/VV/ASH/RR/PR/PS</span></span></strong></p>
+
+                </div>
+
+                <div id="reel_pic">
+                </div>
+
+                <br />
+                <span id="ReleaseId">(Release ID: 2110809)</span>
+                <span id="lblViews">Visitor Counter : 2661</span>
+                <div>
+                    
+                </div>
+                
+
+                <span id="lblRefPhoto"></span>
+
+                <div class="BackgroundRelease">
+                    
+                </div>
+                <div>
+                    
+                </div>
+                <div class="ReleaseLang">Read this release in: 
+                
+                        <a href='https://pib.gov.in/PressReleasePage.aspx?PRID=2110951' target="_blank">
+                            Urdu </a>
+                    
+                        ,
+                    
+                        <a href='https://pib.gov.in/PressReleasePage.aspx?PRID=2111002' target="_blank">
+                            हिन्दी </a>
+                    
+                        ,
+                    
+                        <a href='https://pib.gov.in/PressReleasePage.aspx?PRID=2111127' target="_blank">
+                            Bengali </a>
+                    
+                        ,
+                    
+                        <a href='https://pib.gov.in/PressReleasePage.aspx?PRID=2111363' target="_blank">
+                            Punjabi </a>
+                    
+                        ,
+                    
+                        <a href='https://pib.gov.in/PressReleasePage.aspx?PRID=2110961' target="_blank">
+                            Tamil </a>
+                    
+                </div>
+
+                <div class="RelTag">
+                    <ul>
+                        
+                    </ul>
+                </div>
+                <div class="clear">
+                </div>
+
+                <!-- DBIM 3.0 Option 4: Separator Line with Left Share Rail & Right Reading Metrics -->
+                <div class="pr-share pr-share--footer" role="region" aria-label="Share and reading details">
+                    <div class="pr-share__left">
+                        <span class="pr-share__label" aria-hidden="true">Share</span>
+                        <ul class="pr-share__list">
+                            <li><a class="pr-share__btn pr-share__btn--facebook"
+                                href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpib.gov.in%2fPressReleasePage.aspx%3fPRID%3d2110809"
+                                target="_blank" rel="noopener noreferrer"
+                                aria-label="Share on Facebook">
+                                <svg class="dbim-icon dbim-icon-24" width="24" height="24" fill="currentColor" aria-hidden="true" focusable="false">
+                                    <use href="#icon-facebook" xlink:href="#icon-facebook"></use>
+                                </svg>
+                            </a></li>
+                            <li><a class="pr-share__btn pr-share__btn--twitter"
+                                href="https://twitter.com/intent/tweet?url=https%3a%2f%2fpib.gov.in%2fPressReleasePage.aspx%3fPRID%3d2110809"
+                                target="_blank" rel="noopener noreferrer"
+                                aria-label="Share on X">
+                                <svg class="dbim-icon dbim-icon-24" width="24" height="24" fill="currentColor" aria-hidden="true" focusable="false">
+                                    <use href="#icon-twitter" xlink:href="#icon-twitter"></use>
+                                </svg>
+                            </a></li>
+                            <li><a class="pr-share__btn pr-share__btn--whatsapp"
+                                href="https://api.whatsapp.com/send?text=https%3a%2f%2fpib.gov.in%2fPressReleasePage.aspx%3fPRID%3d2110809"
+                                target="_blank" rel="noopener noreferrer"
+                                aria-label="Share on WhatsApp">
+                                <svg class="dbim-icon dbim-icon-24" width="24" height="24" fill="currentColor" aria-hidden="true" focusable="false">
+                                    <use href="#icon-whatsapp" xlink:href="#icon-whatsapp"></use>
+                                </svg>
+                            </a></li>
+                            <li><a class="pr-share__btn pr-share__btn--linkedin"
+                                href="https://www.linkedin.com/sharing/share-offsite/?url=https%3a%2f%2fpib.gov.in%2fPressReleasePage.aspx%3fPRID%3d2110809"
+                                target="_blank" rel="noopener noreferrer"
+                                aria-label="Share on LinkedIn">
+                                <svg class="dbim-icon dbim-icon-24" width="24" height="24" fill="currentColor" aria-hidden="true" focusable="false">
+                                    <use href="#icon-linkedin" xlink:href="#icon-linkedin"></use>
+                                </svg>
+                            </a></li>
+                            <li><a class="pr-share__btn pr-share__btn--mail"
+                                href="mailto:?subject=Press+release+from+PIB&amp;body=https%3a%2f%2fpib.gov.in%2fPressReleasePage.aspx%3fPRID%3d2110809"
+                                aria-label="Share by email">
+                                <svg class="dbim-icon dbim-icon-24" width="24" height="24" fill="currentColor" aria-hidden="true" focusable="false">
+                                    <use href="#icon-mail" xlink:href="#icon-mail"></use>
+                                </svg>
+                            </a></li>
+                        </ul>
+                    </div>
+                    <div class="pr-reading-meta" id="prReadingMeta" aria-label="Reading statistics">
+                        <span class="pr-reading-meta__item">
+                            <!-- Modern Document / Word Count Icon -->
+                            <svg class="pr-reading-meta__icon" width="18" height="18" viewbox="0 0 16 16" fill="currentColor" aria-hidden="true" focusable="false">
+                                <path d="M5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5" />
+                                <path d="M9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.5zm0 1v2A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z" />
+                            </svg>
+                            <span id="prWordCount">-- words</span>
+                        </span>
+
+                        <span class="pr-reading-meta__divider" aria-hidden="true">|</span>
+
+                        <span class="pr-reading-meta__item">
+                            <!-- Modern Precision Clock / Read Time Icon -->
+                            <svg class="pr-reading-meta__icon" width="18" height="18" viewbox="0 0 16 16" fill="currentColor" aria-hidden="true" focusable="false">
+                                <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71z" />
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0" />
+                            </svg>
+                            <span id="prReadTime">-- min read</span>
+                        </span>
+                    </div>
+                </div>
+
+                <div id="RelLink" class="RelLink">
+                    <ul>
+                        
+                    </ul>
+                </div>
+                <center>
+                    
+                </center>
+            </div>
+
+            <div id="update12">
+	
+                    
+                    <input type="hidden" name="Hidden" id="Hidden" />
+                    <div id="P_CategoryManagement" class="ModalWindow" style="display: none">
+		
+                        <div>
+                            <input type="image" name="btnClose" id="btnClose" src="images/close_flat_icon.png" />
+                        </div>
+                        <div id="description">
+                        </div>
+                        <div class="text-center">
+                            <h2>
+                                
+                                <br>
+                                
+                            </h2>
+                        </div>
+                        <br />
+                        <div class="clear">
+                        </div>
+                        
+                    
+	</div>
+                
+</div>
+        </div>
+
+        <div id="PdfDiv" style="display: none;">
+            <table width="100%">
+                <tr>
+                    <td style="font-weight: 200; text-align: center">
+                        Ministry of Home Affairs
+                        <div style="height: 30px; width: 100%;">
+                        </div>
+                        <div style="font-weight: 200; text-align: center; font-size: 30px;">
+                            STEPS TAKEN TO ADDRESS THE ISSUE OF DIGITAL ARREST SCAMS
+                        </div>
+                        <div style="height: 30px; width: 100%;">
+                        </div>
+                        <div style="font-weight: 200; text-align: center; font-size: 30px;">
+                            
+                        </div>
+                        <div style="height: 30px; width: 100%;">
+                        </div>
+                        <div style="text-align: center; font-size: 14px;">
+                            Posted On:
+                                          12 MAR 2025 4:19PM by PIB Delhi
+                        </div>
+                        <div style="height: 30px; width: 100%;">
+                        </div>
+                        <div style="font-weight: 200; text-align: left; font-size: 16px;">
+                            <p style="margin-left:0in; margin-right:-1.1pt; text-align:justify"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">&lsquo;Police&rsquo; and &lsquo;Public Order&rsquo; are State subjects as per the Seventh Schedule of the Constitution of India. The States/UTs are primarily responsible for the prevention, detection, investigation and prosecution of crimes including cyber crime and digital arrest scams through their Law Enforcement Agencies (LEAs). The Central Government supplements the initiatives of the States/UTs through advisories and financial assistance under various schemes for capacity building of their LEAs. </span></span></p>
+
+<p style="text-align:justify"><span style="font-family:&quot;Times New Roman&quot;,Times,serif; font-size:16px">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; The National Crime Records Bureau (NCRB) compiles and publishes the statistical data on crimes in its publication &ldquo;Crime in India&rdquo;. The latest published report is for the year 2022. &nbsp;Specific data regarding digital arrest scams is not maintained separately by NCRB.</span></p>
+
+<p style="text-align:justify"><span style="font-family:&quot;Times New Roman&quot;,Times,serif; font-size:16px">To strengthen the mechanism to deal with cyber crimes including digital arrest scams in a comprehensive and coordinated manner, the Central Government has taken steps which, inter-alia, include the following:</span></p>
+
+<ol style="list-style-type:lower-roman">
+	<li style="text-align: justify;"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">The Ministry of Home Affairs has set up the &lsquo;Indian Cyber Crime Coordination Centre&rsquo; (I4C) as an attached office to deal with all types of cyber crimes in the country, in a coordinated and comprehensive manner.</span></span></li>
+	<li style="text-align: justify;"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">The Central Government has launched a comprehensive awareness programme on digital arrest scams which, inter-alia, include; newspaper advertisement, announcement in Delhi Metros, use of social media influencers to create special posts, campaign through Prasar Bharti and electronic media, special programme on Aakashvani and participated in Raahgiri Function at Connaught Place, New Delhi on 27.11.2024.</span></span></li>
+	<li style="text-align: justify;"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">The Hon&#39;ble Prime Minister spoke about digital arrests during the episode &quot;Mann Ki Baat&quot; on 27.10.2024&nbsp; and apprised&nbsp; the citizens&nbsp; of India. </span></span></li>
+</ol>
+
+<ol start="4" style="list-style-type:lower-roman">
+	<li style="text-align: justify;"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">I4C in collaboration with the Department of Telecommunications (DoT) has launched a caller tune campaign for raising awareness about cybercrime and promoting the Cyber Crime Helpline Number 1930 &amp; &lsquo;National Cyber Crime Reporting Portal&rsquo; (NCRP). The caller tune is also being broadcasts in regional languages, delivered 7-8 times a day by Telecom Service Providers (TSPs).</span></span></li>
+	<li style="text-align: justify;"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">I4C proactively identify and blocked more than 3,962 Skype IDs and 83,668 Whatsapp accounts used for Digital Arrest.</span></span></li>
+	<li style="text-align: justify;"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">The Central Government has published a Press Release on Alert against incidents of &lsquo;Blackmail&rsquo; and &lsquo;Digital Arrest&rsquo; by Cyber Criminals Impersonating State/UT Police, NCB, CBI, RBI and other Law Enforcement Agencies.</span></span></li>
+	<li style="text-align: justify;"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">The Central Government and Telecom Service Providers (TSPs) have devised a system to identify and block incoming international spoofed calls displaying Indian mobile numbers appear to be originating within India. Directions have been issued to the TSPs for blocking of such incoming international spoofed calls. </span></span></li>
+	<li style="text-align: justify;"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">Till 28.02.2025, more than 7.81 lakhs SIM cards and 2,08,469 IMEIs as reported by Police authorities have been blocked by Government of India.</span></span></li>
+	<li style="text-align: justify;"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">The &lsquo;National Cyber Crime Reporting Portal&rsquo; (<a href="https://cybercrime.gov.in" target="_blank">https://cybercrime.gov.in</a>) </span></span></li>
+</ol>
+
+<p style="margin-left:0.5in; margin-right:0in; text-align:justify"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">has &nbsp;been &nbsp;launched, &nbsp;as &nbsp;a &nbsp;part &nbsp;of &nbsp;the &nbsp;I4C, to enable public to report </span></span></p>
+
+<p style="margin-left:0.5in; margin-right:0in; text-align:justify"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">incidents pertaining to all types of cyber crimes, with special focus on cyber crimes against women and children. Cyber crime incidents reported on this portal, their conversion into FIRs and subsequent action thereon are handled by the State/UT Law Enforcement Agencies concerned as per the provisions of the law.</span></span></p>
+
+<ol start="10" style="list-style-type:lower-roman">
+	<li style="text-align: justify;"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">The &lsquo;Citizen Financial Cyber Fraud Reporting and Management System&rsquo;, under I4C, has been launched in year 2021 for immediate reporting of financial frauds and to stop siphoning off funds by the fraudsters. So far, financial amount of more than Rs. 4,386 Crore has been saved in more than 13.36 lakh complaints. A toll-free Helpline number &lsquo;1930&rsquo; has been operationalized to get assistance in lodging online cyber complaints.</span></span></li>
+	<li style="text-align: justify;"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">To spread awareness on cyber crime, the Central Government has taken steps which, inter-alia, include; dissemination of messages through SMS, I4C social media account i.e. X (formerly Twitter) (@CyberDost), Facebook(CyberDostI4C), Instagram (cyberDostI4C), Telegram(cyberdosti4c), Radio campaign, engaged MyGov for publicity in multiple mediums, organizing Cyber Safety and Security Awareness weeks in association with States/UTs, publishing of Handbook for Adolescents/Students, digital displays on railway stations and airports across, etc. </span></span></li>
+</ol>
+
+<p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">This was stated by the Minister of State in the Ministry of Home Affairs Shri Bandi Sanjay Kumar in a written reply to a question in the Rajya Sabha.</span></span></p>
+
+<p style="text-align:center"><strong><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">*****</span></span></strong></p>
+
+<p style="text-align:justify"><strong><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">RK/VV/ASH/RR/PR/PS</span></span></strong></p>
+
+                        </div>
+                        <div style="height: 30px; width: 100%;">
+                        </div>
+                        <div style="height: 30px; width: 100%;">
+                        </div>
+                        <div style="font-weight: 100; text-align: left; font-size: 16px;">
+                            (Release ID: 2110809)
+                        </div>
+                        <div style="height: 30px; width: 100%;">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="font-weight: 200; text-align: center; font-size: 24px;"></td>
+                </tr>
+            </table>
+        </div>
+        <div class="clearfix">
+        </div>
+
+        <div class="section1">
+            <div id="frst_t">
+                <div id="arr_rm"><div class='sticky-social_mb'><ul class='social_mb'><a href='http://www.facebook.com/share.php?u=https://pib.gov.in/PressReleasePage.aspx?PRID=2110809' target='_blank'><li class='fb_b'   ></li></a><a href='https://twitter.com/intent/tweet?url=https://pib.gov.in/PressReleasePage.aspx?PRID=2110809&text=STEPS TAKEN TO ADDRESS THE ISSUE OF DIGITAL ARREST SCAMS' target='_blank'><li class='twitter_r'  > </li></a><a href='https://api.whatsapp.com/send?text=https://pib.gov.in/PressReleasePage.aspx?PRID=2110809' target='_blank'><li class='whatsapp_r'  ></li></a><a href='https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=&su=STEPS TAKEN TO ADDRESS THE ISSUE OF DIGITAL ARREST SCAMS&body=https://pib.gov.in/PressReleasePage.aspx?PRID=2110809&ui=2&tf=1&pli=1' title='Share by Email' target='_blank'><li class='fa-envelope_r' ></li></a><a href='https://www.linkedin.com/shareArticle?mini=true&url=https://pib.gov.in/PressReleasePage.aspx?PRID=2110809&title=STEPS TAKEN TO ADDRESS THE ISSUE OF DIGITAL ARREST SCAMS&summary=My%20favorite%20developer%20program&source=LinkedIn' target='_blank'><li class='fa-linkedin_r'  ></li></a></ul></div></div>
+            </div>
+            <div id="second_t">
+                <div id="sndr_rm"><div class='sticky-social'><ul class='social'><a href='http://www.facebook.com/share.php?u=https://pib.gov.in/PressReleasePage.aspx?PRID=2110809' target='_blank'><li class='fb_b'   ></li></a><a href='https://twitter.com/intent/tweet?url=https://pib.gov.in/PressReleasePage.aspx?PRID=2110809&text=STEPS TAKEN TO ADDRESS THE ISSUE OF DIGITAL ARREST SCAMS' target='_blank'><li class='twitter_r'  > </li></a><a href='https://api.whatsapp.com/send?text=https://pib.gov.in/PressReleasePage.aspx?PRID=2110809' target='_blank'><li class='whatsapp_r'  ></li></a><a href='https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=&su=STEPS TAKEN TO ADDRESS THE ISSUE OF DIGITAL ARREST SCAMS&body=https://pib.gov.in/PressReleasePage.aspx?PRID=2110809&ui=2&tf=1&pli=1' title='Share by Email' target='_blank'><li class='fa-envelope_r' ></li></a><a href='https://www.linkedin.com/shareArticle?mini=true&url=https://pib.gov.in/PressReleasePage.aspx?PRID=2110809&title=STEPS TAKEN TO ADDRESS THE ISSUE OF DIGITAL ARREST SCAMS&summary=My%20favorite%20developer%20program&source=LinkedIn' target='_blank'><li class='fa-linkedin_r'  ></li></a></ul></div></div>
+            </div>
+        </div>
+        <input type="hidden" name="ltrTitlee" id="ltrTitlee" value="STEPS TAKEN TO ADDRESS THE ISSUE OF DIGITAL ARREST SCAMS" />
+        <input type="hidden" name="ltrSubtitlee" id="ltrSubtitlee" />
+        <input type="hidden" name="ltrDescriptionn" id="ltrDescriptionn" value="&lt;p style=&quot;margin-left:0in; margin-right:-1.1pt; text-align:justify&quot;>&lt;span style=&quot;font-family:Times New Roman,Times,serif&quot;>&lt;span style=&quot;font-size:16px&quot;>&amp;lsquo;Police&amp;rsquo; and &amp;lsquo;Public Order&amp;rsquo; are State subjects as per the Seventh Schedule of the Constitution of India. The States/UTs are primarily responsible for the prevention, detection, investigation and prosecution of crimes including cyber crime and digital arrest scams through their Law Enforcement Agencies (LEAs). The Central Government supplements the initiatives of the States/UTs through advisories and financial assistance under various schemes for capacity building of their LEAs. &lt;/span>&lt;/span>&lt;/p>
+
+&lt;p style=&quot;text-align:justify&quot;>&lt;span style=&quot;font-family:&amp;quot;Times New Roman&amp;quot;,Times,serif; font-size:16px&quot;>&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; The National Crime Records Bureau (NCRB) compiles and publishes the statistical data on crimes in its publication &amp;ldquo;Crime in India&amp;rdquo;. The latest published report is for the year 2022. &amp;nbsp;Specific data regarding digital arrest scams is not maintained separately by NCRB.&lt;/span>&lt;/p>
+
+&lt;p style=&quot;text-align:justify&quot;>&lt;span style=&quot;font-family:&amp;quot;Times New Roman&amp;quot;,Times,serif; font-size:16px&quot;>To strengthen the mechanism to deal with cyber crimes including digital arrest scams in a comprehensive and coordinated manner, the Central Government has taken steps which, inter-alia, include the following:&lt;/span>&lt;/p>
+
+
+	&lt;li style=&quot;text-align: justify;&quot;>&lt;span style=&quot;font-family:Times New Roman,Times,serif&quot;>&lt;span style=&quot;font-size:16px&quot;>The Ministry of Home Affairs has set up the &amp;lsquo;Indian Cyber Crime Coordination Centre&amp;rsquo; (I4C) as an attached office to deal with all types of cyber crimes in the country, in a coordinated and comprehensive manner.&lt;/span>&lt;/span>&lt;/li>
+	&lt;li style=&quot;text-align: justify;&quot;>&lt;span style=&quot;font-family:Times New Roman,Times,serif&quot;>&lt;span style=&quot;font-size:16px&quot;>The Central Government has launched a comprehensive awareness programme on digital arrest scams which, inter-alia, include; newspaper advertisement, announcement in Delhi Metros, use of social media influencers to create special posts, campaign through Prasar Bharti and electronic media, special programme on Aakashvani and participated in Raahgiri Function at Connaught Place, New Delhi on 27.11.2024.&lt;/span>&lt;/span>&lt;/li>
+	&lt;li style=&quot;text-align: justify;&quot;>&lt;span style=&quot;font-family:Times New Roman,Times,serif&quot;>&lt;span style=&quot;font-size:16px&quot;>The Hon&amp;#39;ble Prime Minister spoke about digital arrests during the episode &amp;quot;Mann Ki Baat&amp;quot; on 27.10.2024&amp;nbsp; and apprised&amp;nbsp; the citizens&amp;nbsp; of India. &lt;/span>&lt;/span>&lt;/li>
+
+
+
+	&lt;li style=&quot;text-align: justify;&quot;>&lt;span style=&quot;font-family:Times New Roman,Times,serif&quot;>&lt;span style=&quot;font-size:16px&quot;>I4C in collaboration with the Department of Telecommunications (DoT) has launched a caller tune campaign for raising awareness about cybercrime and promoting the Cyber Crime Helpline Number 1930 &amp;amp; &amp;lsquo;National Cyber Crime Reporting Portal&amp;rsquo; (NCRP). The caller tune is also being broadcasts in regional languages, delivered 7-8 times a day by Telecom Service Providers (TSPs).&lt;/span>&lt;/span>&lt;/li>
+	&lt;li style=&quot;text-align: justify;&quot;>&lt;span style=&quot;font-family:Times New Roman,Times,serif&quot;>&lt;span style=&quot;font-size:16px&quot;>I4C proactively identify and blocked more than 3,962 Skype IDs and 83,668 Whatsapp accounts used for Digital Arrest.&lt;/span>&lt;/span>&lt;/li>
+	&lt;li style=&quot;text-align: justify;&quot;>&lt;span style=&quot;font-family:Times New Roman,Times,serif&quot;>&lt;span style=&quot;font-size:16px&quot;>The Central Government has published a Press Release on Alert against incidents of &amp;lsquo;Blackmail&amp;rsquo; and &amp;lsquo;Digital Arrest&amp;rsquo; by Cyber Criminals Impersonating State/UT Police, NCB, CBI, RBI and other Law Enforcement Agencies.&lt;/span>&lt;/span>&lt;/li>
+	&lt;li style=&quot;text-align: justify;&quot;>&lt;span style=&quot;font-family:Times New Roman,Times,serif&quot;>&lt;span style=&quot;font-size:16px&quot;>The Central Government and Telecom Service Providers (TSPs) have devised a system to identify and block incoming international spoofed calls displaying Indian mobile numbers appear to be originating within India. Directions have been issued to the TSPs for blocking of such incoming international spoofed calls. &lt;/span>&lt;/span>&lt;/li>
+	&lt;li style=&quot;text-align: justify;&quot;>&lt;span style=&quot;font-family:Times New Roman,Times,serif&quot;>&lt;span style=&quot;font-size:16px&quot;>Till 28.02.2025, more than 7.81 lakhs SIM cards and 2,08,469 IMEIs as reported by Police authorities have been blocked by Government of India.&lt;/span>&lt;/span>&lt;/li>
+	&lt;li style=&quot;text-align: justify;&quot;>&lt;span style=&quot;font-family:Times New Roman,Times,serif&quot;>&lt;span style=&quot;font-size:16px&quot;>The &amp;lsquo;National Cyber Crime Reporting Portal&amp;rsquo; (&lt;a href=&quot;https://cybercrime.gov.in&quot; target=&quot;_blank&quot;>https://cybercrime.gov.in&lt;/a>) &lt;/span>&lt;/span>&lt;/li>
+
+
+&lt;p style=&quot;margin-left:0.5in; margin-right:0in; text-align:justify&quot;>&lt;span style=&quot;font-family:Times New Roman,Times,serif&quot;>&lt;span style=&quot;font-size:16px&quot;>has &amp;nbsp;been &amp;nbsp;launched, &amp;nbsp;as &amp;nbsp;a &amp;nbsp;part &amp;nbsp;of &amp;nbsp;the &amp;nbsp;I4C, to enable public to report &lt;/span>&lt;/span>&lt;/p>
+
+&lt;p style=&quot;margin-left:0.5in; margin-right:0in; text-align:justify&quot;>&lt;span style=&quot;font-family:Times New Roman,Times,serif&quot;>&lt;span style=&quot;font-size:16px&quot;>incidents pertaining to all types of cyber crimes, with special focus on cyber crimes against women and children. Cyber crime incidents reported on this portal, their conversion into FIRs and subsequent action thereon are handled by the State/UT Law Enforcement Agencies concerned as per the provisions of the law.&lt;/span>&lt;/span>&lt;/p>
+
+
+	&lt;li style=&quot;text-align: justify;&quot;>&lt;span style=&quot;font-family:Times New Roman,Times,serif&quot;>&lt;span style=&quot;font-size:16px&quot;>The &amp;lsquo;Citizen Financial Cyber Fraud Reporting and Management System&amp;rsquo;, under I4C, has been launched in year 2021 for immediate reporting of financial frauds and to stop siphoning off funds by the fraudsters. So far, financial amount of more than Rs. 4,386 Crore has been saved in more than 13.36 lakh complaints. A toll-free Helpline number &amp;lsquo;1930&amp;rsquo; has been operationalized to get assistance in lodging online cyber complaints.&lt;/span>&lt;/span>&lt;/li>
+	&lt;li style=&quot;text-align: justify;&quot;>&lt;span style=&quot;font-family:Times New Roman,Times,serif&quot;>&lt;span style=&quot;font-size:16px&quot;>To spread awareness on cyber crime, the Central Government has taken steps which, inter-alia, include; dissemination of messages through SMS, I4C social media account i.e. X (formerly Twitter) (@CyberDost), Facebook(CyberDostI4C), Instagram (cyberDostI4C), Telegram(cyberdosti4c), Radio campaign, engaged MyGov for publicity in multiple mediums, organizing Cyber Safety and Security Awareness weeks in association with States/UTs, publishing of Handbook for Adolescents/Students, digital displays on railway stations and airports across, etc. &lt;/span>&lt;/span>&lt;/li>
+
+
+&lt;p style=&quot;text-align:justify&quot;>&lt;span style=&quot;font-family:Times New Roman,Times,serif&quot;>&lt;span style=&quot;font-size:16px&quot;>This was stated by the Minister of State in the Ministry of Home Affairs Shri Bandi Sanjay Kumar in a written reply to a question in the Rajya Sabha.&lt;/span>&lt;/span>&lt;/p>
+
+&lt;p style=&quot;text-align:center&quot;>&lt;strong>&lt;span style=&quot;font-family:Times New Roman,Times,serif&quot;>&lt;span style=&quot;font-size:16px&quot;>*****&lt;/span>&lt;/span>&lt;/strong>&lt;/p>
+
+&lt;p style=&quot;text-align:justify&quot;>&lt;strong>&lt;span style=&quot;font-family:Times New Roman,Times,serif&quot;>&lt;span style=&quot;font-size:16px&quot;>RK/VV/ASH/RR/PR/PS&lt;/span>&lt;/span>&lt;/strong>&lt;/p>
+" />
+        <script type="text/javascript">
+                  var mPlayer = document.getElementById("background_music");
+                  var mPlayAction = document.getElementById("playbutton");
+                  var isPlaying = false;
+
+                  function playAudio() {
+                        mPlayer.play();
+                        isPlaying = true;
+                        document.getElementById('stopA').style.display = "block";
+                        document.getElementById('playA').style.display = "none";
+                  }
+
+                  function pauseAudio() {
+                        mPlayer.pause();
+                        isPlaying = false;
+                        document.getElementById('playA').style.display = "block";
+                        document.getElementById('stopA').style.display = "none";
+                  }
+        </script>
+        <script type="text/javascript">
+                  var synth = window.speechSynthesis;
+
+                  function CleanHtml(html) {
+                        html = html.replace(/<script[\s\S]*?<\/script>/gi, '');
+                        return html;
+                  }
+                  function stripHtml(html) {
+                        let tmp = document.createElement("DIV");
+                        tmp.innerHTML = CleanHtml(html);
+                        return tmp.textContent || tmp.innerText || "";
+                  }
+        </script>
+        <script type="text/javascript">
+                  $(document).ready(function () {
+                        $("table").each(function () {
+                              if (!$(this).closest(".table-responsive").length) {
+                                    $(this).wrap("<div class='table-responsive'></div>");
+                              }
+                        });
+
+                        var width = $(window).width();
+                        if (width < 768) {
+                              document.getElementById('frst_t').style.display = "block";
+                              document.getElementById('second_t').style.display = "none";
+                        } else if (width < 991) {
+                              document.getElementById('frst_t').style.display = "block";
+                              document.getElementById('second_t').style.display = "none";
+                        } else if (width < 1199) {
+                              document.getElementById('frst_t').style.display = "none";
+                              document.getElementById('second_t').style.display = "block";
+                        } else {
+                              document.getElementById('frst_t').style.display = "none";
+                              document.getElementById('second_t').style.display = "block";
+                        }
+                  });
+        </script>
+        <style type="text/css">
+            @media print {
+                .sticky-social, .sticky-social_mb, .pull-right, #printPDF {
+                    display: none !important;
+                }
+            }
+
+            .f_vl {
+                padding-right: 30px;
+                font-size: 17px;
+                cursor: pointer;
+            }
+
+            .log_oo {
+                display: flex;
+                justify-content: space-between;
+            }
+
+                .log_oo img {
+                    width: 150px;
+                }
+
+            .sticky-social_mb {
+                position: fixed;
+                bottom: 0px;
+                padding: 0px;
+                margin: 0px;
+                width: 100%;
+            }
+
+            .social_mb {
+                list-style: none;
+                display: flex;
+                width: 100%;
+                margin-bottom: -8px;
+            }
+
+                .social_mb a {
+                    padding: 8px 0px;
+                    font-size: 30px;
+                    transition: all 0.8s ease-in-out;
+                    width: 20% !important;
+                    text-align: center;
+                }
+        </style>
+        <style type="text/css">
+            .section1 {
+                position: relative;
+                padding: 10px 0px;
+                width: 100%;
+            }
+
+            .sticky-social {
+                position: fixed;
+                top: 20px;
+                left: 0px;
+                padding: 0px;
+                margin: 0px;
+            }
+
+            .social {
+                list-style: none;
+            }
+
+                .social a li {
+                    padding: 8px 12px;
+                    font-size: 25px;
+                    transition: all 0.8s ease-in-out;
+                }
+
+                    .social a li:hover {
+                        margin-right: -30px;
+                        box-shadow: 2px 5px 10px grey;
+                    }
+
+                        .social a li:hover .fa {
+                            margin-left: 20px;
+                        }
+
+            .fb_b {
+                background-color: var(--dbim-key, #0F5757);
+            }
+
+            .twitter_r {
+                background-color: var(--dbim-key, #0F5757);
+            }
+
+            .whatsapp_r {
+                background-color: var(--dbim-key, #0F5757);
+            }
+
+            .fa-envelope_r {
+                background-color: var(--dbim-key, #0F5757);
+            }
+
+            .fa-linkedin_r {
+                background-color: var(--dbim-key, #0F5757);
+            }
+        </style>
+        <style type="text/css">
+            @media only screen and (max-device-width: 767px) {
+                p span img {
+                    max-width: 90% !important;
+                    height: auto !important;
+                }
+
+                p img {
+                    max-width: 90% !important;
+                    height: auto !important;
+                }
+
+                h2 {
+                    font-size: var(--dbim-h2, 20px);
+                    font-weight: 600 !important;
+                }
+
+                h3 {
+                    font-size: var(--dbim-h3, 16px);
+                    font-weight: 600 !important;
+                }
+            }
+        </style>
+        <style type="text/css">
+            .film-roll-badge {
+                position: absolute;
+                top: 82%;
+                right: 20px;
+                width: 230px;
+                height: 70px;
+                background: repeating-linear-gradient( to right, var(--dbim-green-key, #0F5757) 0px, var(--dbim-green-key, #0F5757) 18px, var(--dbim-text, #150202) 18px, var(--dbim-text, #150202) 36px );
+                border-top: 8px solid var(--dbim-green-key, #0F5757);
+                border-bottom: 8px solid var(--dbim-green-key, #0F5757);
+                border-radius: 8px;
+                overflow: hidden;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+                animation: moveFilm 8s linear infinite;
+                z-index: 10;
+            }
+
+                .film-roll-badge::before,
+                .film-roll-badge::after {
+                    content: "";
+                    position: absolute;
+                    width: 100%;
+                    height: 10px;
+                    background: repeating-linear-gradient( to right, var(--dbim-green-key, #0F5757) 0px, var(--dbim-green-key, #0F5757) 10px, #fff 10px, #fff 20px );
+                    left: 0;
+                    z-index: 2;
+                }
+
+                .film-roll-badge::before {
+                    top: -4px;
+                }
+
+                .film-roll-badge::after {
+                    bottom: -4px;
+                }
+
+            .film-roll-inner {
+                position: relative;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                animation: flicker 2s infinite ease-in-out;
+            }
+
+            .countdown-text {
+                font-size: 1.3rem;
+                font-weight: 700;
+                color: #fff;
+                text-shadow: 0 0 6px rgba(255, 255, 255, 0.4), 0 0 10px #000;
+                white-space: nowrap;
+            }
+
+            @keyframes moveFilm {
+                0% {
+                    background-position: 0 0;
+                }
+
+                100% {
+                    background-position: 120px 0;
+                }
+            }
+
+            @keyframes flicker {
+                0%, 100% {
+                    opacity: 1;
+                }
+
+                50% {
+                    opacity: 0.9;
+                }
+
+                25% {
+                    opacity: 0.95;
+                }
+
+                75% {
+                    opacity: 0.85;
+                }
+            }
+
+            @media (max-width: 1500px) {
+                .film-roll-badge {
+                    top: 68%;
+                    right: 18px;
+                    height: 65px;
+                    font-size: 0.85rem;
+                }
+
+                .press-section {
+                    margin-top: 35px;
+                }
+            }
+
+            @media (max-width: 992px) {
+                .film-roll-badge {
+                    top: 52%;
+                    right: 10px;
+                    width: 200px;
+                    height: 60px;
+                }
+            }
+
+            @media (max-width: 768px) {
+                .film-roll-badge {
+                    top: 56%;
+                    right: 10px;
+                    width: 124px;
+                    height: 55px;
+                }
+
+                .countdown-text {
+                    font-size: 0.9rem;
+                }
+            }
+
+            @media (max-width: 576px) {
+                .film-roll-badge {
+                    top: 59%;
+                    right: 5px;
+                    height: 50px;
+                }
+
+                .countdown-text {
+                    font-size: 0.85rem;
+                }
+            }
+        </style>
+        <script type="text/javascript">
+                  const festivalStart = new Date("2025-11-20T00:00:00").getTime();
+                  const festivalEnd = new Date("2025-11-28T23:59:59").getTime();
+                  const countdownElement = document.getElementById("countdown");
+
+                  if (countdownElement) {
+                        const interval = setInterval(() => {
+                              const now = new Date().getTime();
+
+                              if (now < festivalStart) {
+                                    const diff = festivalStart - now;
+                                    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                                    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+
+                                    countdownElement.innerHTML = `${days} Day${days !== 1 ? 's' : ''} ${hours} Hour${hours !== 1 ? 's' : ''} to go`;
+                              } else if (now >= festivalStart && now <= festivalEnd) {
+                                    const dayNumber = Math.floor((now - festivalStart) / (1000 * 60 * 60 * 24)) + 1;
+                                    countdownElement.innerHTML = `56th IFFI - Day ${dayNumber}`;
+                              } else {
+                                    countdownElement.innerHTML = `✨ IFFI closes but never ends…`;
+                                    const elements = document.querySelectorAll('.film-roll-badge');
+                                    elements.forEach(el => el.style.width = "350px");
+                                    clearInterval(interval);
+                              }
+                        }, 1000);
+                  }
+        </script>
+        <script type="text/javascript">
+                  const miffStart = new Date("2026-06-15T00:00:00").getTime();
+                  const miffEnd = new Date("2026-06-15T23:59:59").getTime();
+                  const miffElement = document.getElementById("miff");
+
+                  if (miffElement) {
+                        const miffInterval = setInterval(() => {
+                              const now = new Date().getTime();
+
+                              if (now < miffStart) {
+                                    const diff = miffStart - now;
+                                    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                                    miffElement.innerHTML = `${days} Day${days === 1 ? '' : 's'} to MIFF ...`;
+                              } else if (now >= miffStart && now <= miffEnd) {
+                                    const dayNumber = Math.floor((now - miffStart) / (1000 * 60 * 60 * 24)) + 1;
+                                    miffElement.innerHTML = `19th MIFF - Day ${dayNumber}`;
+                              } else {
+                                    miffElement.innerHTML = `✨ MIFF concludes, cinema lives on...`;
+                                    document.querySelectorAll('.film-roll-badge').forEach(el => el.style.width = "350px");
+                                    clearInterval(miffInterval);
+                              }
+                        }, 1000);
+                  }
+        </script>
+    
+
+<script type="text/javascript">
+//<![CDATA[
+(function() {var fn = function() {$get("sc_HiddenField").value = '';Sys.Application.remove_init(fn);};Sys.Application.add_init(fn);})();Sys.Application.add_init(function() {
+    $create(Sys.Extended.UI.ModalPopupBehavior, {"BackgroundCssClass":"modalBackground","PopupControlID":"P_CategoryManagement","dynamicServicePath":"/PressReleasePage.aspx","id":"mpe"}, null, null, $get("Hidden"));
+});
+//]]>
+</script>
+<input type="hidden" name="__ncforminfo" value="AB2eO4-l95cbihw3wnOJ9uKyJ1kTX_eLQrUA2TDjdZ1TPm0A22-ep9_9V6ctbX_JiBy1jbriJ9S2q9MTfRfp8LfR1Z0mQCy7"/></form>
+    
+
+<script type="application/json" id="pibConsentConfig">{"ga4Id":"G-Q414Y0X6EE,G-QJJ6LZ8LHV","policyUrl":"/CookiePolicy.aspx","text":{"bannerLabel":"Cookie consent","title":"Cookies on this website","body":"We use essential cookies to make this website work. We also set analytics cookies when you arrive, so we can see how the site is used and improve it - you can switch these off below or at any time from the Cookie Policy page. Cookies from embedded social media content are set only if you allow them.","policyLink":"Read our Cookie Policy","accept":"Accept all","reject":"Reject optional","customize":"Customise","prefsTitle":"Cookie preferences","prefsIntro":"Choose which cookies this website may set. Essential cookies cannot be switched off because the site does not work without them. Analytics cookies are on unless you turn them off. Social media cookies stay off until you allow them. You can change these choices at any time from the Cookie Policy page.","essentialName":"Essential cookies","essentialDesc":"Needed for the site to function. These remember your session, your language and region, your text size and colour theme, and verify the security check on forms. They are always on.","analyticsName":"Analytics cookies","analyticsDesc":"Help us understand how visitors use the site - which pages are read and how long people stay - so it can be improved. The information is collected in a form that does not directly identify you. These are on when you arrive; switching them off here stops them and deletes the ones already set.","socialName":"Social media cookies","socialDesc":"Set by content embedded from X, Facebook and YouTube, such as timelines and videos. These platforms may use them to track you across websites. They stay off until you allow them.","save":"Save preferences","cancel":"Cancel"}}</script>
+<script type="text/javascript" src='/js/consent.js?v=10'></script>
+
+<script type="text/javascript" src='/js/consent-embeds.js?v=10'></script>
+
+
+    <!-- Minimal O(N) Time and O(1) Auxiliary Space Word Count & Read Time Calculation -->
+    <script type="text/javascript">
+            (function () {
+                  function calculateReadingStats() {
+                        var bodyEl = document.getElementById("pibReleaseBody");
+                        if (!bodyEl) return;
+
+                        // textContent extracts text without triggering expensive layout/reflow computations
+                        var text = bodyEl.textContent || "";
+                        var words = 0;
+                        var inWord = false;
+
+                        // O(N) single pass character code scan: achieves O(1) space with zero array allocations
+                        for (var i = 0, len = text.length; i < len; i++) {
+                              var code = text.charCodeAt(i);
+                              // Delimits on ASCII whitespace, control characters, tabs, newlines, and non-breaking spaces (160)
+                              if (code <= 32 || code === 160) {
+                                    inWord = false;
+                              } else if (!inWord) {
+                                    inWord = true;
+                                    words++;
+                              }
+                        }
+
+                        // Standard 250 WPM reading speed (e.g., 612 words yields 2 min read)
+                        var minutes = Math.max(1, Math.round(words / 250));
+
+                        var elWords = document.getElementById("prWordCount");
+                        var elTime = document.getElementById("prReadTime");
+
+                        if (elWords) elWords.textContent = words + (words === 1 ? " word" : " words");
+                        if (elTime) elTime.textContent = minutes + " min read";
+                  }
+
+                  if (document.readyState === "loading") {
+                        document.addEventListener("DOMContentLoaded", calculateReadingStats);
+                  } else {
+                        calculateReadingStats();
+                  }
+            })();
+    </script>
+
+    <script type="text/javascript">
+            (function () {
+                  try {
+                        if (window.self === window.top) { return; }
+                  } catch (e) { return; }
+                  var s = document.createElement("style");
+                  s.textContent = ".sticky-social, .sticky-social_mb { display: none !important; }";
+                  (document.head || document.documentElement).appendChild(s);
+            }());
+    </script>
+</body>
+</html>

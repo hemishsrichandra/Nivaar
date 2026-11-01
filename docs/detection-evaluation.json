@@ -1,0 +1,254 @@
+{
+  "scope": "Source-derived development regression; local rules only; not independent real-world accuracy",
+  "total": 28,
+  "scam_precision": 1.0,
+  "scam_recall": 1.0,
+  "scam_f1": 1.0,
+  "false_scam": 0,
+  "missed_scams": 0,
+  "abstention_rate": 0.5,
+  "false_genuine": 0,
+  "confusion": {
+    "scam": {
+      "SCAM": 14,
+      "UNSURE": 0,
+      "GENUINE": 0
+    },
+    "benign": {
+      "SCAM": 0,
+      "UNSURE": 9,
+      "GENUINE": 0
+    },
+    "ambiguous": {
+      "SCAM": 0,
+      "UNSURE": 5,
+      "GENUINE": 0
+    }
+  },
+  "results": [
+    {
+      "id": "digital_arrest-1",
+      "text": "CBI: You are under arrest. Transfer money to a safe account immediately.",
+      "label": "scam",
+      "source_id": "digital_arrest",
+      "provenance": "Manually authored advisory-derived development example; not an observed victim message",
+      "actual": "SCAM"
+    },
+    {
+      "id": "digital_arrest-2",
+      "text": "Police arrest warrant. Pay a security deposit to avoid arrest.",
+      "label": "scam",
+      "source_id": "digital_arrest",
+      "provenance": "Manually authored advisory-derived development example; not an observed victim message",
+      "actual": "SCAM"
+    },
+    {
+      "id": "digital_arrest-3",
+      "text": "पुलिस: गिरफ्तार करेंगे। पैसे भेज दो।",
+      "label": "scam",
+      "source_id": "digital_arrest",
+      "provenance": "Manually authored advisory-derived development example; not an observed victim message",
+      "actual": "SCAM"
+    },
+    {
+      "id": "digital_arrest-4",
+      "text": "ಪೊಲೀಸ್ ಬಂಧನ. ಹಣ ಕಳುಹಿಸಿ.",
+      "label": "scam",
+      "source_id": "digital_arrest",
+      "provenance": "Manually authored advisory-derived development example; not an observed victim message",
+      "actual": "SCAM"
+    },
+    {
+      "id": "digital_arrest-5",
+      "text": "Someone mentioned digital arrest. What does it mean?",
+      "label": "ambiguous",
+      "source_id": "digital_arrest",
+      "provenance": "Manually authored advisory-derived development example; not an observed victim message",
+      "actual": "UNSURE"
+    },
+    {
+      "id": "digital_arrest-6",
+      "text": "Police warn citizens about digital arrest scams. Never send money to callers.",
+      "label": "benign",
+      "source_id": "digital_arrest",
+      "provenance": "Manually authored advisory-derived development example; not an observed victim message",
+      "actual": "UNSURE"
+    },
+    {
+      "id": "credentials-7",
+      "text": "Bank support: share your OTP to unblock your account.",
+      "label": "scam",
+      "source_id": "credentials",
+      "provenance": "Manually authored advisory-derived development example; not an observed victim message",
+      "actual": "SCAM"
+    },
+    {
+      "id": "credentials-8",
+      "text": "Send your PIN now.",
+      "label": "scam",
+      "source_id": "credentials",
+      "provenance": "Manually authored advisory-derived development example; not an observed victim message",
+      "actual": "SCAM"
+    },
+    {
+      "id": "credentials-9",
+      "text": "Please provide your password.",
+      "label": "scam",
+      "source_id": "credentials",
+      "provenance": "Manually authored advisory-derived development example; not an observed victim message",
+      "actual": "SCAM"
+    },
+    {
+      "id": "credentials-10",
+      "text": "OTP बताइए",
+      "label": "scam",
+      "source_id": "credentials",
+      "provenance": "Manually authored advisory-derived development example; not an observed victim message",
+      "actual": "SCAM"
+    },
+    {
+      "id": "credentials-11",
+      "text": "ಒಟಿಪಿ ಹಂಚಿಕೊಳ್ಳಿ",
+      "label": "scam",
+      "source_id": "credentials",
+      "provenance": "Manually authored advisory-derived development example; not an observed victim message",
+      "actual": "SCAM"
+    },
+    {
+      "id": "credentials-12",
+      "text": "Never share your OTP with anyone.",
+      "label": "benign",
+      "source_id": "credentials",
+      "provenance": "Manually authored advisory-derived development example; not an observed victim message",
+      "actual": "UNSURE"
+    },
+    {
+      "id": "credentials-13",
+      "text": "Do not ever share your PIN.",
+      "label": "benign",
+      "source_id": "credentials",
+      "provenance": "Manually authored advisory-derived development example; not an observed victim message",
+      "actual": "UNSURE"
+    },
+    {
+      "id": "credentials-14",
+      "text": "You should not provide your password.",
+      "label": "benign",
+      "source_id": "credentials",
+      "provenance": "Manually authored advisory-derived development example; not an observed victim message",
+      "actual": "UNSURE"
+    },
+    {
+      "id": "credentials-15",
+      "text": "Your OTP is confidential. Keep it private.",
+      "label": "benign",
+      "source_id": "credentials",
+      "provenance": "Manually authored advisory-derived development example; not an observed victim message",
+      "actual": "UNSURE"
+    },
+    {
+      "id": "credentials-16",
+      "text": "Your account needs an update. Contact the branch.",
+      "label": "ambiguous",
+      "source_id": "credentials",
+      "provenance": "Manually authored advisory-derived development example; not an observed victim message",
+      "actual": "UNSURE"
+    },
+    {
+      "id": "banking-17",
+      "text": "Install AnyDesk for bank verification.",
+      "label": "scam",
+      "source_id": "banking",
+      "provenance": "Manually authored advisory-derived development example; not an observed victim message",
+      "actual": "SCAM"
+    },
+    {
+      "id": "banking-18",
+      "text": "Install TeamViewer to receive the refund.",
+      "label": "scam",
+      "source_id": "banking",
+      "provenance": "Manually authored advisory-derived development example; not an observed victim message",
+      "actual": "SCAM"
+    },
+    {
+      "id": "banking-19",
+      "text": "Never install AnyDesk at the request of a stranger.",
+      "label": "benign",
+      "source_id": "banking",
+      "provenance": "Manually authored advisory-derived development example; not an observed victim message",
+      "actual": "UNSURE"
+    },
+    {
+      "id": "banking-20",
+      "text": "Do not install APK files from unknown senders.",
+      "label": "benign",
+      "source_id": "banking",
+      "provenance": "Manually authored advisory-derived development example; not an observed victim message",
+      "actual": "UNSURE"
+    },
+    {
+      "id": "banking-21",
+      "text": "Your refund is being processed.",
+      "label": "ambiguous",
+      "source_id": "banking",
+      "provenance": "Manually authored advisory-derived development example; not an observed victim message",
+      "actual": "UNSURE"
+    },
+    {
+      "id": "banking-22",
+      "text": "Please enter your OTP on the official bank app.",
+      "label": "ambiguous",
+      "source_id": "banking",
+      "provenance": "Manually authored advisory-derived development example; not an observed victim message",
+      "actual": "UNSURE"
+    },
+    {
+      "id": "task_jobs-23",
+      "text": "Complete rating tasks. Deposit money to unlock your commission.",
+      "label": "scam",
+      "source_id": "task_jobs",
+      "provenance": "Manually authored advisory-derived development example; not an observed victim message",
+      "actual": "SCAM"
+    },
+    {
+      "id": "task_jobs-24",
+      "text": "Recharge your wallet to withdraw commission.",
+      "label": "scam",
+      "source_id": "task_jobs",
+      "provenance": "Manually authored advisory-derived development example; not an observed victim message",
+      "actual": "SCAM"
+    },
+    {
+      "id": "task_jobs-25",
+      "text": "Part time job: pay a deposit before starting.",
+      "label": "scam",
+      "source_id": "task_jobs",
+      "provenance": "Manually authored advisory-derived development example; not an observed victim message",
+      "actual": "SCAM"
+    },
+    {
+      "id": "task_jobs-26",
+      "text": "Beware of task scams asking for deposits.",
+      "label": "benign",
+      "source_id": "task_jobs",
+      "provenance": "Manually authored advisory-derived development example; not an observed victim message",
+      "actual": "UNSURE"
+    },
+    {
+      "id": "task_jobs-27",
+      "text": "The ministry warns against online investment fraud.",
+      "label": "benign",
+      "source_id": "task_jobs",
+      "provenance": "Manually authored advisory-derived development example; not an observed victim message",
+      "actual": "UNSURE"
+    },
+    {
+      "id": "task_jobs-28",
+      "text": "A part time job opportunity is available. Contact the employer.",
+      "label": "ambiguous",
+      "source_id": "task_jobs",
+      "provenance": "Manually authored advisory-derived development example; not an observed victim message",
+      "actual": "UNSURE"
+    }
+  ]
+}
