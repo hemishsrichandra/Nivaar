@@ -97,7 +97,6 @@ async def _investigate(value,emit=None):
     errors={}
     for name,note in [('llm',extraction_note),('search',search_note),('evidence_comparison',' '.join(limitations))]:
         if statuses.get(name) in ('fallback','unavailable'):
-            from backend.services.llm_client import ProviderError
             reason='http_429' if re.search(r'429|cooldown|free_tier_budget',note) else 'not_configured' if re.search(r'not_configured|No search key',note) else 'timeout' if 'timeout' in note else 'invalid_response'
             errors[name]=ProviderError(name,reason).code
     report=VerificationReport(report_id=uuid.uuid4().hex,verdict=verdict,detailed_verdict=verdict,risk_level=risk,summary=summary,language=value.language,checks=checks,extracted=extracted,tactics=extracted.tactics,script_family=extracted.script_family,evidence=evidence,trace=trace,recommended_actions=actions,which_door_routing=channels,limitations=limitations,report_hash='',generated_at_utc=generated,complaint=complaint,provider_status=statuses,provider_errors=errors,claims=ledger,assessments=assessments,identifiers=identifiers,evidence_coverage=coverage,source_conflicts=conflicts,user_situation=value.user_situation or ('OTHER_OR_UNSURE' if value.user_reported_loss else 'ONLY_RECEIVED'))

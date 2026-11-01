@@ -1,7 +1,8 @@
 """Persistent single-instance abuse budget and privacy-preserving operational telemetry."""
 import os, sqlite3, time, secrets, hmac, hashlib, json, logging
 from pathlib import Path
-DB=os.getenv('OPERATIONS_DB','/tmp/nivaar-operations.sqlite3')
+import tempfile
+DB=os.getenv('OPERATIONS_DB', str(Path(tempfile.gettempdir()) / 'nivaar-operations.sqlite3'))
 SECRET=os.getenv('REPORT_SIGNING_SECRET') or secrets.token_hex(32)
 logger=logging.getLogger('nivaar.operations')
 def connect():

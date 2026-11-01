@@ -5,7 +5,7 @@ import pytest
 from backend.services.claim_extractor import local_extract
 from backend.services.verdict_engine import action_checks,choose_verdict
 from backend.schemas import AnalyzeInput,DimensionChecks
-DATA=json.loads(Path('backend/data/evaluation/action_quality_2026_11_01.json').read_text())
+DATA=json.loads(Path('backend/data/evaluation/action_quality_2026_11_01.json').read_text(encoding='utf-8'))
 @pytest.mark.parametrize('case',DATA['cases'],ids=lambda c:c['id'])
 def test_multilingual_action_quality(case):
     x=local_extract(case['text'],'voice',False);action,high=action_checks(x)
