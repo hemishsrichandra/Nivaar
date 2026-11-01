@@ -1,98 +1,97 @@
 # Nivaar
 
-Desktop-first fraud-verification web app: **standard Next.js + FastAPI**, deployable as one Docker service on Render. No ChatGPT login or Sites runtime.
+**Clarity before action.**
 
-## Local setup
+Nivaar is a web app that helps people assess suspicious messages, links, screenshots and voice notes. It identifies dangerous requests, compares factual claims with available official evidence, and gives practical next steps.
 
-Requires Node.js 22.13+ and Python 3.11+. Node 24 is supported locally.
+Designed for English, Hindi and Kannada, Nivaar brings scam-pattern detection and source-based verification into one place. It is an independent tool and is not affiliated with any government agency.
 
-```sh
-git clone https://github.com/hemishsrichandra/Nivaar.git
-cd Nivaar
-python3 -m venv .venv
-.venv/bin/python -m pip install -r backend/requirements.lock
-npm ci
-npm run dev
-```
+## What you can check
 
-Open **http://localhost:3000**. `npm run dev` starts both FastAPI on loopback port 8000 and Next.js on port 3000. Stop both with Ctrl+C.
+| Input | How Nivaar handles it |
+| --- | --- |
+| Messages | Examines the text for manipulation, dangerous instructions and factual claims. |
+| Links | Inspects destination patterns alongside the surrounding message. Submitted links are not opened by the verification pipeline. |
+| Screenshots | Extracts text for review using local OCR, with an optional consent-based cloud reading path. |
+| Voice notes | Transcribes uploaded or recorded audio with Sarvam, then checks the reviewed transcript. |
 
-Provider secrets belong in the ignored `backend/.env` file. Copy the template and add your **Gemini, Sarvam, and Tavily** credentials locally:
+Audio transcription supports automatic spoken-language detection or an explicit language choice. Spoken language and report language are separate. Voice uploads are limited to 30 seconds and 10 MB; browser recording stops at 29 seconds to leave a small margin. Browser dictation is also available where supported.
 
-```sh
-cp backend/.env.example backend/.env
-```
+## How a check works
 
-Edit `backend/.env` with your preferred editor. Restart the app after changes. Missing or unavailable providers are explicitly shown as basic/fallback checks in the interface. Provider keys alone do not guarantee quota or source availability.
+1. **Add the suspicious content.** Review extracted text or a voice transcript, correct recognition mistakes, and remove personal details.
+2. **Choose your situation.** Indicate whether you only received the message, sent money, shared credentials, granted app or remote access, suspect SIM compromise, or are unsure.
+3. **Follow the investigation.** Nivaar identifies claims and tactics, inspects destinations, searches for relevant official material, and compares available evidence.
+4. **Review the assessment.** Read the detected risks, claim-level findings, source quotations and limitations.
+5. **Take a safer next step.** Use the situation-specific checklist, official reporting links, complaint draft or downloadable evidence report.
 
-See [provider setup and acceptance checks](docs/PROVIDER_SETUP.md) for dashboard links, Brave instructions, supported alternatives and the exact live test checklist.
+## Scam patterns covered
 
-## Production locally
+Nivaar combines local rules with AI-assisted extraction. Its action-risk checks include:
 
-```sh
-npm run build
-npm start
-```
+- Digital-arrest threats, coercive payment demands and transfers into so-called safe or verification accounts.
+- Customs impersonation demanding payment into personal or private accounts, including English, Hindi and Kannada wording.
+- Requests to disclose OTPs, PINs, passwords, passcodes or CVVs, including spoken variants such as “O T P” and “one-time password.”
+- Remote-access and screen-control requests, including common remote-support application names.
+- Task or rating jobs requiring deposits or wallet recharges to unlock commissions.
+- Advance-fee prize or loan-release demands and payment requests promising guaranteed investment profits.
+- Suspicious link patterns and authority-impersonation cues.
 
-`npm start` runs the actual production Next.js server and FastAPI together. No dev server, Cloudflare Worker or external tunnel is required.
+Negation and advisory checks help distinguish requests such as “share your OTP” from warnings such as “never share your OTP.” A warning in one part of a message does not automatically cancel a dangerous instruction elsewhere. Quoted speech, unfamiliar wording and transcription mistakes can still be misinterpreted.
 
-## Render deployment
+## Understanding the result
 
-1. Connect this repository to Render. Do not commit `backend/.env`.
-2. In Render, create a **Blueprint** from that repository using the root `render.yaml`. Alternatively create a Docker Web Service using the root Dockerfile. If the repository contains a parent workspace, set the service root directory to `nivaar`.
-3. Set `GEMINI_API_KEY`, `SARVAM_API_KEY` and `TAVILY_API_KEY` in Render Environment. Keep `REQUIRE_LIVE_PROVIDERS=true` for the production service.
-4. The Blueprint generates `REPORT_SIGNING_SECRET` and `BENCHMARK_TOKEN`. For manual setup, generate stable random values yourself. Use only the benchmark token in the Live benchmark dialog; provider keys never go into the webpage.
-5. Deploy. The app listens on Render's `PORT` (default 10000) and health check is `/api/health`. `/api/ready` reports missing provider keys separately. An `onrender.com` URL or your own custom domain works without ChatGPT authentication.
-6. Run the live acceptance checks after credentials are installed. No Render deployment is claimed until an actual build and live service are verified.
+| Result | What it means |
+| --- | --- |
+| **Scam signals detected** | A dangerous action or destination pattern, or sufficiently specific contradictory official evidence, was identified. It is a warning about the content, not proof of the sender’s identity. |
+| **Matches official information** | The factual content meets the app’s source-verification requirements. This does not authenticate the sender or authorize a separate payment request. |
+| **High-risk warning signs detected** | Risk signals are present even though factual verification remains inconclusive. The message should not be treated as safe to act on. |
+| **We couldn’t verify this message** | Available evidence is insufficient to establish the material claims. This is neither a fraud finding nor a safety guarantee. |
 
-The root Dockerfile uses the pinned Python lockfile and Next.js standalone build. Container-image execution can be verified on Docker or Render. The equivalent production process is testable with `npm start`.
+High-risk results use a distinct red assessment card, a prominent **HIGH RISK** badge and an alert icon. The report explains authority, requested action and destination separately. A dangerous action can remain flagged even when the surrounding factual claims cannot be verified.
 
-## Implemented features
+**Evidence Coverage measures how much could be checked against relevant source evidence. It is not a probability of fraud, a confidence score or an accuracy percentage.** Unresolved source conflicts remain visible in the claim ledger; they do not override an independently detected dangerous action.
 
-- Text and link intake, local screenshot OCR, opt-in cloud image reading, uploaded/recorded voice-note transcription, and browser dictation fallback.
-- Gemini extraction and evidence comparison; optional OpenAI/Groq alternatives.
-- Brave or Tavily live official-source search, bounded official document retrieval, and optional Google Safe Browsing checks.
-- Exact-span tactic X-ray, deterministic authority/action/destination verdicts, and actual streamed investigation trace.
-- English, Hindi and Kannada summaries, action guidance and complaint drafts. Sarvam read-aloud with device-speech fallback.
-- Immediate emergency checklist, official action routing, copyable complaint and signed snapshot evidence PDFs with multilingual fonts.
-- Session-only recent results, connection diagnostics and a live regression benchmark with synthetic provenance and a genuine official excerpt.
+## Evidence you can inspect
 
-## Verification commands
+Nivaar uses a curated official-source registry and live search to discover relevant material. Source handling includes relevance ranking, publication-date metadata, bounded retrieval, exact-quote validation and retrieval timestamps. Cached material retains its original retrieval time.
 
-```sh
-npm run typecheck
-npm test
-npm run test:providers  # real provider calls; run after adding keys
-curl http://localhost:3000/api/health
-curl http://localhost:3000/api/ready
-```
+Reports include a claim ledger, scoped explanations, source links and available official quotations. General advisories provide context; they do not prove that an individual parcel was seized, an account was suspended, or a caller represents an institution. Search snippets are not presented as fetched official evidence.
 
-`npm test` uses deterministic fixtures and mocked HTTP provider contracts; it never validates real credentials. Authenticated provider smoke tests are separate; their actual outcomes are recorded in docs/validation/upgrade-provider-tests.txt. Official-source availability can still be tested without credentials.
+Limited phone, UPI and messaging-link checks explain syntax and context without claiming subscriber or payee ownership. Absence from a threat list is not evidence of safety.
 
-## API
+## Support after a suspicious message
 
-- `GET /api/health`, `/api/ready`, `/api/config`
-- `POST /api/analyze`, `/api/analyze/stream`
-- `POST /api/ocr` — multipart image + explicit consent
-- `POST /api/transcribe` — multipart short audio + language + explicit consent
-- `POST /api/speak` — localized text to audio
-- `POST /api/evidence-pdf` — exact report + signature, no repeated investigation
-- `POST /api/benchmark` — production benchmark access token required
+- English, Hindi and Kannada report summaries, guidance and complaint drafts.
+- Sarvam read-aloud with stop controls, autoplay recovery and a matching-language device-voice fallback where available.
+- An immediate-help checklist for people who already paid or shared sensitive information.
+- Official reporting routes selected according to the situation the user reports.
+- A copyable complaint draft for review; Nivaar does not submit complaints automatically.
+- Signed report snapshots exported as evidence PDFs, plus printing and session-only recent checks.
 
-API schemas are available directly on the backend at http://127.0.0.1:8000/docs during local development.
+## Privacy and reliability
 
-## Boundaries
+Sensitive number patterns are masked before analysis, but this does not catch every personal detail. Review content before submitting it. Cloud image reading and Sarvam transcription require explicit consent. Browser dictation may use the browser’s own speech provider.
 
-The app does not authenticate a sender, guarantee fraud detection, automatically file complaints or provide legal certification. AI interpretation can be wrong despite quote validation. Inspect the evidence. Number masking is not exhaustive de-identification. Upload consent and provider data handling are explained in the UI.
+The application does not persist investigations or uploaded media. Recent checks remain in page memory. A bounded SQLite operations store tracks application events and request/provider budgets separately; third-party retention and infrastructure metadata have their own policies.
 
-No database stores investigations. A local SQLite file stores bounded operations events and request/provider budgets. Raw messages and uploads are not retained by the application; recent results live in page memory. Provider retention and infrastructure metadata are separate. Read [architecture and operational limits](docs/ARCHITECTURE.md).
+Provider availability and quota limits can reduce the checks that complete. Nivaar shows degraded operation and uses local checks where possible. It also includes request limits, upload bounds, concurrency controls, protected monitoring and structured operational alerts. These controls have single-instance limits; external notification delivery is not configured.
 
-Detection evaluation, free-tier budgets, protected monitoring and load-test instructions: [implementation and measured limits](docs/DETECTION_IMPROVEMENTS.md).
+## Technology
 
-## Evidence-led verification upgrade
+Nivaar uses **Next.js and React** for the web interface and **FastAPI** for the investigation API. Gemini supports structured extraction and evidence comparison; Tavily or Brave supports source discovery; Sarvam handles transcription and speech output. Local Python rules determine verdicts rather than accepting an AI-generated verdict directly.
 
-The existing result now includes a typed claim ledger, scoped authority/action/destination explanations, limited phone/UPI/messaging-link checks, explicit cached retrieval metadata and **Evidence Coverage**. Coverage is how much could be checked using relevant source evidence; it is not a probability of scam/safety and never determines the verdict. Unresolved official-source conflicts force UNSURE. General advisories do not establish private account events or authenticate a sender/payee.
+## Validation and limits
 
-Choose your actual situation before checking: only received, money sent, credentials shared, app/remote access granted, suspected SIM compromise or unsure. The same EN/HI/KN checklist data is used in the UI and backend. Legacy `user_reported_loss` requests remain accepted, but new clients send `user_situation` explicitly. Local history remains in page memory; there is no persistent investigation database. SQLite is used only for bounded operational events and abuse/provider budgets.
+The latest detection update passed **251 backend tests** and the production build. Voice lifecycle checks cover recording cleanup, cancellation, format labels, playback state and autoplay recovery. Live Sarvam checks covered English, Hindi, Kannada and common browser audio formats; a codec-labelled MIME rejection was reproduced and fixed.
 
-Curated family sources and their limits: [ADVISORY_SOURCES.md](docs/ADVISORY_SOURCES.md). Baseline: [UPGRADE_BASELINE.md](docs/UPGRADE_BASELINE.md). Hosting/remaining external checks: [DEPLOYMENT_CHECKLIST.md](docs/DEPLOYMENT_CHECKLIST.md). The internal benchmark now always requires BENCHMARK_TOKEN, including local development. No public accuracy metric or leaderboard is added.
+A focused 49-case development set contains 25 dangerous examples and 24 controls. After the detection changes, all 25 dangerous examples were detected and none of the controls was labelled a scam. This set was used to develop the rules: **it is not an independent benchmark or a real-world accuracy claim.** Broader detection still needs independently labelled, representative evaluation.
+
+Nivaar cannot guarantee scam detection, authenticate senders, establish private account events or provide legal certification. AI interpretation, OCR, speech recognition and local rules can all be wrong. Inspect the evidence and verify consequential requests independently.
+
+Further details:
+
+- [Detection changes and focused evaluation](docs/DETECTION_QUALITY_2026_11_01.md)
+- [Voice validation and recording fixes](docs/VOICE_VALIDATION.md)
+- [Official advisory sources and their scope](docs/ADVISORY_SOURCES.md)
+- [Architecture and operational boundaries](docs/ARCHITECTURE.md)
