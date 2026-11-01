@@ -6,6 +6,78 @@ Nivaar is a web app that helps people assess suspicious messages, links, screens
 
 Designed for English, Hindi and Kannada, Nivaar brings scam-pattern detection and source-based verification into one place. It is an independent tool and is not affiliated with any government agency.
 
+## Local setup
+
+Requires **Node.js 22.13+**, **Python 3.11+**, Git and npm. The latest recorded local Python validation used Python 3.13. The commands below use macOS/Linux shell paths.
+
+### 1. Get the code and install dependencies
+
+```sh
+git clone https://github.com/hemishsrichandra/Nivaar.git
+cd Nivaar
+python3 -m venv .venv
+.venv/bin/python -m pip install -r backend/requirements.lock
+npm ci
+```
+
+### 2. Configure your API keys
+
+Create the local environment file if one does not already exist:
+
+```sh
+if [ ! -f backend/.env ]; then
+  cp backend/.env.example backend/.env
+fi
+```
+
+Open `backend/.env` in your editor and fill in the relevant values:
+
+| Variable | Purpose |
+| --- | --- |
+| `GEMINI_API_KEY` | AI-assisted claim extraction and evidence comparison. |
+| `TAVILY_API_KEY` | Live official-source search. `BRAVE_API_KEY` is an alternative. |
+| `SARVAM_API_KEY` | Voice transcription and read-aloud. |
+| `LLM_PROVIDER` / `LLM_MODEL` | AI provider and model selection. For Gemini, use `LLM_PROVIDER=gemini` and a model available to your account; review the template's model value. |
+| `GOOGLE_SAFE_BROWSING_KEY` | Optional live URL-reputation checks. |
+| `BENCHMARK_TOKEN` | A private value you choose if you want to use the protected Live benchmark dialog. |
+
+The full AI, live search and Sarvam voice paths need their corresponding credentials and available quota. Local checks still run when providers are unavailable, with degraded operation shown in the report. OpenAI/Groq are optional AI alternatives; you do not need keys for every provider.
+
+Keep API keys in the ignored `backend/.env` file. Do not commit them or enter provider keys into the website. Preserve any existing local credentials and model settings. Restart the app after environment changes.
+
+### 3. Run Nivaar
+
+```sh
+npm run dev
+```
+
+Open [localhost:3000](http://localhost:3000/). This command starts both the Next.js frontend on port 3000 and FastAPI on loopback port 8000. Stop both with **Ctrl+C**. A separate backend terminal is not required.
+
+For recording, allow microphone access for localhost when prompted. Use the Voice note tab, enable transcription consent, record a short sample, then review the transcript before checking it. Uploading an existing voice note is also supported.
+
+### 4. Check the local setup
+
+```sh
+curl http://localhost:3000/api/health
+curl http://localhost:3000/api/ready
+npm test
+npm run test:voice
+npm run typecheck
+```
+
+Health confirms that the service responds; readiness checks configuration presence, not whether API credentials or quotas work. Automated tests use fixtures and mocks. The following optional commands make real provider calls and consume quota:
+
+```sh
+npm run test:providers
+.venv/bin/python -m backend.verify_voice
+```
+
+The Sarvam-only voice check does not call Gemini or search. FFmpeg is optional for its additional WebM/M4A/Ogg conversion checks. To run the focused action-risk evaluation without API calls:
+
+```sh
+.venv/bin/python -m backend.evaluate_actions
+```
+
 ## What you can check
 
 | Input | How Nivaar handles it |
