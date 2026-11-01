@@ -48,3 +48,36 @@ A report hash covers canonical sorted UTF-8 JSON with an empty `report_hash` fie
 One supervised Node process launches FastAPI and Next.js and terminates both if either exits. Render uses the root Dockerfile and render.yaml. Secrets are runtime environment variables. Liveness `/api/health` is separate from provider-presence `/api/ready` and explicit live smoke tests.
 
 Request limits, a process-wide rate limit and investigation concurrency bounds protect upstream costs. These limits are designed for a single Render instance and do not replace a distributed limiter for multi-instance deployments. The benchmark requires a separate access token in production. Files are not persisted. Family guardian links and live-call co-pilot were excluded by the reduced master brief and remain outside this implementation.
+
+## Evidence-led upgrade (November 2026)
+
+```mermaid
+flowchart TD
+    A[Existing text / URL / OCR / voice intake] --> B[User-confirmed situation; privacy masking]
+    B --> C[Rule extraction + optional Gemini exact excerpts]
+    C --> D[Phone / UPI / messaging-link syntax and context]
+    C --> E[Deterministic family / issuer / reference query]
+    E --> F[Tavily discovery; reviewed official hosts]
+    F --> G[At most two DNS-pinned document fetches]
+    G --> H[Optional Gemini comparison + exact quote / scope / identifier guards]
+    H --> I[Claim ledger and unresolved source conflicts]
+    D --> J[Existing authority × action × destination matrix]
+    I --> J
+    J --> K[SCAM / GENUINE / UNSURE]
+    I --> L[Deterministic Evidence Coverage; never controls verdict]
+    B --> M[Shared EN / HI / KN situation checklist]
+    K --> N[Existing SSE result and session-only history]
+    L --> N
+    M --> N
+    N --> O[Canonical SHA-256 + HMAC snapshot / signed PDF]
+```
+
+Backward-compatible fields remain; optional typed claim ledger, assessment explanations, identifier findings, coverage, situation and conflict IDs extend the existing report. Evidence retains legacy date/time/hash fields and adds stable evidence IDs, source type and explicit cached/fetched state. Source references are validated by Pydantic before signing. Exact source passage validation precedes relation acceptance. Broad topic similarity is not sufficient for contradiction; private events remain unverifiable. Conservative lexical/entity/number/negation guards intentionally increase abstention and are not a full semantic proof.
+
+Gemini cannot choose the public verdict. Model tactic spans are labelled `origin=model`; they cannot independently trigger dangerous-action rules. Local claim extraction splits material sentences; model extraction replaces it only when exact submitted excerpts cover the input sufficiently. The fixed orchestrator makes no model-selected tools or URLs. A request-scoped five-operation budget is shared by extraction, search, reputation, safe document fetches, comparison and transient retry. Optional reputation or a retry can leave no budget for comparison; that check then degrades explicitly. Redirects are bounded within the safe fetch operation. The normal path uses two AI operations, one search and two document fetches. No tool framework or agents were added.
+
+Public-source matching authenticates content within scope, not a sender. International prefixes, +91 and 1930 never establish caller identity. UPI PSP suffixes never establish ownership. Only an explicitly private customs-duty request matched to a successfully fetched CBIC process warning can produce the new payment-instruction mismatch; recipient ownership remains unknown.
+
+Coverage weights are 30 claims, 25 authority, 25 action, 20 destination. Genuine N/A dimensions are renormalized. Pattern-only risk checks earn no evidence credit; unavailable AI caps the claim component at partial. Destination verification remains zero where no purpose-specific recipient check exists. Coverage never changes the verdict. Conflicts are retained and deterministically force UNSURE; no source-precedence shortcut is currently implemented.
+
+Source caches preserve original retrieval times and expose cached state. TTLs are configurable for PDF and other official sources. The protected benchmark now requires its token locally as well as in production. No new accounts, persistence of investigations, ownership lookups, payments or automatic complaint submission were added.

@@ -73,7 +73,10 @@ async def test_signed_snapshot_pdf_tamper_rejected(offline):
 async def test_pdf_all_languages(language,offline):
     r=await agent.investigate(AnalyzeInput(text={'en':'Share your OTP immediately.','hi':'बैंक KYC के लिए ओटीपी भेजें तुरंत।','kn':'ಬ್ಯಾಂಕ್ KYC: OTP ಕಳುಹಿಸಿ ತಕ್ಷಣ.'}[language],language=language))
     r.pop('signature');report=VerificationReport.model_validate(r);data=build_pdf(report)
-    path='/private/tmp/nivaar-render-'+language+'.pdf';open(path,'wb').write(data)
+    from tempfile import TemporaryDirectory
+    from pathlib import Path
+    with TemporaryDirectory() as tmp:
+        path=Path(tmp)/('nivaar-render-'+language+'.pdf');path.write_bytes(data);assert path.read_bytes()==data
     pdf=PdfReader(BytesIO(data));assert len(pdf.pages)>0;assert 'NIVAAR' in pdf.pages[0].extract_text()
 
 def test_grounding_drops_invented_quotes():

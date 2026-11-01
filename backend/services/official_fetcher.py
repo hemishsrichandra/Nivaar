@@ -1,4 +1,5 @@
-import time
+import time,os
+from copy import deepcopy
 _CACHE={}
 import asyncio, hashlib, ipaddress, re, socket
 from datetime import datetime, timezone
@@ -22,12 +23,18 @@ async def public_addresses(host):
     if not addresses or any(not ipaddress.ip_address(a).is_global for a in addresses):raise ValueError('Non-public destination blocked')
     return addresses
 
-async def fetch_document(url,source_id='',publisher='',title='',date=None):
+async def fetch_document(url,source_id='',publisher='',title='',date=None,anchor=''):
     key=(url,source_id,publisher,title,date)
+    if anchor:key=key+(anchor,)
     cached=_CACHE.get(key)
-    if cached and time.monotonic()-cached[0]<900:return cached[1]
+    if cached and time.monotonic()-cached[0]<int(os.getenv('SOURCE_CACHE_PDF_TTL_SECONDS' if cached[1]['evidence'].source_type=='official_pdf' else 'SOURCE_CACHE_TTL_SECONDS','900')):
+        result=deepcopy(cached[1]);result['evidence'].cached=True;result['evidence'].fetch_status='cached';return result
+    from backend.services.source_ranking import valid_date
+    date=valid_date(date)
     original=url
     if not allowed_url(url):return None
+    from backend.services.llm_client import reserve_operation
+    if not reserve_operation():return None
     try:
         async with asyncio.timeout(14):
             async with httpx.AsyncClient(timeout=10,follow_redirects=False,trust_env=False) as client:
@@ -55,7 +62,7 @@ async def fetch_document(url,source_id='',publisher='',title='',date=None):
                             from pypdf import PdfReader
                             from io import BytesIO
                             doc=PdfReader(BytesIO(data))
-                            text=' '.join(p.extract_text() or '' for p in doc.pages[:20])
+                            text=' '.join(p.extract_text() or '' for p in doc.pages[:60])
                         else:
                             soup=BeautifulSoup(bytes(data),'html.parser')
                             for tag in soup(['script','style','nav','footer','header','noscript']):tag.decompose()
@@ -72,8 +79,10 @@ async def fetch_document(url,source_id='',publisher='',title='',date=None):
                             if not title and soup.title:title=soup.title.get_text(' ',strip=True)[:200]
                         text=re.sub(r'\s+',' ',text).strip()
                         if len(text)<100 or re.search(r'captcha|access denied|request rejected|verify you are human',text[:500],re.I):return None
-                        item=EvidenceItem(source_id=source_id or 'web-'+sha256(original)[:12],url=url,publisher=publisher or host,title=title or host,document_date=date,evidence_text=text[:700],sha256_hash=sha256(text),retrieved_at_utc=utcnow())
-                        result={'evidence':item,'text':text[:40000]}
+                        at=text.casefold().find(anchor.casefold()) if anchor else -1
+                        window=text[max(0,at-2000):at+20000] if at>=0 else text[:40000]
+                        item=EvidenceItem(source_id=source_id or 'web-'+sha256(original)[:12],url=url,publisher=publisher or host,title=title or host,document_date=date,evidence_text=window[:700],sha256_hash=sha256(text),retrieved_at_utc=utcnow(),source_type='official_pdf' if 'application/pdf' in content_type else 'official_page')
+                        result={'evidence':item,'text':window}
                         if len(_CACHE)>=128:_CACHE.pop(next(iter(_CACHE)))
                         _CACHE[key]=(time.monotonic(),result)
                         return result

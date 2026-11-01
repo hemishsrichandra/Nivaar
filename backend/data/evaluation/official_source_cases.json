@@ -1,0 +1,42 @@
+[
+  {
+    "id": "maharashtra-lottery-2020",
+    "family": "lottery_fraud",
+    "source_url": "https://cybercrime.gov.in/pdf/Cyber%20Security%20Awareness%20Booklet%20for%20Citizens.pdf",
+    "publication_date": "2020-01-10",
+    "retrieved_at": "2026-11-01T11:14:06.918362+00:00",
+    "expected_relation": "context_only",
+    "scope": "Real official advisory; does not classify a private message",
+    "snapshot_excerpt": "The fraudster asks the victim to transfer a token amount"
+  },
+  {
+    "id": "delhi-police-sim",
+    "family": "sim_swap",
+    "source_url": "https://cyber.delhipolice.gov.in/netbanking.html",
+    "publication_date": null,
+    "retrieved_at": "2026-11-01T11:12:51.198636+00:00",
+    "expected_relation": "context_only",
+    "scope": "Real official advisory; does not classify a private message",
+    "snapshot_excerpt": "Under SIM Swap, fraudsters manage to get a new SIM card issued against your registered mobile number"
+  },
+  {
+    "id": "pib-2025648",
+    "family": "customs_fraud",
+    "source_url": "https://www.pib.gov.in/PressReleaseIframePage.aspx?PRID=2025648&lang=2&reg=48",
+    "publication_date": "2024-06-16",
+    "retrieved_at": "2026-11-01T11:12:51.228606+00:00",
+    "expected_relation": "context_only",
+    "scope": "Real official advisory; does not classify a private message",
+    "snapshot_excerpt": "Indian Customs officers never contact the general public via phone, SMS, or e-mail for payment of duty in private accounts."
+  },
+  {
+    "id": "rbi-fame-digital-lending",
+    "family": "loan_app_fraud",
+    "source_url": "https://www.rbi.org.in/commonman/images/FAME202426022024.pdf",
+    "publication_date": null,
+    "retrieved_at": "2026-11-01T11:10:31.642427+00:00",
+    "expected_relation": "context_only",
+    "scope": "Real official advisory; does not classify a private message",
+    "snapshot_excerpt": "Before using any digital lending app, you can check whether the app is associated/ has outsourcing arrangement with an RBI regulated bank/ NBFC"
+  }
+]

@@ -58,5 +58,117 @@
     "summary": "An official interactive portal for checking verified UPI IDs and account details. Nivaar routes users here; it does not automate or claim to complete the portal check.",
     "anchor": "CHECK VERIFIED UPI",
     "family": "investment_scam"
+  },
+  {
+    "id": "pib-1982936",
+    "url": "https://www.pib.gov.in/PressReleasePage.aspx?PRID=1982936",
+    "publisher": "Ministry of Home Affairs / PIB",
+    "date": "2023-12-06",
+    "title": "Investment and task based part time job frauds",
+    "summary": "Task commissions lure victims into larger deposits that become inaccessible.",
+    "family": "investment_scam",
+    "anchor": "task"
+  },
+  {
+    "id": "maharashtra-lottery-2020",
+    "family": "lottery_fraud",
+    "publisher": "Maharashtra Cyber / Home Department, hosted by NCRP",
+    "url": "https://cybercrime.gov.in/pdf/Cyber%20Security%20Awareness%20Booklet%20for%20Citizens.pdf",
+    "date": "2020-01-10",
+    "title": "Lottery advance-fee warning",
+    "summary": "Illustrates advance-fee risk patterns. Cannot deny an individual lottery or identify an organiser.",
+    "anchor": "The fraudster asks the victim to transfer a token amount",
+    "excerpt": "The fraudster asks the victim to transfer a token amount",
+    "last_verified_at": "2026-11-01T11:14:06.918362+00:00",
+    "source_retrieved_at": "2026-11-01T11:14:06.918362+00:00",
+    "language": "English original",
+    "strength": "OFFICIAL_WARNING",
+    "match_requirements": "Unsolicited winnings plus upfront release/token payment",
+    "can_establish": "Illustrates advance-fee risk patterns",
+    "cannot_establish": "Cannot deny an individual lottery or identify an organiser",
+    "exclusions": [
+      "Unrelated issuer, subject, jurisdiction or personal event",
+      "General advisory is not an individual denial"
+    ],
+    "indicators": [
+      "Unsolicited winnings plus upfront release/token payment"
+    ]
+  },
+  {
+    "id": "delhi-police-sim",
+    "family": "sim_swap",
+    "publisher": "Delhi Police Cyber Crime Cell",
+    "url": "https://cyber.delhipolice.gov.in/netbanking.html",
+    "date": null,
+    "title": "SIM swap and banking alerts",
+    "summary": "Explains fraudulent duplicate-SIM mechanism. Cannot query network state or establish that a specific SIM was swapped.",
+    "anchor": "Under SIM Swap, fraudsters manage to get a new SIM card issued ag",
+    "excerpt": "Under SIM Swap, fraudsters manage to get a new SIM card issued against your registered mobile number",
+    "last_verified_at": "2026-11-01T11:14:06.918362+00:00",
+    "source_retrieved_at": "2026-11-01T11:12:51.198636+00:00",
+    "language": "English original",
+    "strength": "OFFICIAL_WARNING",
+    "match_requirements": "SIM replacement and loss of OTP/alert control",
+    "can_establish": "Explains fraudulent duplicate-SIM mechanism",
+    "cannot_establish": "Cannot query network state or establish that a specific SIM was swapped",
+    "exclusions": [
+      "Unrelated issuer, subject, jurisdiction or personal event",
+      "General advisory is not an individual denial"
+    ],
+    "indicators": [
+      "SIM replacement and loss of OTP/alert control"
+    ]
+  },
+  {
+    "id": "pib-2025648",
+    "family": "customs_fraud",
+    "publisher": "CBIC / PIB",
+    "url": "https://www.pib.gov.in/PressReleaseIframePage.aspx?PRID=2025648&lang=2&reg=48",
+    "date": "2024-06-16",
+    "title": "Customs private-account payment impersonation",
+    "summary": "Contradicts the specified private-account duty demand process; supplies official DIN route. Cannot establish parcel status, identify a caller, or reject all legitimate customs payments.",
+    "anchor": "Indian Customs officers never contact the general public via phon",
+    "excerpt": "Indian Customs officers never contact the general public via phone, SMS, or e-mail for payment of duty in private accounts.",
+    "last_verified_at": "2026-11-01T11:14:06.918362+00:00",
+    "source_retrieved_at": "2026-11-01T11:12:51.228606+00:00",
+    "language": "English original",
+    "strength": "OFFICIAL_WARNING",
+    "match_requirements": "Customs duty demanded by phone/SMS/email into explicitly private accounts",
+    "can_establish": "Contradicts the specified private-account duty demand process; supplies official DIN route",
+    "cannot_establish": "Cannot establish parcel status, identify a caller, or reject all legitimate customs payments",
+    "exclusions": [
+      "Unrelated issuer, subject, jurisdiction or personal event",
+      "General advisory is not an individual denial"
+    ],
+    "indicators": [
+      "Customs duty demanded by phone/SMS/email into explicitly private accounts"
+    ]
+  },
+  {
+    "id": "rbi-fame-digital-lending",
+    "family": "loan_app_fraud",
+    "publisher": "Reserve Bank of India",
+    "url": "https://www.rbi.org.in/commonman/images/FAME202426022024.pdf",
+    "date": null,
+    "title": "Digital lending app lender relationship and disclosure",
+    "summary": "Explains checks on bank/NBFC relationship, disclosed documents and data permissions. Cannot identify an unknown app or establish current registration without exact issuer evidence.",
+    "anchor": "Before using any digital lending app, you can check whether the a",
+    "excerpt": "Before using any digital lending app, you can check whether the app is associated/ has outsourcing arrangement with an RBI regulated bank/ NBFC",
+    "last_verified_at": "2026-11-01T11:14:06.918362+00:00",
+    "source_retrieved_at": "2026-11-01T11:10:31.642427+00:00",
+    "language": "English original",
+    "strength": "OFFICIAL_WARNING",
+    "match_requirements": "App lender relationship, terms, KFS and permissions",
+    "can_establish": "Explains checks on bank/NBFC relationship, disclosed documents and data permissions",
+    "cannot_establish": "Cannot identify an unknown app or establish current registration without exact issuer evidence",
+    "exclusions": [
+      "Unrelated issuer, subject, jurisdiction or personal event",
+      "General advisory is not an individual denial"
+    ],
+    "indicators": [
+      "App lender relationship",
+      "terms",
+      "KFS and permissions"
+    ]
   }
 ]

@@ -1,0 +1,11 @@
+
+> nivaar@1.0.0 test:providers
+> .venv/bin/python -m backend.verify_providers
+
+{"event": "provider_failure", "label": "gemini_http_429"}
+gemini structured output: FAIL (http_429)
+Official-source search: PASS
+Sarvam TTS + STT en: PASS
+Sarvam TTS + STT hi: PASS
+Sarvam TTS + STT kn: PASS
+Run the app benchmark and test a real redacted screenshot/voice note next. No production accuracy claim is made by these smoke tests.

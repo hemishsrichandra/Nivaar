@@ -1,0 +1,110 @@
+[
+  {
+    "id": "assam_lottery",
+    "url": "https://police.assam.gov.in/sites/default/files/swf_utility_folder/departments/assampolice_webcomindia_org_oid_8/menu/document/cyber_secure.pdf",
+    "retrieved_at": "2026-11-01T11:12:51.157121+00:00",
+    "status": "unavailable",
+    "reason": "HTTPStatusError"
+  },
+  {
+    "id": "alt_lottery",
+    "url": "https://elurupolice.ap.gov.in/lotteryscam.html",
+    "retrieved_at": "2026-11-01T11:12:51.191073+00:00",
+    "status": "unavailable",
+    "reason": "ConnectError"
+  },
+  {
+    "id": "alt_sim",
+    "url": "https://cyber.delhipolice.gov.in/netbanking.html",
+    "retrieved_at": "2026-11-01T11:12:51.198636+00:00",
+    "status": "retrieved",
+    "sha256": "480f678c364bf934c569c881eade7ff19faead5da146a8258db66c2d1a367397",
+    "characters": 14401,
+    "canonical_url": "https://cyber.delhipolice.gov.in/netbanking.html"
+  },
+  {
+    "id": "alt_loan",
+    "url": "https://www.pib.gov.in/PressReleasePage.aspx?PRID=1749169&lang=2&reg=48",
+    "retrieved_at": "2026-11-01T11:12:51.206355+00:00",
+    "status": "retrieved",
+    "sha256": "fc76f7b3c54f31b7e23ae2da415022de53f233ec8a7a5661d6f73643d75b9112",
+    "characters": 3923,
+    "canonical_url": "https://www.pib.gov.in/PressReleasePage.aspx?PRID=1749169&lang=2&reg=48"
+  },
+  {
+    "id": "lottery",
+    "url": "https://cybercrime.gov.in/pdf/Cyber%20Security%20Awareness%20Booklet%20for%20Citizens.pdf",
+    "retrieved_at": "2026-11-01T11:12:51.213692+00:00",
+    "status": "unavailable",
+    "reason": "ValueError"
+  },
+  {
+    "id": "sim",
+    "url": "https://cybercrime.gov.in/webform/crimecatdes.aspx",
+    "retrieved_at": "2026-11-01T11:12:51.221062+00:00",
+    "status": "unavailable",
+    "reason": "ValueError"
+  },
+  {
+    "id": "customs",
+    "url": "https://www.pib.gov.in/PressReleaseIframePage.aspx?PRID=2025648&lang=2&reg=48",
+    "retrieved_at": "2026-11-01T11:12:51.228606+00:00",
+    "status": "retrieved",
+    "sha256": "d7c2f8f731bd1db4126c516b844488115ccdd1ff400c619fb256c24d8027b276",
+    "characters": 5880,
+    "canonical_url": "https://www.pib.gov.in/PressReleaseIframePage.aspx?PRID=2025648&lang=2&reg=48"
+  },
+  {
+    "id": "loan",
+    "url": "https://www.rbi.org.in/commonman/images/FAME202426022024.pdf",
+    "retrieved_at": "2026-11-01T11:10:31.642427+00:00",
+    "status": "retrieved",
+    "reason": "HTTPStatusError",
+    "last_attempt_status": "unavailable",
+    "sha256": "24fbff392418aada7f69889a3c0cc8a69956d608aca39affdaa897df5604f40c",
+    "canonical_url": "https://www.rbi.org.in/commonman/images/FAME202426022024.pdf",
+    "note": "Successful earlier fetch retained; later attempt unavailable."
+  },
+  {
+    "id": "lending",
+    "url": "https://systemhealth.rbi.org.in/Scripts/NotificationUser.aspx_Id%3D12382%26Mode%3D0.html",
+    "retrieved_at": "2026-11-01T11:12:51.243761+00:00",
+    "status": "unavailable",
+    "reason": "ConnectError"
+  },
+  {
+    "id": "phone",
+    "url": "https://www.dot.gov.in/static/uploads/2025/07/8df49d5b579439471bb8e506906d913a.pdf",
+    "retrieved_at": "2026-11-01T11:12:51.251122+00:00",
+    "status": "retrieved",
+    "sha256": "24889c2d59cb993946093d8d94eb1894870646ed08926280331f67938e34b94d",
+    "characters": 170413,
+    "canonical_url": "https://www.dot.gov.in/static/uploads/2025/07/8df49d5b579439471bb8e506906d913a.pdf"
+  },
+  {
+    "id": "helpline",
+    "url": "https://www.pib.gov.in/PressReleasePage.aspx?PRID=2290377&lang=1&reg=22",
+    "retrieved_at": "2026-11-01T11:12:51.258588+00:00",
+    "status": "retrieved",
+    "sha256": "7806046a35e83fdd1364e884645505b1b944b2f62b9f3d395423f7b15493493f",
+    "characters": 10028,
+    "canonical_url": "https://www.pib.gov.in/PressReleasePage.aspx?PRID=2290377&lang=1&reg=22"
+  },
+  {
+    "id": "upi",
+    "url": "https://www.npci.org.in/PDF/npci/upi/Product-Booklet.pdf",
+    "retrieved_at": "2026-11-01T11:12:51.265988+00:00",
+    "status": "unavailable",
+    "reason": "HTTPStatusError"
+  },
+  {
+    "id": "lottery_web",
+    "url": "https://cybercrime.gov.in/pdf/Cyber%20Security%20Awareness%20Booklet%20for%20Citizens.pdf",
+    "canonical_url": "https://cybercrime.gov.in/pdf/Cyber%20Security%20Awareness%20Booklet%20for%20Citizens.pdf",
+    "retrieved_at": "2026-11-01T11:14:06.918362+00:00",
+    "status": "retrieved_via_web_pdf",
+    "verification_channel": "Web PDF extraction, printed page 17; local HTTP fetch currently returns HTML",
+    "excerpt": "The fraudster asks the victim to transfer a token amount",
+    "excerpt_sha256": "5fb9bed3f6a40be1fe05be70ae8bab4f7bbdb867d37551fe2c9c1b746b71f79b"
+  }
+]

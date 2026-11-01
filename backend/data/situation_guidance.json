@@ -1,0 +1,98 @@
+{
+  "en": {
+    "ONLY_RECEIVED": [
+      "Do not click, reply, pay, install apps or disclose credentials until independently verified.",
+      "Contact the organisation through a channel obtained from its official app, card or website.",
+      "Preserve the communication and use the relevant official reporting route."
+    ],
+    "MONEY_SENT": [
+      "Call 1930 promptly to report financial cyber fraud. Recovery is not guaranteed.",
+      "Contact your bank/payment provider using a number from its official app, card or website.",
+      "Retain the transaction ID, date, amount, messages and screenshots; report at the official cybercrime portal."
+    ],
+    "OTP_OR_PASSWORD_SHARED": [
+      "Do not share any more codes. An OTP cannot be recalled.",
+      "Use the service’s independently verified recovery channel; change exposed credentials and terminate sessions/revoke tokens where supported.",
+      "If financial credentials may be exposed, contact the bank/payment provider through its official channel."
+    ],
+    "APP_INSTALLED_OR_REMOTE_ACCESS_GRANTED": [
+      "Stop interacting with the caller and end the remote session.",
+      "Revoke remote-access permissions and uninstall the app when safe and feasible; uninstalling does not prove the device is clean.",
+      "Use a separate trusted device to contact affected financial providers if needed, and seek trusted technical assistance."
+    ],
+    "SIM_SUSPECTED_COMPROMISED": [
+      "Contact your telecom operator through an independently obtained official channel to block/reissue the SIM.",
+      "Secure bank and payment accounts using a trusted channel; a SIM swap can expose OTPs and bank alerts.",
+      "Nivaar cannot detect network-level SIM replacement. Preserve relevant messages and report suspected fraud."
+    ],
+    "OTHER_OR_UNSURE": [
+      "Pause contact and do not share more money, codes or device access.",
+      "Did you send money? If yes, call 1930 promptly and contact your bank through its official channel.",
+      "Use the affected service’s independently obtained official recovery channel."
+    ]
+  },
+  "hi": {
+    "ONLY_RECEIVED": [
+      "स्वतंत्र पुष्टि तक लिंक न खोलें, जवाब या भुगतान न करें, ऐप न डालें और निजी जानकारी न दें।",
+      "संस्था के आधिकारिक ऐप, कार्ड या वेबसाइट से मिले माध्यम से संपर्क करें।",
+      "संदेश सुरक्षित रखें और उचित आधिकारिक माध्यम पर रिपोर्ट करें।"
+    ],
+    "MONEY_SENT": [
+      "वित्तीय साइबर धोखाधड़ी की रिपोर्ट के लिए तुरंत 1930 पर कॉल करें। पैसे वापस मिलने की गारंटी नहीं है।",
+      "बैंक या भुगतान सेवा से उसके आधिकारिक ऐप, कार्ड या वेबसाइट से मिले नंबर पर संपर्क करें।",
+      "लेनदेन ID, तारीख, राशि, संदेश और स्क्रीनशॉट सुरक्षित रखें; आधिकारिक साइबरक्राइम पोर्टल पर रिपोर्ट करें।"
+    ],
+    "OTP_OR_PASSWORD_SHARED": [
+      "अब कोई कोड साझा न करें। OTP वापस नहीं लिया जा सकता।",
+      "सेवा के स्वतंत्र रूप से सत्यापित रिकवरी माध्यम का उपयोग करें; उजागर पासवर्ड बदलें और जहाँ संभव हो सत्र बंद या टोकन रद्द करें।",
+      "वित्तीय जानकारी उजागर होने पर बैंक या भुगतान सेवा के आधिकारिक माध्यम से संपर्क करें।"
+    ],
+    "APP_INSTALLED_OR_REMOTE_ACCESS_GRANTED": [
+      "कॉलर से बातचीत रोकें और रिमोट सत्र समाप्त करें।",
+      "सुरक्षित और संभव हो तो रिमोट अनुमति हटाएँ और ऐप अनइंस्टॉल करें। इससे उपकरण साफ होने का प्रमाण नहीं मिलता।",
+      "ज़रूरत पर अलग भरोसेमंद उपकरण से वित्तीय सेवा से संपर्क करें और विश्वसनीय तकनीकी सहायता लें।"
+    ],
+    "SIM_SUSPECTED_COMPROMISED": [
+      "स्वतंत्र रूप से मिले आधिकारिक माध्यम से टेलीकॉम ऑपरेटर से SIM ब्लॉक या दोबारा जारी कराने के लिए संपर्क करें।",
+      "विश्वसनीय माध्यम से बैंक और भुगतान खाते सुरक्षित करें। SIM swap से OTP और बैंक अलर्ट उजागर हो सकते हैं।",
+      "Nivaar नेटवर्क पर SIM बदलने का पता नहीं लगा सकता। संदेश सुरक्षित रखें और संदिग्ध धोखाधड़ी रिपोर्ट करें।"
+    ],
+    "OTHER_OR_UNSURE": [
+      "बातचीत रोकें; और पैसे, कोड या उपकरण का एक्सेस न दें।",
+      "क्या आपने पैसे भेजे? हाँ तो तुरंत 1930 पर कॉल करें और बैंक के आधिकारिक माध्यम से संपर्क करें।",
+      "प्रभावित सेवा का स्वतंत्र रूप से मिला आधिकारिक रिकवरी माध्यम उपयोग करें।"
+    ]
+  },
+  "kn": {
+    "ONLY_RECEIVED": [
+      "ಸ್ವತಂತ್ರ ಪರಿಶೀಲನೆವರೆಗೆ ಲಿಂಕ್ ತೆರೆಯಬೇಡಿ, ಉತ್ತರಿಸಬೇಡಿ, ಹಣ ಪಾವತಿಸಬೇಡಿ, ಆ್ಯಪ್ ಸ್ಥಾಪಿಸಬೇಡಿ ಅಥವಾ ಗೌಪ್ಯ ಮಾಹಿತಿ ನೀಡಬೇಡಿ.",
+      "ಸಂಸ್ಥೆಯ ಅಧಿಕೃತ ಆ್ಯಪ್, ಕಾರ್ಡ್ ಅಥವಾ ಜಾಲತಾಣದಿಂದ ಪಡೆದ ಮಾರ್ಗದಲ್ಲಿ ಸಂಪರ್ಕಿಸಿ.",
+      "ಸಂದೇಶ ಉಳಿಸಿ ಮತ್ತು ಸೂಕ್ತ ಅಧಿಕೃತ ಮಾರ್ಗದಲ್ಲಿ ವರದಿ ಮಾಡಿ."
+    ],
+    "MONEY_SENT": [
+      "ಹಣಕಾಸಿನ ಸೈಬರ್ ವಂಚನೆ ವರದಿಗೆ ತಕ್ಷಣ 1930 ಕರೆ ಮಾಡಿ. ಹಣ ಮರಳಿ ಸಿಗುವ ಭರವಸೆ ಇಲ್ಲ.",
+      "ಬ್ಯಾಂಕ್ ಅಥವಾ ಪಾವತಿ ಸೇವೆಯ ಅಧಿಕೃತ ಆ್ಯಪ್, ಕಾರ್ಡ್ ಅಥವಾ ಜಾಲತಾಣದ ಸಂಖ್ಯೆಗೆ ಸಂಪರ್ಕಿಸಿ.",
+      "ವ್ಯವಹಾರದ ID, ದಿನಾಂಕ, ಮೊತ್ತ, ಸಂದೇಶ ಮತ್ತು ಸ್ಕ್ರೀನ್‌ಶಾಟ್ ಉಳಿಸಿ; ಅಧಿಕೃತ ಸೈಬರ್‌ಕ್ರೈಮ್ ಪೋರ್ಟಲ್‌ನಲ್ಲಿ ವರದಿ ಮಾಡಿ."
+    ],
+    "OTP_OR_PASSWORD_SHARED": [
+      "ಇನ್ನು ಯಾವುದೇ ಕೋಡ್ ಹಂಚಿಕೊಳ್ಳಬೇಡಿ. OTP ಹಿಂಪಡೆಯಲು ಸಾಧ್ಯವಿಲ್ಲ.",
+      "ಸ್ವತಂತ್ರವಾಗಿ ಪರಿಶೀಲಿಸಿದ ಅಧಿಕೃತ ಖಾತೆ ಮರುಪಡೆಯುವ ಮಾರ್ಗ ಬಳಸಿ; ಪಾಸ್‌ವರ್ಡ್ ಬದಲಿಸಿ, ಬೆಂಬಲ ಇದ್ದರೆ ಸೆಷನ್ ಮುಚ್ಚಿ ಅಥವಾ ಟೋಕನ್ ರದ್ದು ಮಾಡಿ.",
+      "ಹಣಕಾಸಿನ ಮಾಹಿತಿ ಬಯಲಾಗಿದ್ದರೆ ಬ್ಯಾಂಕ್ ಅಥವಾ ಪಾವತಿ ಸೇವೆಯ ಅಧಿಕೃತ ಮಾರ್ಗ ಸಂಪರ್ಕಿಸಿ."
+    ],
+    "APP_INSTALLED_OR_REMOTE_ACCESS_GRANTED": [
+      "ಕರೆ ಮಾಡಿದವರೊಂದಿಗೆ ಮಾತು ನಿಲ್ಲಿಸಿ ಮತ್ತು ರಿಮೋಟ್ ಸೆಷನ್ ಮುಗಿಸಿ.",
+      "ಸುರಕ್ಷಿತ ಮತ್ತು ಸಾಧ್ಯವಾದರೆ ರಿಮೋಟ್ ಅನುಮತಿ ತೆಗೆದು ಆ್ಯಪ್ ಅಸ್ಥಾಪಿಸಿ. ಅಸ್ಥಾಪನೆಯಿಂದ ಸಾಧನ ಸುರಕ್ಷಿತವೆಂದು ಸಾಬೀತಾಗುವುದಿಲ್ಲ.",
+      "ಅಗತ್ಯವಿದ್ದರೆ ಬೇರೆ ವಿಶ್ವಾಸಾರ್ಹ ಸಾಧನದಿಂದ ಹಣಕಾಸಿನ ಸೇವೆ ಸಂಪರ್ಕಿಸಿ ಮತ್ತು ವಿಶ್ವಾಸಾರ್ಹ ತಾಂತ್ರಿಕ ನೆರವು ಪಡೆಯಿರಿ."
+    ],
+    "SIM_SUSPECTED_COMPROMISED": [
+      "ಸ್ವತಂತ್ರವಾಗಿ ಪಡೆದ ಅಧಿಕೃತ ಮಾರ್ಗದಲ್ಲಿ ಟೆಲಿಕಾಂ ಸಂಸ್ಥೆಯನ್ನು ಸಂಪರ್ಕಿಸಿ SIM ತಡೆಹಿಡಿಯಲು ಅಥವಾ ಮರುನೀಡಲು ಕೇಳಿ.",
+      "ವಿಶ್ವಾಸಾರ್ಹ ಮಾರ್ಗದಲ್ಲಿ ಬ್ಯಾಂಕ್ ಮತ್ತು ಪಾವತಿ ಖಾತೆ ರಕ್ಷಿಸಿ; SIM swap ಮೂಲಕ OTP ಮತ್ತು ಬ್ಯಾಂಕ್ ಎಚ್ಚರಿಕೆ ಬಯಲಾಗಬಹುದು.",
+      "ನೆಟ್‌ವರ್ಕ್ ಮಟ್ಟದ SIM ಬದಲಾವಣೆ Nivaar ಪತ್ತೆಮಾಡುವುದಿಲ್ಲ. ಸಂದೇಶ ಉಳಿಸಿ ಮತ್ತು ಶಂಕಿತ ವಂಚನೆ ವರದಿ ಮಾಡಿ."
+    ],
+    "OTHER_OR_UNSURE": [
+      "ಸಂಪರ್ಕ ನಿಲ್ಲಿಸಿ; ಇನ್ನಷ್ಟು ಹಣ, ಕೋಡ್ ಅಥವಾ ಸಾಧನ ಪ್ರವೇಶ ನೀಡಬೇಡಿ.",
+      "ಹಣ ಕಳುಹಿಸಿದ್ದೀರಾ? ಹೌದಾದರೆ ತಕ್ಷಣ 1930 ಕರೆ ಮಾಡಿ ಮತ್ತು ಬ್ಯಾಂಕಿನ ಅಧಿಕೃತ ಮಾರ್ಗ ಸಂಪರ್ಕಿಸಿ.",
+      "ಪ್ರಭಾವಿತ ಸೇವೆಯ ಸ್ವತಂತ್ರವಾಗಿ ಪಡೆದ ಅಧಿಕೃತ ಖಾತೆ ಮರುಪಡೆಯುವ ಮಾರ್ಗ ಬಳಸಿ."
+    ]
+  }
+}

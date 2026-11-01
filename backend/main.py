@@ -73,7 +73,7 @@ async def limits(request,call_next):
     return response
 
 @app.exception_handler(ProviderError)
-async def provider_error(request,exc):return JSONResponse({'error':str(exc),'provider':exc.provider,'reason':exc.reason},status_code=503 if exc.reason=='not_configured' else 502)
+async def provider_error(request,exc):return JSONResponse({'error':str(exc),'provider':exc.provider,'reason':exc.reason,'error_code':exc.code},status_code=503 if exc.reason=='not_configured' else 502)
 
 @app.get('/api/health')
 async def health():return {'status':'ok','application':'Nivaar','version':'1.0.0','runtime':'fastapi','stores_messages':False,'providers':settings.public_status()}
@@ -85,7 +85,7 @@ async def ready():
     if not (settings.brave_key or settings.tavily_key):missing.append('SEARCH_API_KEY')
     return JSONResponse({'ready':not missing,'configured_only':True,'missing':missing,'providers':settings.public_status()},status_code=503 if missing else 200)
 @app.get('/api/config')
-async def config():return {'providers':settings.public_status(),'require_live':settings.require_live,'benchmark_requires_token':bool(settings.benchmark_token) or bool(os.getenv('RENDER')),'max_upload_mb':10,'max_voice_seconds':30,'mode':'live_configured' if settings.llm_key else 'fallback','credentials_verified':False}
+async def config():return {'providers':settings.public_status(),'require_live':settings.require_live,'benchmark_requires_token':True,'max_upload_mb':10,'max_voice_seconds':30,'mode':'live_configured' if settings.llm_key else 'fallback','credentials_verified':False}
 
 def require_provider():
     if settings.require_live and not settings.llm_key:raise HTTPException(503,'AI provider is not configured. Set the provider key before enabling full analysis.')
@@ -153,14 +153,15 @@ async def evidence_pdf(value:PdfInput):
 
 @app.post('/api/benchmark')
 async def benchmark(value:BenchmarkInput):
-    if (settings.benchmark_token or os.getenv('RENDER')) and (not settings.benchmark_token or not secrets.compare_digest(value.token,settings.benchmark_token)):raise HTTPException(403,'A valid BENCHMARK_TOKEN is required for this deployment.')
-    cases=[json.loads(line) for line in (ROOT/'data/benchmark_cases.jsonl').read_text().splitlines() if line.strip()]
+    if not settings.benchmark_token or not secrets.compare_digest(value.token,settings.benchmark_token):raise HTTPException(403,'A valid BENCHMARK_TOKEN is required for this deployment.')
+    cases=[json.loads(line) for line in (ROOT/'data/benchmark_cases.jsonl').read_text(encoding="utf-8").splitlines() if line.strip()]
     started=time.perf_counter();results=[]
     # Bounded sequential evaluation avoids bursting provider quotas.
     for c in cases:
+        case_started=time.perf_counter()
         result=await limited_analyze(AnalyzeInput(text=c['text'],language=c['language']))
-        results.append({'id':c['id'],'language':c['language'],'expected':c['expected'],'actual':result['verdict'],'passed':c['expected']==result['verdict'],'source':c.get('source'),'evidence_count':len(result['evidence']),'provider_status':result['provider_status']})
-    return {'total':len(results),'correct':sum(r['passed'] for r in results),'false_genuine':sum(r['actual']=='GENUINE' and r['expected']!='GENUINE' for r in results),'genuine_cases':sum(r['expected']=='GENUINE' for r in results),'duration_ms':round((time.perf_counter()-started)*1000),'results':results,'limitations':'Synthetic regression cases derived from official advisories, not a real-world accuracy estimate. Genuine cases require live official retrieval. Provider and source outages are visible in each result.'}
+        results.append({'id':c['id'],'language':c['language'],'expected':c['expected'],'actual':result['verdict'],'passed':c['expected']==result['verdict'],'source':c.get('source'),'evidence_count':len(result['evidence']),'provider_status':result['provider_status'],'group':c.get('group','unit_fixture'),'latency_ms':round((time.perf_counter()-case_started)*1000),'source_validation_failure':any(t['tool_name']=='fetch_official_documents' and t['status']=='fallback' for t in result['trace'])})
+    return {'total':len(results),'correct':sum(r['passed'] for r in results),'abstention_count':sum(r['actual']=='UNSURE' for r in results),'false_scam':sum(r['actual']=='SCAM' and r['expected']!='SCAM' for r in results),'groups':{group:{'total':sum(r['group']==group for r in results),'correct':sum(r['group']==group and r['passed'] for r in results)} for group in {r['group'] for r in results}},'language_results':{lang:{'total':sum(r['language']==lang for r in results),'correct':sum(r['language']==lang and r['passed'] for r in results)} for lang in ('en','hi','kn')},'source_validation_failures':sum(r['source_validation_failure'] for r in results),'false_genuine':sum(r['actual']=='GENUINE' and r['expected']!='GENUINE' for r in results),'genuine_cases':sum(r['expected']=='GENUINE' for r in results),'duration_ms':round((time.perf_counter()-started)*1000),'results':results,'limitations':'Synthetic regression cases derived from official advisories, not a real-world accuracy estimate. Genuine cases require live official retrieval. Provider and source outages are visible in each result.'}
 
 @app.get('/api/ops')
 async def operations(request:Request):

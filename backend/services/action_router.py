@@ -1,3 +1,6 @@
+import json
+from backend.config import ROOT
+ROUTES=json.loads((ROOT/'data/reporting_channels.json').read_text(encoding='utf-8'))
 from backend.schemas import ReportingChannel
 TEXT={
 'en':{
@@ -24,20 +27,26 @@ TEXT={
  'loss':['ತಕ್ಷಣ 1930 ಕರೆ ಮಾಡಿ ಮತ್ತು ಬ್ಯಾಂಕಿನ ಅಧಿಕೃತ ವಂಚನೆ ವಿಭಾಗವನ್ನು ಸಂಪರ್ಕಿಸಿ.','ಅಪಾಯದಲ್ಲಿರುವ ಕಾರ್ಡ್ ಅಥವಾ ಖಾತೆ ತಡೆಹಿಡಿಯಿರಿ ಮತ್ತು ಪಾಸ್‌ವರ್ಡ್ ಬದಲಿಸಿ.','ಸಂದೇಶ, ವ್ಯವಹಾರದ ಉಲ್ಲೇಖ ಮತ್ತು ದೂರಿನ ಸ್ವೀಕೃತಿ ಉಳಿಸಿಕೊಳ್ಳಿ.'],
  'genuine':['ಅಧಿಕೃತ ಮೂಲವನ್ನು ನೇರವಾಗಿ ಓದಿ. ವಿಷಯದ ಪರಿಶೀಲನೆ ಕಳುಹಿಸಿದವರ ಗುರುತನ್ನು ದೃಢೀಕರಿಸುವುದಿಲ್ಲ.','ಪ್ರತ್ಯೇಕ ಹಣ ಪಾವತಿ, ಲಿಂಕ್ ಅಥವಾ ಗೌಪ್ಯ ಮಾಹಿತಿಯ ವಿನಂತಿಯನ್ನು ಸ್ವತಂತ್ರವಾಗಿ ಪರಿಶೀಲಿಸಿ.'],
  'complaint':'ಶಂಕಿತ ಸೈಬರ್ ವಂಚನೆ ವರದಿ','message':'ಮೂಲ ಸಂದೇಶ (ಸಂವೇದನಾಶೀಲ ಸಂಖ್ಯೆ ಮಾದರಿಗಳನ್ನು ಮರೆಮಾಡಲಾಗಿದೆ)','loss_label':'ಹಣ ಅಥವಾ ಮಾಹಿತಿ ಹಂಚಿಕೊಂಡಿರುವುದು','yes':'ಹೌದು, ಬಳಕೆದಾರರು ತಿಳಿಸಿದ್ದಾರೆ','no':'ತಿಳಿಸಿಲ್ಲ','review':'ದಯವಿಟ್ಟು ಪರಿಶೀಲಿಸಿ. ದೂರು ಸಲ್ಲಿಸುವ ಮೊದಲು ಕಳುಹಿಸಿದವರ ವಿವರ, ದಿನಾಂಕ, ವ್ಯವಹಾರದ ಉಲ್ಲೇಖ, ಮೊತ್ತ ಮತ್ತು ಸ್ಕ್ರೀನ್‌ಶಾಟ್ ಸೇರಿಸುತ್ತೇನೆ.'}}
-def guidance(verdict,language,extracted,evidence,generated):
-    t=TEXT[language];loss=extracted.user_reported_loss
+def guidance(verdict,language,extracted,evidence,generated,situation=None):
+    t=TEXT[language];situation=situation or ('OTHER_OR_UNSURE' if extracted.user_reported_loss else 'ONLY_RECEIVED');loss=situation=='MONEY_SENT' or (extracted.user_reported_loss and situation=='OTHER_OR_UNSURE')
     summary=t[verdict]
     if verdict=='GENUINE':summary+=' '+'; '.join(dict.fromkeys(e.publisher for e in evidence if e.relation=='supports'))
     actions=t['loss'] if loss else t['genuine'] if verdict=='GENUINE' else t['normal']
-    complaint=f"{t['complaint']}\nUTC: {generated}\n{t['message']}:\n{extracted.raw_text_redacted}\n{t['loss_label']}: {t['yes'] if loss else t['no']}\n{t['review']}"
+    from backend.services.situations import ACTIONS
+    actions=ACTIONS[language][situation] + (t['genuine'] if verdict=='GENUINE' else [])
+    complaint=f"{t['complaint']}\nUTC: {generated}\n{t['message']}:\n{extracted.raw_text_redacted}\nUser-confirmed situation: {situation}\n{t['review']}"
     channels=[]
     if loss:
-        channels=[ReportingChannel(name='Call 1930',url_or_number='tel:1930',when_to_use='Report financial cyber fraud promptly.'),ReportingChannel(name='Cybercrime portal',url_or_number='https://cybercrime.gov.in/',when_to_use='File a cybercrime report and preserve the acknowledgement.')]
+        channels=[ReportingChannel(name='Call 1930',url_or_number=ROUTES['financial_helpline']['value'],when_to_use='Report financial cyber fraud promptly.'),ReportingChannel(name='Cybercrime portal',url_or_number=ROUTES['cybercrime_portal']['value'],when_to_use='File a cybercrime report and preserve the acknowledgement.')]
+    elif situation!='ONLY_RECEIVED':
+        channels=[ReportingChannel(name='Cybercrime portal',url_or_number=ROUTES['cybercrime_portal']['value'],when_to_use='Report suspected cybercrime; use the affected provider’s official recovery channel.')]
     elif verdict=='GENUINE':
         channels=[ReportingChannel(name='Read official record',url_or_number=e.url,when_to_use='Read the verified content directly.') for e in evidence[:2]]
-    else:channels=[ReportingChannel(name='Report on Chakshu',url_or_number='https://www.sancharsaathi.gov.in/sfc/Home/sfc-complaint.jsp',when_to_use='Suspected fraudulent call, SMS or WhatsApp; no financial loss reported.')]
-    if extracted.script_family=='investment_scam':channels.append(ReportingChannel(name='SEBI Check',url_or_number='https://siportal.sebi.gov.in/intermediary/sebi-check',when_to_use='Check an intermediary payment destination independently.'))
-    if extracted.urls and verdict!='GENUINE':channels.append(ReportingChannel(name='Report suspicious link',url_or_number='https://sancharsaathi.gov.in/sfc/Home/murl-complaint.jsp',when_to_use='Report a suspected fraudulent web link.'))
-    if extracted.claimed_authority and verdict!='GENUINE':channels.append(ReportingChannel(name='PIB Fact Check',url_or_number='https://factcheck.pib.gov.in/',when_to_use='Central government claim or impersonation.'))
-    for c in channels:c.draft_complaint=complaint
+    else:channels=[ReportingChannel(name='Report on Chakshu',url_or_number=ROUTES['chakshu']['value'],when_to_use='Suspected fraudulent call, SMS or WhatsApp; no financial loss reported.')]
+    if extracted.script_family=='investment_scam':channels.append(ReportingChannel(name='SEBI Check',url_or_number=ROUTES['sebi_check']['value'],when_to_use='Check an intermediary payment destination independently.'))
+    if extracted.urls and verdict!='GENUINE':channels.append(ReportingChannel(name='Report suspicious link',url_or_number=ROUTES['malicious_link']['value'],when_to_use='Report a suspected fraudulent web link.'))
+    if extracted.claimed_authority and verdict!='GENUINE':channels.append(ReportingChannel(name='PIB Fact Check',url_or_number=ROUTES['pib_factcheck']['value'],when_to_use='Central government claim or impersonation.'))
+    for c in channels:
+        c.draft_complaint=complaint
+        c.source_urls=[r['source'] for r in ROUTES.values() if isinstance(r,dict) and r['value']==c.url_or_number]
     return summary,actions,complaint,channels

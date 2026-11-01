@@ -23,3 +23,16 @@ def rank_sources(items,query,urls=()):
         key=(host.removeprefix('www.') if host else '',urlparse(url).path,urlparse(url).query)
         if key not in seen or score>seen[key][0]:seen[key]=(score,item)
     return [v[1] for v in sorted(seen.values(),key=lambda v:v[0],reverse=True)][:3]
+
+def relevant_document(extracted,document):
+    """Remove off-topic retrievals before they can become background evidence."""
+    text=document['text'].casefold()
+    rules={
+      'customs_fraud':(r'customs|cbic',r'private account|\bdin\b|fraud|impersonat'),
+      'sim_swap':(r'\bsim\b',r'swap|duplicate|replacement|fraud'),
+      'loan_app_fraud':(r'lend|\bnbfc\b',r'digital|\bapp|\blsp\b|key fact'),
+      'lottery_fraud':(r'lottery|prize',r'advance|fee|token|fraud'),
+      'digital_arrest':(r'digital arrest',r'fraud|scam|police|payment'),
+    }
+    if extracted.script_family in rules:return all(re.search(p,text) for p in rules[extracted.script_family])
+    return True

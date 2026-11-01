@@ -1,13 +1,14 @@
 import re
 from backend.schemas import DimensionChecks
 
-def choose_verdict(checks, high_risk=False):
+def choose_verdict(checks, high_risk=False, conflict=False):
+    if conflict:return 'UNSURE','HIGH'
     if checks.authority=='CONTRADICTED' or checks.requested_action=='DANGEROUS' or checks.destination=='DANGEROUS':return 'SCAM','HIGH'
     if checks.authority=='VERIFIED' and checks.requested_action in ('VERIFIED','NOT_PROVIDED') and checks.destination in ('VERIFIED','NOT_PROVIDED') and not high_risk:return 'GENUINE','LOW'
     return 'UNSURE','HIGH' if high_risk or checks.requested_action=='SUSPICIOUS' or checks.destination=='SUSPICIOUS' else 'MEDIUM'
 
 def action_checks(extracted):
-    types={t.tactic for t in extracted.tactics}
+    types={t.tactic for t in extracted.tactics if t.origin=='rule'}
     payment='payment_redirection' in types or bool(re.search(r'\bpay\b|transfer|deposit|fee|भुगतान|पैसे|ಹಣ',extracted.raw_text_redacted,re.I))
     task_deposit=bool(re.search(r'(?:task|rating|review|part.time)[^.!?]{0,100}\b(?:deposit|recharge|pay|transfer)\b|(?:deposit|recharge).{0,100}(?:unlock|withdraw|commission)',extracted.raw_text_redacted,re.I))
     dangerous=task_deposit or bool(types & {'otp_or_credential_harvesting','remote_access_app'}) or payment and bool(types & {'fear_of_arrest','secrecy_or_isolation'})
@@ -15,16 +16,21 @@ def action_checks(extracted):
 
 def grounded_matches(assessment,extracted,documents):
     """Drop invented claim/source identifiers and any quote absent from fetched text."""
-    claims={c.claim_id for c in extracted.claims};docs={d['evidence'].source_id:d for d in documents};accepted=[]
+    claims={c.claim_id for c in extracted.claims};docs={d['evidence'].source_id:d for d in documents};accepted=[];rejected_material=False
     for match in assessment.matches:
-        if match.claim_id not in claims or match.source_id not in docs:continue
-        normal=lambda s:re.sub(r'\s+',' ',s).strip().casefold()
+        if match.claim_id not in claims or match.source_id not in docs:
+            rejected_material=True;continue
+        normal=lambda s:re.sub(r'\s+',' ',s).strip()
         quote=normal(match.quote)
-        if len(quote)<25 or quote not in normal(docs[match.source_id]['text']):continue
+        if len(quote)<25 or quote not in normal(docs[match.source_id]['text']):
+            rejected_material=True;continue
+        if not specific_relation(extracted,match,docs[match.source_id]):
+            rejected_material=True;continue
         item=docs[match.source_id]['evidence'].model_copy(update={'claim_id':match.claim_id,'relation':match.relation,'evidence_text':match.quote[:1600]})
         accepted.append(item)
     supported={e.claim_id for e in accepted if e.relation=='supports'}
-    authority='CONTRADICTED' if any(e.relation=='contradicts' for e in accepted) else 'VERIFIED' if claims and claims<=supported and not assessment.unverified_claim_ids else 'UNVERIFIED'
+    conflicting=any(any(e.claim_id==cid and e.relation=='supports' for e in accepted) and any(e.claim_id==cid and e.relation=='contradicts' for e in accepted) for cid in claims)
+    authority='UNVERIFIED' if conflicting else 'CONTRADICTED' if any(e.relation=='contradicts' for e in accepted) else 'VERIFIED' if claims and claims<=supported and not assessment.unverified_claim_ids and not rejected_material else 'UNVERIFIED'
     return accepted,authority
 
 def local_evidence(extracted,documents):
@@ -34,11 +40,14 @@ def local_evidence(extracted,documents):
     cleaned=re.sub(r'\b(?:official clarification|source|official source)\s*:\s*','',cleaned,flags=re.I).strip()
     norm=lambda s:re.sub(r'[^\w\s]','',s.casefold()).strip()
     for d in documents:
-        if len(cleaned)>50 and norm(cleaned) in norm(d['text']):
-            e=d['evidence'].model_copy(update={'relation':'supports','claim_id':'c1','evidence_text':cleaned})
-            return [e],'VERIFIED'
+        if len(cleaned)>50 and re.sub(r'\s+',' ',cleaned).strip() in re.sub(r'\s+',' ',d['text']).strip():
+            matches=[]
+            for c in extracted.claims:
+                quote=re.sub(r'https?://\S+','',c.text).strip()
+                if quote and re.sub(r'\s+',' ',quote) in re.sub(r'\s+',' ',d['text']):matches.append(d['evidence'].model_copy(update={'relation':'supports','claim_id':c.claim_id,'evidence_text':quote}))
+            return matches,'VERIFIED' if len(matches)==len(extracted.claims) else 'UNVERIFIED'
     for d in documents:
-        if d['evidence'].source_id=='pib-2130875' and re.search(r'1736|1,736',text) and re.search(r'recruitment|posts|vacanc|भर्ती|ನೇಮಕ',text,re.I) and not re.search(r'denies|no official|fake|fraudulent|खंडन|नकली|ನಕಲಿ',text,re.I) and 'categorically denies' in d['text'].lower():
+        if d['evidence'].source_id=='pib-2130875' and re.search(r'1736|1,736',text) and re.search(r'Cabinet Secretariat',text,re.I) and re.search(r'Field Assistant',text,re.I) and not re.search(r'denies|no official|fake|fraudulent|खंडन|नकली|ನಕಲಿ',text,re.I) and 'categorically denies' in d['text'].lower():
             at=d['text'].lower().find('categorically denies');e=d['evidence'].model_copy(update={'relation':'contradicts','claim_id':'c1','evidence_text':d['text'][max(0,at-40):at+400]});return [e],'CONTRADICTED'
     return [d['evidence'] for d in documents],'UNVERIFIED'
 
@@ -59,3 +68,40 @@ def can_verify_public_content(extracted,evidence):
         return (u.hostname or '').lower().removeprefix('www.'),u.path.rstrip('/'),tuple(query)
     references={identity(url) for url in extracted.urls if allowed_url(url)}
     return bool(references and any(e.relation=='supports' and identity(e.url) in references for e in evidence))
+
+
+def specific_relation(extracted,match,document):
+    """Conservative lexical/scope guard in addition to exact source-quote validation."""
+    if match.relation in ('context_only','unclear'):return True
+    from backend.services.report_findings import private_claim
+    claim=next(c.text for c in extracted.claims if c.claim_id==match.claim_id)
+    if private_claim(claim):return False
+    from backend.services.source_ranking import tokens
+    wanted=tokens(claim)-{'official','notice','message','says','issued','please'}
+    quote_tokens=tokens(match.quote)
+    overlap=len(wanted & quote_tokens)/max(1,len(wanted))
+    # Distinctive numbers must be present exactly; no matching an unrelated recruitment/date/amount.
+    numbers=set(re.findall(r'\b\d[\d,]*\b',claim))
+    if not numbers <= set(re.findall(r'\b\d[\d,]*\b',match.quote)):return False
+    names=set(re.findall(r'\b[A-Z][a-zA-Z]{2,}\b',claim))-{'The','This','Your','Please','Official','Notice','Source'}
+    if not {n.casefold() for n in names}<={n.casefold() for n in re.findall(r'\b[a-zA-Z]{3,}\b',match.quote)}:return False
+    if match.relation=='contradicts':
+        # A general advisory is context, never an individual contradiction.
+        if document['evidence'].source_id=='pib-2130875':
+            return bool(re.search(r'Cabinet Secretariat',claim,re.I) and re.search(r'1,?736',claim) and re.search(r'Field Assistant',claim,re.I) and re.search(r'categorically denies|no official notification',match.quote,re.I))
+        if document['evidence'].source_id=='pib-2025648':
+            return bool(re.search(r'customs|CBIC',claim,re.I) and re.search(r'private account|personal account',claim,re.I) and re.search(r'pay|duty|fee',claim,re.I) and re.search(r'never contact.*private accounts',match.quote,re.I))
+        # Only a specific issuer denial with material identifier overlap can contradict.
+        return overlap>=.7 and bool(numbers) and bool(re.search(r'categorically denies|no such notification|not issued|withdrawn|cancelled',match.quote,re.I))
+    neg=lambda s:bool(re.search(r'\b(?:not|never|no|denies|withdrawn|cancelled)\b|नहीं|ಬೇಡ',s,re.I))
+    return overlap>=.75 and len(wanted)>=3 and neg(claim)==neg(match.quote)
+
+
+def customs_action_evidence(extracted,documents):
+    text=extracted.raw_text_redacted
+    if not (re.search(r'customs|CBIC',text,re.I) and re.search(r'private account|personal account',text,re.I) and re.search(r'duty|customs fee',text,re.I) and re.search(r'pay|transfer',text,re.I) and re.search(r'phone|call|SMS|email|message',text,re.I)):return None
+    for d in documents:
+        if d['evidence'].source_id!='pib-2025648':continue
+        match=re.search(r'Indian Customs officers never contact the general public via phone, SMS, or e-mail for payment of duty in private accounts\.',d['text'],re.I)
+        if match:return d['evidence'].model_copy(update={'relation':'context_only','claim_id':None,'evidence_text':match.group()})
+    return None

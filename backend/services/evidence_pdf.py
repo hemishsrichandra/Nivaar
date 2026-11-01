@@ -27,6 +27,18 @@ def build_pdf(report):
     p('Redacted message',heading);p(report.extracted.raw_text_redacted)
     p('Dimension checks',heading)
     for k,v in report.checks.model_dump().items():p(f'{k.replace("_"," ").title()}: {v}')
+    if report.evidence_coverage.components:
+        p('Evidence Coverage',heading)
+        p(f'{report.evidence_coverage.score if report.evidence_coverage.score is not None else "—"}/100 — {report.evidence_coverage.label}')
+        p(report.evidence_coverage.note,tiny)
+        for c in report.evidence_coverage.components:p(f'{c.name}: {c.completed if c.applicable else "N/A"}. {c.explanation}',tiny)
+    if report.claims:
+        p('Claim-by-claim evidence',heading)
+        for c in report.claims:
+            p(f'{c.claim_id}: {c.status} — {c.text}')
+            p(c.explanation);p('Evidence IDs: '+(', '.join(c.evidence_ids) or 'None'),tiny)
+    if report.source_conflicts:p('Unresolved official-source conflicts: '+', '.join(report.source_conflicts))
+    p('User-confirmed situation: '+report.user_situation)
     p('Tactics',heading)
     if not report.tactics:p('No matching manipulation spans. This does not prove authenticity.')
     for t in report.tactics:p(f'{t.tactic.replace("_"," ")}: “{t.phrase}” — {t.explanation}')
@@ -37,7 +49,7 @@ def build_pdf(report):
     p('Official evidence',heading)
     if not report.evidence:p('No corroborating official document was fetched.')
     for e in report.evidence:
-        p(e.publisher+' — '+e.title,heading);p(e.url,tiny);p(f'{e.document_date or "Date unavailable"} | {e.relation} | {e.retrieval_status}',tiny);p(e.evidence_text);p('Document text SHA-256: '+e.sha256_hash,tiny);p('Retrieved UTC: '+e.retrieved_at_utc,tiny)
+        p((e.evidence_id+' | ' if e.evidence_id else '')+e.publisher+' — '+e.title,heading);p(e.url,tiny);p(f'{e.document_date or "Date unavailable"} | {e.relation} | {e.fetch_status}',tiny);p(e.evidence_text);p('Document text SHA-256: '+e.sha256_hash,tiny);p('Retrieved UTC: '+e.retrieved_at_utc,tiny)
     p('Next actions',heading)
     for i,a in enumerate(report.recommended_actions,1):p(f'{i}. {a}')
     for c in report.which_door_routing:p(c.name+' — '+c.url_or_number+'\n'+c.when_to_use)

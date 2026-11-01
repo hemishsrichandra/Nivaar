@@ -50,7 +50,7 @@ def test_source_derived_regressions():
  from backend.services.claim_extractor import local_extract
  from backend.services.verdict_engine import action_checks,choose_verdict
  from backend.schemas import DimensionChecks
- for line in Path('backend/data/evaluation/cases.jsonl').read_text().splitlines():
+ for line in Path('backend/data/evaluation/cases.jsonl').read_text(encoding="utf-8").splitlines():
   c=json.loads(line);action,risk=action_checks(local_extract(c['text'],'text',False))
   verdict,_=choose_verdict(DimensionChecks(authority='UNVERIFIED',requested_action=action,destination='NOT_PROVIDED'),risk)
   assert (verdict=='SCAM')==(c['label']=='scam'),c['id']

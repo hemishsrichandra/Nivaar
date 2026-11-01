@@ -1,0 +1,17 @@
+{
+  "/api/health": {
+    "status": 200
+  },
+  "/api/ready": {
+    "status": 200
+  },
+  "/api/config": {
+    "status": 200
+  },
+  "/api/ops": {
+    "status": 403
+  },
+  "benchmark_without_token": {
+    "status": 403
+  }
+}

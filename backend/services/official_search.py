@@ -1,20 +1,22 @@
-import json, time
+import json, time, hashlib
 _CACHE={}
 from urllib.parse import urlparse
 import httpx
 from backend.config import settings,ROOT,OFFICIAL_DOMAINS
 from backend.services.official_fetcher import allowed_url
 from backend.services.input_parser import search_safe
-REGISTRY=json.loads((ROOT/'data/verified_advisories.json').read_text())
+REGISTRY=json.loads((ROOT/'data/verified_advisories.json').read_text(encoding="utf-8"))
 async def search_sources(extracted,query=''):
     from backend.services.source_ranking import rank_sources
     seeds=[s for s in REGISTRY if s['family']==extracted.script_family or any(urlparse(u).path==urlparse(s['url']).path and urlparse(u).query.split('&')[0]==urlparse(s['url']).query for u in extracted.urls)]
     results=[];status='fallback';note='No search key; matching official registry entries only.'
-    query=search_safe(query or ' '.join(c.text for c in extracted.claims))
-    cache_key=(query,tuple(extracted.urls))
+    from backend.services.query_builder import build_queries
+    query=build_queries(extracted)[0]
+    cache_key=(query,hashlib.sha256('\n'.join(extracted.urls).encode()).hexdigest())
     cached=_CACHE.get(cache_key)
-    if cached and time.monotonic()-cached[0]<900:return cached[1]
-    if query and (settings.tavily_key or settings.brave_key):
+    if cached and time.monotonic()-cached[0]<900:return cached[1][0],'cached','Cached discovery results; documents are fetched or individually marked cached.'
+    from backend.services.llm_client import reserve_operation
+    if query and (settings.tavily_key or settings.brave_key) and reserve_operation():
         try:
             async with httpx.AsyncClient(timeout=12,trust_env=False) as client:
                 if settings.tavily_key:

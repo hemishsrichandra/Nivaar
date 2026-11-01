@@ -67,7 +67,7 @@ curl http://localhost:3000/api/health
 curl http://localhost:3000/api/ready
 ```
 
-`npm test` uses deterministic fixtures and mocked HTTP provider contracts; it never validates real credentials. Authenticated provider tests are intentionally deferred until keys are supplied. Official-source availability can still be tested without credentials.
+`npm test` uses deterministic fixtures and mocked HTTP provider contracts; it never validates real credentials. Authenticated provider smoke tests are separate; their actual outcomes are recorded in docs/validation/upgrade-provider-tests.txt. Official-source availability can still be tested without credentials.
 
 ## API
 
@@ -85,6 +85,14 @@ API schemas are available directly on the backend at http://127.0.0.1:8000/docs 
 
 The app does not authenticate a sender, guarantee fraud detection, automatically file complaints or provide legal certification. AI interpretation can be wrong despite quote validation. Inspect the evidence. Number masking is not exhaustive de-identification. Upload consent and provider data handling are explained in the UI.
 
-No database is required for the selected core workflow. Raw messages and uploads are not retained by the application; recent results live in page memory. Provider retention and infrastructure metadata are separate. Read [architecture and operational limits](docs/ARCHITECTURE.md).
+No database stores investigations. A local SQLite file stores bounded operations events and request/provider budgets. Raw messages and uploads are not retained by the application; recent results live in page memory. Provider retention and infrastructure metadata are separate. Read [architecture and operational limits](docs/ARCHITECTURE.md).
 
 Detection evaluation, free-tier budgets, protected monitoring and load-test instructions: [implementation and measured limits](docs/DETECTION_IMPROVEMENTS.md).
+
+## Evidence-led verification upgrade
+
+The existing result now includes a typed claim ledger, scoped authority/action/destination explanations, limited phone/UPI/messaging-link checks, explicit cached retrieval metadata and **Evidence Coverage**. Coverage is how much could be checked using relevant source evidence; it is not a probability of scam/safety and never determines the verdict. Unresolved official-source conflicts force UNSURE. General advisories do not establish private account events or authenticate a sender/payee.
+
+Choose your actual situation before checking: only received, money sent, credentials shared, app/remote access granted, suspected SIM compromise or unsure. The same EN/HI/KN checklist data is used in the UI and backend. Legacy `user_reported_loss` requests remain accepted, but new clients send `user_situation` explicitly. Local history remains in page memory; there is no persistent investigation database. SQLite is used only for bounded operational events and abuse/provider budgets.
+
+Curated family sources and their limits: [ADVISORY_SOURCES.md](docs/ADVISORY_SOURCES.md). Baseline: [UPGRADE_BASELINE.md](docs/UPGRADE_BASELINE.md). Hosting/remaining external checks: [DEPLOYMENT_CHECKLIST.md](docs/DEPLOYMENT_CHECKLIST.md). The internal benchmark now always requires BENCHMARK_TOKEN, including local development. No public accuracy metric or leaderboard is added.

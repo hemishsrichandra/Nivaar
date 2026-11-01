@@ -1,0 +1,37 @@
+{
+  "scope": "Real localhost production SSE and provider-backed official retrieval; authored input fixture, not accuracy data",
+  "sse_http": 200,
+  "trace_events": 6,
+  "verdict": "SCAM",
+  "coverage": 25,
+  "claim_count": 2,
+  "providers": {
+    "llm": "fallback",
+    "search": "cached",
+    "evidence_comparison": "fallback",
+    "url_reputation": "not_configured"
+  },
+  "provider_errors": {
+    "llm": "RATE_LIMITED",
+    "evidence_comparison": "RATE_LIMITED"
+  },
+  "sources": [
+    {
+      "source_id": "pib-2025648",
+      "cached": true,
+      "published": "2024-06-16",
+      "retrieved_at": "2026-11-01T11:34:48.601275+00:00"
+    },
+    {
+      "source_id": "pib-2025648",
+      "cached": true,
+      "published": "2024-06-16",
+      "retrieved_at": "2026-11-01T11:34:48.601275+00:00"
+    }
+  ],
+  "pdf_status": 200,
+  "pdf_magic_ok": true,
+  "tamper_status": 400,
+  "user_situation": "MONEY_SENT",
+  "first_action_has_1930": true
+}

@@ -1,0 +1,31 @@
+{
+  "checked_at": "2026-11-01",
+  "financial_helpline": {
+    "value": "tel:1930",
+    "source": "https://www.pib.gov.in/PressReleasePage.aspx?PRID=2290377&lang=1&reg=22"
+  },
+  "cybercrime_portal": {
+    "value": "https://cybercrime.gov.in/",
+    "source": "https://www.pib.gov.in/PressReleaseIframePage.aspx?PRID=2025648&lang=2&reg=48"
+  },
+  "customs_din": {
+    "value": "https://esanchar.cbic.gov.in/DIN/DINSearch",
+    "source": "https://www.pib.gov.in/PressReleaseIframePage.aspx?PRID=2025648&lang=2&reg=48"
+  },
+  "chakshu": {
+    "value": "https://www.sancharsaathi.gov.in/sfc/Home/sfc-complaint.jsp",
+    "source": "https://sancharsaathi.gov.in/"
+  },
+  "malicious_link": {
+    "value": "https://sancharsaathi.gov.in/sfc/Home/murl-complaint.jsp",
+    "source": "https://sancharsaathi.gov.in/"
+  },
+  "pib_factcheck": {
+    "value": "https://factcheck.pib.gov.in/",
+    "source": "https://www.pib.gov.in/"
+  },
+  "sebi_check": {
+    "value": "https://siportal.sebi.gov.in/intermediary/sebi-check",
+    "source": "https://www.sebi.gov.in/"
+  }
+}

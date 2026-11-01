@@ -9,16 +9,19 @@ async def check_urls(urls,text):
     gov_claim=bool(re.search(r'India Post|police|CBI|Cabinet Secretariat|Ministry|court|tax department|सरकार|पुलिस|ಸರ್ಕಾರ|ಪೊಲೀಸ್',text,re.I))
     for url in urls:
         u=urlparse(url);host=(u.hostname or '').lower()
+        from backend.services.identifiers import PLATFORMS
+        platform=host in PLATFORMS
         official=host.endswith(('.gov.in','.nic.in')) or host in ('rbi.org.in','www.rbi.org.in','sebi.gov.in','www.sebi.gov.in')
         registered=extract_domain(host).top_domain_under_public_suffix
         short_kyc=host in ('bit.ly','tinyurl.com','t.co','cutt.ly','is.gd','rb.gy') and bool(re.search(r'KYC|challan',text,re.I))
-        if short_kyc or (gov_claim and not official) or re.search(r'\.apk(?:$|\?)',u.path,re.I) or u.username or u.password:
+        if short_kyc or (gov_claim and not official and not platform and bool(re.search(r'indiapost|rbi|cbi|gov|police',host,re.I))) or re.search(r'\.apk(?:$|\?)',u.path,re.I) or u.username or u.password:
             status='DANGEROUS';notes.append(f'{registered or host}: government mismatch, credential-bearing URL or APK destination.')
         elif not official or u.scheme!='https' or 'xn--' in host or not host.isascii():
             if status!='DANGEROUS':status='SUSPICIOUS'
             notes.append(f'{registered or host}: unverified destination.')
     provider='not_configured'
-    if settings.safe_browsing_key and urls:
+    from backend.services.llm_client import reserve_operation
+    if settings.safe_browsing_key and urls and reserve_operation():
         try:
             async with httpx.AsyncClient(timeout=8,trust_env=False) as client:
                 response=await client.post('https://safebrowsing.googleapis.com/v4/threatMatches:find',params={'key':settings.safe_browsing_key},json={'client':{'clientId':'nivaar','clientVersion':'1.0'},'threatInfo':{'threatTypes':['MALWARE','SOCIAL_ENGINEERING','UNWANTED_SOFTWARE'],'platformTypes':['ANY_PLATFORM'],'threatEntryTypes':['URL'],'threatEntries':[{'url':u} for u in urls]}})

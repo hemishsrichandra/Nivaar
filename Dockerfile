@@ -5,6 +5,8 @@ COPY package.json package-lock.json ./
 RUN npm ci
 COPY app ./app
 COPY components ./components
+COPY backend/data/situation_guidance.json ./backend/data/situation_guidance.json
+COPY backend/data/reporting_channels.json ./backend/data/reporting_channels.json
 COPY lib ./lib
 COPY data ./data
 COPY public ./public
