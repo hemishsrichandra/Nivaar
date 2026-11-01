@@ -47,7 +47,7 @@ def local_evidence(extracted,documents):
                 if quote and re.sub(r'\s+',' ',quote) in re.sub(r'\s+',' ',d['text']):matches.append(d['evidence'].model_copy(update={'relation':'supports','claim_id':c.claim_id,'evidence_text':quote}))
             return matches,'VERIFIED' if len(matches)==len(extracted.claims) else 'UNVERIFIED'
     for d in documents:
-        if d['evidence'].source_id=='pib-2130875' and re.search(r'1736|1,736',text) and re.search(r'Cabinet Secretariat',text,re.I) and re.search(r'Field Assistant',text,re.I) and not re.search(r'denies|no official|fake|fraudulent|खंडन|नकली|ನಕಲಿ',text,re.I) and 'categorically denies' in d['text'].lower():
+        if known_release(d['evidence'],'2130875') and re.search(r'1736|1,736',text) and re.search(r'Cabinet Secretariat',text,re.I) and re.search(r'Field Assistant',text,re.I) and not re.search(r'denies|no official|fake|fraudulent|खंडन|नकली|ನಕಲಿ',text,re.I) and 'categorically denies' in d['text'].lower() and contemporaneous_claim(text,d['evidence']):
             at=d['text'].lower().find('categorically denies');e=d['evidence'].model_copy(update={'relation':'contradicts','claim_id':'c1','evidence_text':d['text'][max(0,at-40):at+400]});return [e],'CONTRADICTED'
     return [d['evidence'] for d in documents],'UNVERIFIED'
 
@@ -63,6 +63,9 @@ def can_verify_public_content(extracted,evidence):
     )
     if any(re.search(p,text,re.I) for p in personal_patterns):return False
     def identity(url):
+        from backend.services.source_ranking import source_identity
+        key=source_identity(url)
+        if key[0]=='pib':return key
         u=urlparse(url)
         query=sorted((k,v) for k,v in parse_qsl(u.query) if k.lower() not in ('reg','lang') and not k.lower().startswith('utm_'))
         return (u.hostname or '').lower().removeprefix('www.'),u.path.rstrip('/'),tuple(query)
@@ -87,9 +90,10 @@ def specific_relation(extracted,match,document):
     if not {n.casefold() for n in names}<={n.casefold() for n in re.findall(r'\b[a-zA-Z]{3,}\b',match.quote)}:return False
     if match.relation=='contradicts':
         # A general advisory is context, never an individual contradiction.
-        if document['evidence'].source_id=='pib-2130875':
+        if known_release(document['evidence'],'2130875'):
+            if not contemporaneous_claim(claim,document['evidence']):return False
             return bool(re.search(r'Cabinet Secretariat',claim,re.I) and re.search(r'1,?736',claim) and re.search(r'Field Assistant',claim,re.I) and re.search(r'categorically denies|no official notification',match.quote,re.I))
-        if document['evidence'].source_id=='pib-2025648':
+        if known_release(document['evidence'],'2025648'):
             return bool(re.search(r'customs|CBIC',claim,re.I) and re.search(r'private account|personal account',claim,re.I) and re.search(r'pay|duty|fee',claim,re.I) and re.search(r'never contact.*private accounts',match.quote,re.I))
         # Only a specific issuer denial with material identifier overlap can contradict.
         return overlap>=.7 and bool(numbers) and bool(re.search(r'categorically denies|no such notification|not issued|withdrawn|cancelled',match.quote,re.I))
@@ -101,7 +105,17 @@ def customs_action_evidence(extracted,documents):
     text=extracted.raw_text_redacted
     if not (re.search(r'customs|CBIC',text,re.I) and re.search(r'private account|personal account',text,re.I) and re.search(r'duty|customs fee',text,re.I) and re.search(r'pay|transfer',text,re.I) and re.search(r'phone|call|SMS|email|message',text,re.I)):return None
     for d in documents:
-        if d['evidence'].source_id!='pib-2025648':continue
+        if not known_release(d['evidence'],'2025648'):continue
         match=re.search(r'Indian Customs officers never contact the general public via phone, SMS, or e-mail for payment of duty in private accounts\.',d['text'],re.I)
         if match:return d['evidence'].model_copy(update={'relation':'context_only','claim_id':None,'evidence_text':match.group()})
     return None
+
+
+def known_release(evidence,prid):
+    from backend.services.source_ranking import source_identity
+    return evidence.source_id=='pib-'+prid or source_identity(evidence.url)==('pib',prid)
+
+def contemporaneous_claim(text,evidence):
+    # A historical denial does not establish whether a newly dated notice exists.
+    years=[int(y) for y in re.findall(r'\b20\d{2}\b',text)]
+    return not years or bool(evidence.document_date and max(years)<=int(evidence.document_date[:4]))

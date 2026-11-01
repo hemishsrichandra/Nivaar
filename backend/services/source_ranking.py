@@ -1,7 +1,7 @@
 """Relevance first; dates are metadata, never proof of validity."""
 import re
 from datetime import date,datetime,timezone
-from urllib.parse import urlparse
+from urllib.parse import urlparse,parse_qsl
 STOP={'this','that','with','from','your','have','will','please','official','source','https','www','gov','com','the','and','for'}
 def tokens(text):return {t for t in re.findall(r'[^\W_]{3,}',text.casefold()) if t not in STOP}
 def valid_date(value):
@@ -19,9 +19,15 @@ def rank_sources(items,query,urls=()):
         if re.search(r'roundup|newsletter|news clipping|monthly bulletin',text,re.I):score-=5
         d=valid_date(item.get('date')); item={**item,'date':d}
         if d:score+=max(0,1-(date.today()-date.fromisoformat(d)).days/3650)
-        host=urlparse(url).hostname
-        key=(host.removeprefix('www.') if host else '',urlparse(url).path,urlparse(url).query)
-        if key not in seen or score>seen[key][0]:seen[key]=(score,item)
+        key=source_identity(url)
+        if key in seen:
+            prior_score,prior=seen[key]
+            registry=prior if prior.get('id') else item if item.get('id') else None
+            winner=item if score>prior_score else prior
+            if registry:
+                winner={**winner,**{k:registry[k] for k in ('id','publisher','date','anchor','family','strength') if k in registry}}
+            seen[key]=(max(score,prior_score),winner)
+        else:seen[key]=(score,item)
     return [v[1] for v in sorted(seen.values(),key=lambda v:v[0],reverse=True)][:3]
 
 def relevant_document(extracted,document):
@@ -36,3 +42,10 @@ def relevant_document(extracted,document):
     }
     if extracted.script_family in rules:return all(re.search(p,text) for p in rules[extracted.script_family])
     return True
+
+
+def source_identity(url):
+    u=urlparse(url);host=(u.hostname or '').lower().removeprefix('www.')
+    query={k.lower():v for k,v in parse_qsl(u.query)}
+    if host=='pib.gov.in' and query.get('prid','').isdigit():return ('pib',query['prid'])
+    return (host,u.path.rstrip('/'),tuple(sorted(parse_qsl(u.query))))

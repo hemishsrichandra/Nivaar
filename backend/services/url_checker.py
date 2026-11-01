@@ -16,8 +16,15 @@ async def check_urls(urls,text):
         short_kyc=host in ('bit.ly','tinyurl.com','t.co','cutt.ly','is.gd','rb.gy') and bool(re.search(r'KYC|challan',text,re.I))
         if short_kyc or (gov_claim and not official and not platform and bool(re.search(r'indiapost|rbi|cbi|gov|police',host,re.I))) or re.search(r'\.apk(?:$|\?)',u.path,re.I) or u.username or u.password:
             status='DANGEROUS';notes.append(f'{registered or host}: government mismatch, credential-bearing URL or APK destination.')
+        elif platform:
+            risky=gov_claim or bool(re.search(r'pay|transfer|deposit|OTP|password|arrest',text,re.I))
+            if status not in ('DANGEROUS','SUSPICIOUS'):
+                status='SUSPICIOUS' if risky else 'UNVERIFIED'
+            notes.append(f'{host}: messaging platform; recipient/group identity is unverified. The platform alone is not a scam signal.')
         elif not official or u.scheme!='https' or 'xn--' in host or not host.isascii():
-            if status!='DANGEROUS':status='SUSPICIOUS'
+            risky=bool(re.search(r'pay|transfer|deposit|OTP|password|arrest|KYC',text,re.I))
+            structural=u.scheme!='https' or 'xn--' in host or not host.isascii()
+            if status not in ('DANGEROUS','SUSPICIOUS'):status='SUSPICIOUS' if risky or structural else 'UNVERIFIED'
             notes.append(f'{registered or host}: unverified destination.')
     provider='not_configured'
     from backend.services.llm_client import reserve_operation

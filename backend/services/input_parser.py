@@ -26,3 +26,8 @@ def search_safe(text):
     text=redact(text)
     text=re.sub(r'https?://\S+|\b\S+@\S+|\+?\d[\d -]{7,}\d',' ',text)
     return re.sub(r'\s+',' ',text).strip()[:350]
+
+def is_link_only(text,urls):
+    if len(urls)!=1:return False
+    value=text.strip().rstrip('.,;!?)')
+    return value in (urls[0],re.sub(r'^https?://','',urls[0],flags=re.I))

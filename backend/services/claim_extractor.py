@@ -9,7 +9,7 @@ RULES=[
  ('secrecy_or_isolation',r'do not (?:tell|inform) (?:anyone|your family)|keep (?:this )?(?:secret|confidential)|किसी को मत बताना|गुप्त|ಯಾರಿಗೂ ಹೇಳಬೇಡಿ|ಗೌಪ್ಯ','Secrecy isolates you from people who could help.'),
  ('payment_redirection',r'(?:pay|transfer) (?:customs duty|prize release fee)|transfer (?:the )?(?:money|funds|₹?[\d,]+)|security deposit|verification fee|safe account|verification account|RTGS|पैसे भेज|पैसे ट्रांसफर|ಹಣ ಕಳುಹಿಸಿ|ಹಣ ವರ್ಗಾಯಿಸಿ','A request to move money needs independent confirmation.'),
  ('too_good_returns',r'guaranteed returns|double your money|risk.free profit|गारंटीड रिटर्न|ಖಚಿತ ಲಾಭ','Guaranteed or unusually large returns are a warning sign.'),
- ('otp_or_credential_harvesting',r'(?:share|send|tell|provide|reveal) (?:your |my |the )?(?:OTP|PIN|password)|OTP (?:बताएं|भेजें|ಕಳುಹಿಸಿ)|(?:ओटीपी|OTP|ಪಿನ್|ಒಟಿಪಿ)\s*(?:ಹೇಳಿ|ಹಂಚಿಕೊಳ್ಳಿ|बताओ|बताइए)|ओटीपी (?:बताएं|भेजें)|ಪಿನ್ ಕಳುಹಿಸಿ','Sharing credentials can give someone access to your accounts.'),
+ ('otp_or_credential_harvesting',r'(?:share|send|tell|provide|reveal) (?:your |my |the )?(?:(?:bank|banking|account|net banking) )?(?:OTP|PIN|password)|OTP (?:बताएं|भेजें|ಕಳುಹಿಸಿ)|(?:ओटीपी|OTP|ಪಿನ್|ಒಟಿಪಿ)\s*(?:ಹೇಳಿ|ಹಂಚಿಕೊಳ್ಳಿ|बताओ|बताइए)|ओटीपी (?:बताएं|भेजें)|ಪಿನ್ ಕಳುಹಿಸಿ','Sharing credentials can give someone access to your accounts.'),
  ('remote_access_app',r'install (?:the )?(?:APK|AnyDesk|TeamViewer)|screen.shar(?:e|ing)|स्क्रीन शेयर|ಸ್ಕ್ರೀನ್ ಶೇರ್','Remote access and screen sharing can expose banking information.'),
  ('link_lure',r'https?://[^\s<>]+','Check the actual destination independently.')]
 

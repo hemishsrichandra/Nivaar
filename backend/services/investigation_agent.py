@@ -81,6 +81,9 @@ async def _investigate(value,emit=None):
     async def apply():return choose_verdict(checks,high_risk,conflict=bool(conflicts))
     verdict,risk=await step('apply_verdict_rules','Pure Python authority/action/destination matrix; AI cannot directly choose verdict',apply,lambda r:(f'{r[0]} / {r[1]} risk. Sender identity is not authenticated.','ok'))
     generated=utcnow();summary,actions,complaint,channels=guidance(verdict,value.language,extracted,evidence,generated,value.user_situation)
+    from backend.services.input_parser import is_link_only
+    if verdict=='UNSURE' and is_link_only(text,extracted.urls):
+        summary={'en':'Only a link was supplied. Its owner, content and requested action have not been independently verified. Add the surrounding message; an unverified link is not proof of fraud or safety.','hi':'केवल लिंक दिया गया है। मालिक, सामग्री और अनुरोधित कार्रवाई की स्वतंत्र पुष्टि नहीं हुई। साथ में आया संदेश भी जोड़ें; अपुष्ट लिंक धोखाधड़ी या सुरक्षा का प्रमाण नहीं है।','kn':'ಲಿಂಕ್ ಮಾತ್ರ ನೀಡಲಾಗಿದೆ. ಮಾಲೀಕ, ವಿಷಯ ಮತ್ತು ಕೋರಿದ ಕ್ರಮ ಸ್ವತಂತ್ರವಾಗಿ ದೃಢೀಕೃತವಾಗಿಲ್ಲ. ಅದರ ಜೊತೆ ಬಂದ ಸಂದೇಶ ಸೇರಿಸಿ; ದೃಢೀಕೃತವಲ್ಲದ ಲಿಂಕ್ ವಂಚನೆ ಅಥವಾ ಸುರಕ್ಷತೆಯ ಪುರಾವೆ ಅಲ್ಲ.'}[value.language]
     if not documents:limitations.append('No corroborating official document was available.')
     if reputation!='live_checked':limitations.append('Live malware reputation was not checked; domain inspection is not a clean bill of health.')
     limitations.append('Automated guidance, not legal certification. Exact quotations ground source relations, but AI evidence interpretation can be wrong; inspect the sources.')
