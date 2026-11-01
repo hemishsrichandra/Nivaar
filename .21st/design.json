@@ -11,9 +11,13 @@
   },
   "sources": {
     "tokens": [
-      "app/globals.css"
+      "app/globals.css",
+      "app/cinematic.css"
     ],
-    "components": [],
+    "components": [
+      "components/cinematic-hero.tsx",
+      "components/product-navigation.tsx"
+    ],
     "assets": [],
     "instructions": [
       "AGENTS.md",
@@ -21,19 +25,19 @@
     ]
   },
   "design": {
-    "colorMode": "light",
+    "colorMode": "dark",
     "colors": {
       "primary": {
-        "value": "#1d4ed8",
-        "source": "app/globals.css"
+        "value": "#96b8ff",
+        "source": "app/cinematic.css"
       },
       "background": {
-        "value": "#f7f9fc",
-        "source": "app/globals.css"
+        "value": "#070e1a",
+        "source": "app/cinematic.css"
       },
       "foreground": {
-        "value": "#17263f",
-        "source": "app/globals.css"
+        "value": "#f1f5fd",
+        "source": "app/cinematic.css"
       },
       "danger": {
         "value": "#a02e28",
