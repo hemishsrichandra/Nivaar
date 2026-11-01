@@ -2,6 +2,8 @@
 
 **Clarity before action.**
 
+**Live app:** [nivaar.onrender.com](https://nivaar.onrender.com)
+
 Nivaar is a web app that helps people assess suspicious messages, links, screenshots and voice notes. It identifies dangerous requests, compares factual claims with available official evidence, and gives practical next steps.
 
 Designed for English, Hindi and Kannada, Nivaar brings scam-pattern detection and source-based verification into one place. It is an independent tool and is not affiliated with any government agency.
