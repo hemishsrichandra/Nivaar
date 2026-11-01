@@ -1,4 +1,5 @@
 import asyncio, base64, json, os, secrets, time
+from pathlib import Path
 from collections import defaultdict,deque
 from contextlib import asynccontextmanager
 from fastapi import FastAPI,HTTPException,UploadFile,File,Form,Request
@@ -126,14 +127,19 @@ async def analyze_stream(value:AnalyzeInput,request:Request):
     return StreamingResponse(stream(),media_type='text/event-stream',headers={'X-Accel-Buffering':'no','Cache-Control':'no-cache, no-transform'})
 
 @app.post('/api/transcribe')
-async def transcribe(file:UploadFile=File(...),language:str=Form('en'),consent:bool=Form(False)):
+async def transcribe(file:UploadFile=File(...),language:str=Form('en'),consent:bool=Form(False),audio_language:str|None=Form(None)):
+    if audio_language not in (None,'auto','en','hi','kn'):raise HTTPException(422,'Unsupported spoken language.')
     if language not in ('en','hi','kn'):raise HTTPException(422,'Unsupported language.')
     if not consent:raise HTTPException(400,'Explicit consent is required to send audio to Sarvam.')
-    if not file.content_type or not file.content_type.startswith(('audio/','video/webm','video/mp4')):raise HTTPException(415,'Upload a supported audio file.')
+    content_type=file.content_type or ''
+    if content_type in ('','application/octet-stream'):
+        content_type={'.wav':'audio/wav','.mp3':'audio/mpeg','.m4a':'audio/mp4','.mp4':'audio/mp4','.webm':'audio/webm','.ogg':'audio/ogg','.opus':'audio/ogg','.flac':'audio/flac'}.get(Path(file.filename or '').suffix.lower(),'')
+    if not content_type.startswith(('audio/','video/webm','video/mp4')):raise HTTPException(415,'Upload a supported audio file.')
     data=await file.read(10*1024*1024+1)
+    if not data:raise HTTPException(400,'The audio file is empty.')
     if len(data)>10*1024*1024:raise HTTPException(413,'Audio must be under 10 MB and 30 seconds.')
     # Provider enforces duration/codecs; files are held only for this request.
-    return await speech.transcribe(data,(file.filename or 'voice.webm')[:100],file.content_type,language)
+    return await speech.transcribe(data,(file.filename or 'voice.webm')[:100],content_type,audio_language if audio_language is not None else language)
 @app.post('/api/speak')
 async def speak(value:SpeakInput):return Response(await speech.speak(value.text,value.language),media_type='audio/wav')
 @app.post('/api/ocr')

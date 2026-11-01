@@ -14,7 +14,8 @@
     "start": "node scripts/run.mjs start",
     "typecheck": "tsc --noEmit",
     "test": ".venv/bin/python -m pytest backend/tests -q",
-    "test:providers": ".venv/bin/python -m backend.verify_providers"
+    "test:providers": ".venv/bin/python -m backend.verify_providers",
+    "test:voice": "node --test lib/voice.test.mjs"
   },
   "dependencies": {
     "next": "16.3.4",
