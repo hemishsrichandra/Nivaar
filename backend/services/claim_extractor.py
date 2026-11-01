@@ -15,13 +15,16 @@ RULES=[
 
 def local_extract(text,input_type,loss):
     tactics=[]
-    for tactic,pattern,explanation in RULES:
+    from backend.services.risk_patterns import EXTRA_RULES,negated_or_advisory
+    for tactic,pattern,explanation in RULES+EXTRA_RULES:
         for match in re.finditer(pattern,text,re.I):
+            if tactic not in ('authority_impersonation','link_lure') and negated_or_advisory(text,match.start(),match.end()):continue
             prefix=text[max(0,match.start()-45):match.start()]
             if tactic in ('otp_or_credential_harvesting','remote_access_app') and re.search(r'(?:do not|don.t|never|must not|should not|नहीं|ಬೇಡಿ)\s*(?:ever\s+)?$',prefix,re.I):continue
             if tactic in ('otp_or_credential_harvesting','remote_access_app'):
                 suffix=text[match.end():match.end()+25]
                 if re.match(r'\s*(?:न\s*करें|मत\s*करें|ಬೇಡಿ|ಬಾರದು)',suffix):continue
+            if any(t.tactic==tactic and t.start==match.start() and t.end==match.end() for t in tactics):continue
             tactics.append(TacticSpan(phrase=match.group(),tactic=tactic,explanation=explanation,start=match.start(),end=match.end()))
     family='digital_arrest' if re.search(r'digital arrest|arrest warrant|गिरफ्तार|ಅರೆಸ್ಟ್|ಬಂಧನ',text,re.I) else 'fake_recruitment' if re.search(r'1736|1,736|Field Assistant',text,re.I) else 'fake_delivery_sms' if re.search(r'India Post|parcel|डाक|ಅಂಚೆ',text,re.I) else 'fake_kyc' if re.search(r'KYC|RBI|bank verification',text,re.I) else 'investment_scam' if re.search(r'investment|trading|returns|निवेश|ನಿವೇಶ',text,re.I) else None
     for name,pattern in [('customs_fraud',r'customs|CBIC|सीमा शुल्क|ಕಸ್ಟಮ್ಸ್'),('sim_swap',r'SIM[ -]?(?:swap|replacement|upgrade)|सिम|ಸಿಮ್'),('loan_app_fraud',r'loan app|digital lend|NBFC|ऋण ऐप|ಲೋನ್'),('lottery_fraud',r'lottery|prize.{0,30}(?:fee|won)|लॉटरी|ಲಾಟರಿ')]:

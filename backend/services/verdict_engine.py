@@ -2,17 +2,16 @@ import re
 from backend.schemas import DimensionChecks
 
 def choose_verdict(checks, high_risk=False, conflict=False):
+    if checks.requested_action=='DANGEROUS' or checks.destination=='DANGEROUS':return 'SCAM','HIGH'
     if conflict:return 'UNSURE','HIGH'
-    if checks.authority=='CONTRADICTED' or checks.requested_action=='DANGEROUS' or checks.destination=='DANGEROUS':return 'SCAM','HIGH'
+    if checks.authority=='CONTRADICTED':return 'SCAM','HIGH'
     if checks.authority=='VERIFIED' and checks.requested_action in ('VERIFIED','NOT_PROVIDED') and checks.destination in ('VERIFIED','NOT_PROVIDED') and not high_risk:return 'GENUINE','LOW'
     return 'UNSURE','HIGH' if high_risk or checks.requested_action=='SUSPICIOUS' or checks.destination=='SUSPICIOUS' else 'MEDIUM'
 
 def action_checks(extracted):
-    types={t.tactic for t in extracted.tactics if t.origin=='rule'}
-    payment='payment_redirection' in types or bool(re.search(r'\bpay\b|transfer|deposit|fee|भुगतान|पैसे|ಹಣ',extracted.raw_text_redacted,re.I))
-    task_deposit=bool(re.search(r'(?:task|rating|review|part.time)[^.!?]{0,100}\b(?:deposit|recharge|pay|transfer)\b|(?:deposit|recharge).{0,100}(?:unlock|withdraw|commission)',extracted.raw_text_redacted,re.I))
-    dangerous=task_deposit or bool(types & {'otp_or_credential_harvesting','remote_access_app'}) or payment and bool(types & {'fear_of_arrest','secrecy_or_isolation'})
-    return ('DANGEROUS' if dangerous else 'SUSPICIOUS' if payment else 'NOT_PROVIDED'),bool(types & {'fear_of_arrest','secrecy_or_isolation','otp_or_credential_harvesting','remote_access_app','too_good_returns'})
+    from backend.services.risk_patterns import behavioural_risk
+    action,high,_=behavioural_risk(extracted)
+    return action,high
 
 def grounded_matches(assessment,extracted,documents):
     """Drop invented claim/source identifiers and any quote absent from fetched text."""

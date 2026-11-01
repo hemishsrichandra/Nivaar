@@ -68,6 +68,9 @@ async def _investigate(value,emit=None):
     from backend.services.report_findings import findings
     statuses={'llm':extraction_status,'search':search_status,'evidence_comparison':assessment_status,'url_reputation':reputation}
     ledger,assessments,identifiers,coverage,conflicts=findings(extracted,evidence,checks,statuses,url_notes)
+    from backend.services.risk_patterns import behavioural_risk
+    _,_,danger_reasons=behavioural_risk(extracted)
+    if danger_reasons:assessments['requested_action'].reason=' '.join(danger_reasons)
     if action_evidence:
         assessments['requested_action'].reason='This phone/message customs-duty demand into an explicitly private account conflicts with the cited CBIC process warning.'
         assessments['requested_action'].evidence_ids=[action_evidence.evidence_id]
@@ -81,6 +84,10 @@ async def _investigate(value,emit=None):
     async def apply():return choose_verdict(checks,high_risk,conflict=bool(conflicts))
     verdict,risk=await step('apply_verdict_rules','Pure Python authority/action/destination matrix; AI cannot directly choose verdict',apply,lambda r:(f'{r[0]} / {r[1]} risk. Sender identity is not authenticated.','ok'))
     generated=utcnow();summary,actions,complaint,channels=guidance(verdict,value.language,extracted,evidence,generated,value.user_situation)
+    if verdict=='SCAM' and danger_reasons and value.language=='en':
+        summary=' '.join(danger_reasons[:2])+' Do not pay, disclose credentials or grant remote access. Verify independently through an official channel.'
+    if verdict=='UNSURE' and risk=='HIGH':
+        summary={'en':'High-risk warning signs were detected. Treat this message as unsafe to act on until independently checked. Its factual claims remain unverified; do not pay, share credentials or grant remote access.','hi':'उच्च जोखिम के संकेत मिले हैं। स्वतंत्र जाँच तक इस संदेश पर कार्रवाई न करें। तथ्यात्मक दावे अपुष्ट हैं; भुगतान, पासवर्ड साझा या रिमोट एक्सेस न दें।','kn':'ಹೆಚ್ಚಿನ ಅಪಾಯದ ಸೂಚನೆಗಳು ಕಂಡುಬಂದಿವೆ. ಸ್ವತಂತ್ರ ಪರಿಶೀಲನೆ ತನಕ ಈ ಸಂದೇಶದಂತೆ ನಡೆದುಕೊಳ್ಳಬೇಡಿ. ಹೇಳಿಕೆಗಳು ದೃಢೀಕೃತವಾಗಿಲ್ಲ; ಹಣ, ಗೌಪ್ಯ ಮಾಹಿತಿ ಅಥವಾ ರಿಮೋಟ್ ಪ್ರವೇಶ ನೀಡಬೇಡಿ.'}[value.language]
     from backend.services.input_parser import is_link_only
     if verdict=='UNSURE' and is_link_only(text,extracted.urls):
         summary={'en':'Only a link was supplied. Its owner, content and requested action have not been independently verified. Add the surrounding message; an unverified link is not proof of fraud or safety.','hi':'केवल लिंक दिया गया है। मालिक, सामग्री और अनुरोधित कार्रवाई की स्वतंत्र पुष्टि नहीं हुई। साथ में आया संदेश भी जोड़ें; अपुष्ट लिंक धोखाधड़ी या सुरक्षा का प्रमाण नहीं है।','kn':'ಲಿಂಕ್ ಮಾತ್ರ ನೀಡಲಾಗಿದೆ. ಮಾಲೀಕ, ವಿಷಯ ಮತ್ತು ಕೋರಿದ ಕ್ರಮ ಸ್ವತಂತ್ರವಾಗಿ ದೃಢೀಕೃತವಾಗಿಲ್ಲ. ಅದರ ಜೊತೆ ಬಂದ ಸಂದೇಶ ಸೇರಿಸಿ; ದೃಢೀಕೃತವಲ್ಲದ ಲಿಂಕ್ ವಂಚನೆ ಅಥವಾ ಸುರಕ್ಷತೆಯ ಪುರಾವೆ ಅಲ್ಲ.'}[value.language]

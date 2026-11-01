@@ -61,3 +61,35 @@ def test_empty_audio_rejected_before_provider_call():
     with TestClient(app) as client:
         response=client.post('/api/transcribe',files={'file':('note.wav',b'','audio/wav')},data={'consent':'true'})
     assert response.status_code==400
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize('mime,expected',[
+    ('audio/webm;codecs=opus','audio/webm'),
+    ('audio/ogg; codecs=opus','audio/ogg'),
+    ('audio/mp4;codecs=mp4a.40.2','audio/mp4'),
+    (' Audio/WebM ;codecs=opus','audio/webm'),
+    ('audio/wav','audio/wav'),
+])
+@respx.mock
+async def test_sarvam_receives_base_mime_without_browser_codec_parameters(monkeypatch,mime,expected):
+    monkeypatch.setattr(settings,'sarvam_key','test-key')
+    route=respx.post('https://api.sarvam.ai/speech-to-text').mock(return_value=httpx.Response(200,json={'transcript':'Check this message','language_code':'en-IN'}))
+    await speech.transcribe(b'unchanged audio bytes','recording.webm',mime,'auto')
+    multipart=route.calls[0].request.content
+    assert f'Content-Type: {expected}\r\n'.encode() in multipart
+    assert b'codecs=' not in multipart
+    assert b'unchanged audio bytes' in multipart
+
+
+def test_browser_mime_parameter_survives_route_but_is_normalised_for_sarvam(monkeypatch):
+    from fastapi.testclient import TestClient
+    from backend.main import app
+    monkeypatch.setattr(settings,'sarvam_key','test-key')
+    with respx.mock:
+        route=respx.post('https://api.sarvam.ai/speech-to-text').mock(return_value=httpx.Response(200,json={'transcript':'Recorded successfully','language_code':'en-IN'}))
+        with TestClient(app) as client:
+            result=client.post('/api/transcribe',files={'file':('recording.webm',b'audio bytes','audio/webm;codecs=opus')},data={'consent':'true','audio_language':'auto'})
+        assert result.status_code==200
+        assert result.json()['text']=='Recorded successfully'
+        assert b'Content-Type: audio/webm\r\n' in route.calls[0].request.content
+        assert b'codecs=' not in route.calls[0].request.content

@@ -44,3 +44,11 @@ Repeat Sarvam-only checks manually with `.venv/bin/python -m backend.verify_voic
 Physical microphone capture, OS/browser permission prompts, noisy rooms and actual speaker output need a check on the user's own device. Browser recording lifecycle is covered with controlled test doubles; uploaded audio and live APIs were tested end to end. Browser dictation still depends on the browser's own recognition support and selected/derived language. No new API key, provider upgrade or paid tier is required by these changes.
 
 Provider references: [Sarvam transcription API](https://docs.sarvam.ai/api-reference/speech-to-text/transcribe), [Bulbul v3 guidance](https://docs.sarvam.ai/api/api-guides-tutorials/text-to-speech/bulbul-v3-best-practices).
+
+## Follow-up: reproduced recording HTTP 400
+
+The original checks missed a distinction between an uploaded audio file and MediaRecorder metadata. A direct Sarvam call using the exact same WebM bytes returned HTTP 400 with `audio/webm;codecs=opus`, but HTTP 200 with `audio/webm`. Sarvam rejected the parameterised MIME type against its exact allowlist before decoding audio. This was a confirmed integration bug, independent of API quota or microphone permission.
+
+The recorder now uses the base MIME type on its completed File while retaining codec selection for recording. The speech adapter independently strips MIME parameters, whitespace and case differences before forwarding to Sarvam, covering old browser tabs and other upload clients. Audio bytes are unchanged. Six regression cases cover the adapter and full upload route; the recorded-file test now checks the upload-safe MIME label.
+
+After restarting localhost, real requests through `localhost:3000/api/transcribe` using `audio/webm;codecs=opus` and `audio/ogg;codecs=opus` both returned HTTP 200 and the expected synthetic English transcript. Updated totals: 196 backend tests and 11 browser voice lifecycle tests pass; production build passes. The repeatable Sarvam-only smoke test now includes browser-style codec parameters. Physical microphone capture remains device-specific and was not recorded during these checks.

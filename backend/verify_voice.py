@@ -37,8 +37,10 @@ async def check():
                 path=folder/f'en.{ext}'
                 try:
                     subprocess.run([ffmpeg,'-y','-v','error','-i',str(folder/'en.wav'),'-c:a',codec,str(path)],check=True,capture_output=True)
-                    result=await transcribe(path.read_bytes(),path.name,mime,'auto')
-                    results.append({'language':'en','codec':ext,'detected':result['language_code'],'transcript':result['text'],'ok':result['language_code']=='en-IN' and bool(result['text'])})
+                    # Mirror MediaRecorder metadata, including codec parameters.
+                    browser_mime=mime+';codecs='+('mp4a.40.2' if ext=='m4a' else 'opus')
+                    result=await transcribe(path.read_bytes(),path.name,browser_mime,'auto')
+                    results.append({'language':'en','codec':ext,'input_mime':browser_mime,'detected':result['language_code'],'transcript':result['text'],'ok':result['language_code']=='en-IN' and bool(result['text'])})
                 except Exception as exc:results.append({'codec':ext,'ok':False,'error':str(exc)})
         else:results.append({'codec':'webm/m4a/ogg','skipped':'ffmpeg or English WAV unavailable'})
     print(json.dumps(results,ensure_ascii=False,indent=2))

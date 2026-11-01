@@ -1,0 +1,308 @@
+{
+  "provenance": "Synthetic regression paraphrases derived from official scam advisories, including spoken variants and protective/legitimate controls. Not real victim recordings or a population accuracy dataset.",
+  "sources": {
+    "arrest": "https://www.pib.gov.in/Pressreleaseshare.aspx?PRID=2020570&lang=2&reg=48",
+    "credential": "https://rbikehtahai.rbi.org.in/safeguards-for-digital-banking.html",
+    "investment": "https://investor.sebi.gov.in/spot-any-scam.html",
+    "task": "https://www.pib.gov.in/PressReleasePage.aspx?PRID=1982936&lang=2&reg=48",
+    "remote": "https://bankofbaroda.bank.in/cyber-fraud-awareness",
+    "customs": "https://www.pib.gov.in/PressReleasePage.aspx?PRID=2025648"
+  },
+  "cases": [
+    {
+      "id": "s01",
+      "family": "credential",
+      "scam": true,
+      "text": "Hello this is the bank. Tell me your O T P to unblock your account."
+    },
+    {
+      "id": "s02",
+      "family": "credential",
+      "scam": true,
+      "text": "Give us the one time password now for account verification."
+    },
+    {
+      "id": "s03",
+      "family": "credential",
+      "scam": true,
+      "text": "Read me the OTP you received on your phone."
+    },
+    {
+      "id": "s04",
+      "family": "credential",
+      "scam": true,
+      "text": "Please provide me your banking passcode for KYC."
+    },
+    {
+      "id": "s05",
+      "family": "credential",
+      "scam": true,
+      "text": "Send your CVV to claim the refund."
+    },
+    {
+      "id": "s06",
+      "family": "credential",
+      "scam": true,
+      "text": "आपका खाता बंद होगा। ओ टी पी बताइए।"
+    },
+    {
+      "id": "s07",
+      "family": "credential",
+      "scam": true,
+      "text": "ಬ್ಯಾಂಕ್ ಪರಿಶೀಲನೆಗಾಗಿ ಒಟಿಪಿ ಹೇಳಿ."
+    },
+    {
+      "id": "s08",
+      "family": "arrest",
+      "scam": true,
+      "text": "You are under digital arrest. Stay on this video call."
+    },
+    {
+      "id": "s09",
+      "family": "arrest",
+      "scam": true,
+      "text": "You have been placed under digital arrest by CBI."
+    },
+    {
+      "id": "s10",
+      "family": "arrest",
+      "scam": true,
+      "text": "Transfer ten thousand rupees now or we will arrest you."
+    },
+    {
+      "id": "s11",
+      "family": "arrest",
+      "scam": true,
+      "text": "Send money into the safe bank account for verification."
+    },
+    {
+      "id": "s12",
+      "family": "arrest",
+      "scam": true,
+      "text": "Deposit your savings into our verification account."
+    },
+    {
+      "id": "s13",
+      "family": "remote",
+      "scam": true,
+      "text": "Download Any Desk to receive your bank refund."
+    },
+    {
+      "id": "s14",
+      "family": "remote",
+      "scam": true,
+      "text": "Install the QuickSupport application for bank verification."
+    },
+    {
+      "id": "s15",
+      "family": "remote",
+      "scam": true,
+      "text": "Enable remote access so we can process your refund."
+    },
+    {
+      "id": "s16",
+      "family": "task",
+      "scam": true,
+      "text": "Finish rating tasks then recharge the wallet to withdraw your commission."
+    },
+    {
+      "id": "s17",
+      "family": "task",
+      "scam": true,
+      "text": "Deposit five thousand to unlock your commission."
+    },
+    {
+      "id": "s18",
+      "family": "investment",
+      "scam": true,
+      "text": "Invest now for guaranteed daily profit. Transfer money today."
+    },
+    {
+      "id": "s19",
+      "family": "investment",
+      "scam": true,
+      "text": "Send money today and we will double your money."
+    },
+    {
+      "id": "s20",
+      "family": "credential",
+      "scam": true,
+      "text": "Never share an OTP with strangers. But tell me your PIN for bank verification."
+    },
+    {
+      "id": "s21",
+      "family": "advance_fee",
+      "scam": true,
+      "text": "You have won a lottery prize. Pay a processing fee to release your winnings."
+    },
+    {
+      "id": "s22",
+      "family": "advance_fee",
+      "scam": true,
+      "text": "Pay an advance fee to release your loan."
+    },
+    {
+      "id": "c01",
+      "family": "credential",
+      "scam": false,
+      "text": "Never share your OTP or password with anyone."
+    },
+    {
+      "id": "c02",
+      "family": "credential",
+      "scam": false,
+      "text": "Do not tell anyone your O T P."
+    },
+    {
+      "id": "c03",
+      "family": "credential",
+      "scam": false,
+      "text": "Bank officials will never ask you to share your password."
+    },
+    {
+      "id": "c04",
+      "family": "credential",
+      "scam": false,
+      "text": "Scammers may ask you to read your OTP. Do not comply."
+    },
+    {
+      "id": "c05",
+      "family": "credential",
+      "scam": false,
+      "text": "Enter your OTP only inside the official bank app you opened yourself."
+    },
+    {
+      "id": "c06",
+      "family": "credential",
+      "scam": false,
+      "text": "ओटीपी साझा करें मत करें। किसी को पासवर्ड न दें।"
+    },
+    {
+      "id": "c07",
+      "family": "credential",
+      "scam": false,
+      "text": "ಒಟಿಪಿ ಹೇಳಿ ಬೇಡಿ. ಪಾಸ್ವರ್ಡ್ ಹಂಚಿಕೊಳ್ಳಬೇಡಿ."
+    },
+    {
+      "id": "c08",
+      "family": "arrest",
+      "scam": false,
+      "text": "There is no such thing as digital arrest. Do not transfer money to a verification account."
+    },
+    {
+      "id": "c09",
+      "family": "arrest",
+      "scam": false,
+      "text": "Police warn about digital arrest scams and fake payment demands."
+    },
+    {
+      "id": "c10",
+      "family": "arrest",
+      "scam": false,
+      "text": "An article explains how digital arrest scams operate."
+    },
+    {
+      "id": "c11",
+      "family": "remote",
+      "scam": false,
+      "text": "Never download Any Desk at a caller's request."
+    },
+    {
+      "id": "c12",
+      "family": "remote",
+      "scam": false,
+      "text": "Do not install QuickSupport for a bank refund."
+    },
+    {
+      "id": "c13",
+      "family": "remote",
+      "scam": false,
+      "text": "Install the official banking app from its official app store listing."
+    },
+    {
+      "id": "c14",
+      "family": "investment",
+      "scam": false,
+      "text": "Never invest in a scheme promising guaranteed daily profit. Do not transfer money."
+    },
+    {
+      "id": "c15",
+      "family": "investment",
+      "scam": false,
+      "text": "A fixed deposit has a published interest rate. Read the bank's official terms."
+    },
+    {
+      "id": "c16",
+      "family": "task",
+      "scam": false,
+      "text": "Security warning: deposit money to unlock commission is a task scam."
+    },
+    {
+      "id": "c17",
+      "family": "normal",
+      "scam": false,
+      "text": "Please pay the electricity bill using the official provider app."
+    },
+    {
+      "id": "c18",
+      "family": "normal",
+      "scam": false,
+      "text": "Your parcel is out for delivery today."
+    },
+    {
+      "id": "c19",
+      "family": "normal",
+      "scam": false,
+      "text": "The application has been received. Visit our office during working hours."
+    },
+    {
+      "id": "c20",
+      "family": "normal",
+      "scam": false,
+      "text": "My friend sent me a payment receipt."
+    },
+    {
+      "id": "c21",
+      "family": "normal",
+      "scam": false,
+      "text": "The lottery regulator published its prize tax rules."
+    },
+    {
+      "id": "c22",
+      "family": "normal",
+      "scam": false,
+      "text": "Pay your monthly loan repayment through the official bank app."
+    },
+    {
+      "id": "user-kn-customs",
+      "family": "customs",
+      "scam": true,
+      "provenance": "Exact transcript pasted by the user; contains both a dangerous quoted demand and a later safety warning. Target is detection of the dangerous payment instruction, not authentication of the whole narrative.",
+      "text": "ಕನ್ನಡಕ್ಕೆ ಅನುವಾದ ಮಾಡಿದ್ದೇನೆ. ಕಸ್ಟಮ್ಸ್ ನಿಂದ ಬಂದ ಎಸ್ಎಂಎಸ್, ನಿಮ್ಮ ವಿದೇಶಿ ಪಾರ್ಸೆಲ್ ಅನ್ನು ವಶಪಡಿಸಿಕೊಳ್ಳಲಾಗಿದೆ. ಪಾರ್ಸೆಲ್ ಅನ್ನು ಬಿಡುಗಡೆ ಮಾಡಲು ತಕ್ಷಣವೇ 12,500 ಕಸ್ಟಮ್ಸ್ ಸುಲ್ಗವನ್ನು ನನ್ನ ವೈಯಕ್ತಿಕ ಖಾತೆಯಾದ ಆಫೀಸರ್ಗೆ ಪಾವತಿಸಿ. ಎಚ್ಚರಿಕೆ ಇದು ಮೋಸದ ಸಂದೇಶ ಆಗಿರುವ ಸಾಧ್ಯತೆ ಇದೆ. ಕಸ್ಟಮ್ಸ್ ಇಲಾಖೆ ಸಾಮಾನ್ಯವಾಗಿ ವೈಯಕ್ತಿಕ ಯುಪಿಐ ಖಾತೆಗೆ ಹಣ ಪಾವತಿಸಲು ಕೇಳುವುದಿಲ್ಲ. ಯಾವುದೇ ಹಣ ಪಾವತಿಸುವ ಮೊದಲು ಅಧಿಕೃತ ಕಸ್ಟಮ್ಸ್ ಇಲಾಖೆಯ ಮೂಲಕ ಪರಿಶೀಲಿಸಿ."
+    },
+    {
+      "id": "customs-warning-kn",
+      "family": "customs",
+      "scam": false,
+      "text": "ಎಚ್ಚರಿಕೆ: ಕಸ್ಟಮ್ಸ್ ಶುಲ್ಕವನ್ನು ವೈಯಕ್ತಿಕ ಖಾತೆಗೆ ಪಾವತಿಸಿ ಎಂದು ಕೇಳುವವರು ಮೋಸಗಾರರು. ಹಣ ಕಳುಹಿಸಬೇಡಿ."
+    },
+    {
+      "id": "customs-demand-en",
+      "family": "customs",
+      "scam": true,
+      "text": "Customs: pay duty into my personal account to release your parcel."
+    },
+    {
+      "id": "customs-demand-hi",
+      "family": "customs",
+      "scam": true,
+      "text": "कस्टम्स शुल्क मेरे व्यक्तिगत खाते में जमा करें।"
+    },
+    {
+      "id": "customs-official-kn",
+      "family": "customs",
+      "scam": false,
+      "text": "ಕಸ್ಟಮ್ಸ್ ಇಲಾಖೆಯ ಅಧಿಕೃತ ಪೋರ್ಟಲ್ ಮೂಲಕ ಶುಲ್ಕ ಪಾವತಿಸಿ."
+    }
+  ]
+}

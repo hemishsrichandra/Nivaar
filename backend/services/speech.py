@@ -9,6 +9,8 @@ LANG={'en':'en-IN','hi':'hi-IN','kn':'kn-IN','auto':'unknown'}
 
 async def transcribe(data,filename,content_type,language):
     if not settings.sarvam_key:raise ProviderError('sarvam','not_configured')
+    # MediaRecorder includes codec parameters; Sarvam validates an exact MIME allowlist.
+    content_type=content_type.split(';',1)[0].strip().lower()
     try:
         async with httpx.AsyncClient(timeout=60,trust_env=False) as client:
             r=await client.post('https://api.sarvam.ai/speech-to-text',headers={'api-subscription-key':settings.sarvam_key},files={'file':(filename,data,content_type)},data={'model':settings.stt_model,'mode':'transcribe','language_code':LANG[language]})
