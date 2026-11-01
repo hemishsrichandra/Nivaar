@@ -1,0 +1,3 @@
+import {z} from 'zod';
+export const AnalysisInput=z.object({text:z.string().trim().min(3,'Enter at least 3 characters.').max(12000,'Please keep messages under 12,000 characters.'),language:z.enum(['en','hi','kn']).default('en'),input_type:z.enum(['text','link','image','voice']).default('text'),user_reported_loss:z.boolean().default(false)});
+export async function parseInput(request:Request){if(Number(request.headers.get('content-length')||0)>60000)throw new Error('Request too large.');const raw=await request.text();if(raw.length>60000)throw new Error('Request too large.');return AnalysisInput.parse(JSON.parse(raw));}
